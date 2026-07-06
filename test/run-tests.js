@@ -203,6 +203,66 @@ const get = (port, path, opts = {}) => new Promise((resolve, reject) => {
     assert.strictEqual(stored.questions[0].suggestedBitTopic, "wind play");
     assert.ok(stored.questions[0].answerSummary.includes("mock answer"));
   });
+  await test("ask: buildAskContext seeds base context without a fixed question", () => {
+    const { buildAskContext } = require("../lib/ask");
+    const recentQuestions = Array.from({ length: 6 }, (_, i) => ({ date: `2026-07-0${i + 1}`, question: `q ${i + 1}` }));
+    const ctx = buildAskContext({
+      learner: { name: "Amit", profile: "Bangalore righty" },
+      playbook: "PLAYBOOK_EXCERPT",
+      progressDigest: "DIGEST HEADER",
+      recentQuestions
+    });
+    assert.ok(ctx.includes("interactive session"));
+    assert.ok(ctx.includes("LEARNER: Bangalore righty"));
+    assert.ok(ctx.includes("PLAYBOOK_EXCERPT"));
+    assert.ok(ctx.includes("LEARNER PROGRESS DIGEST:\nDIGEST HEADER"));
+    assert.ok(ctx.includes("Greet him"));
+    assert.ok(!/\bQUESTION:/.test(ctx), "interactive context must not carry a fixed QUESTION line");
+    assert.ok(ctx.includes("- [2026-07-06] q 6"));
+    assert.ok(!ctx.includes("q 1"), "only the 5 most recent questions belong in context");
+  });
+  await test("ask: askInteractive spawns provider with interactiveArgs seeded by context", async () => {
+    const { askInteractive } = require("../lib/ask");
+    const rawConfig = {
+      agent: { provider: "mock", providers: { mock: {
+        command: process.execPath,
+        args: ["-e", "process.exit(3)", "{PROMPT}"],
+        interactiveArgs: ["-e", "process.exit(0)", "{PROMPT}"]
+      } } },
+      server: { host: "127.0.0.1", port: 4321 },
+      content: { batchSize: 28 },
+      learner: { name: "Amit", profile: "profile" }
+    };
+    const r = await askInteractive({
+      rawConfig,
+      projectConfText: "",
+      questionsFile: path.join(os.tmpdir(), "golfbits-interactive-none.json"),
+      playbookText: "PLAYBOOK",
+      progressDigest: "DIGEST",
+      stdio: "ignore"
+    });
+    assert.strictEqual(r.status, 0, "interactiveArgs template must be used (exit 0), not headless args (exit 3)");
+    assert.ok(r.args.includes("-e"));
+    assert.ok(r.args.some(a => a.includes("PLAYBOOK") && a.includes("interactive session")), "prompt must carry seeded context");
+    assert.ok(!r.args.some(a => /\bQUESTION:/.test(a)));
+  });
+  await test("ask: askInteractive on missing command exits 127 with switch hint", async () => {
+    const { askInteractive } = require("../lib/ask");
+    const rawConfig = {
+      agent: { provider: "mock", providers: { mock: { command: "definitely-not-a-real-cli-xyz", args: ["{PROMPT}"], interactiveArgs: ["{PROMPT}"] } } },
+      server: { host: "127.0.0.1", port: 4321 },
+      content: { batchSize: 28 },
+      learner: { name: "Amit", profile: "profile" }
+    };
+    let err = "";
+    const r = await askInteractive({
+      rawConfig, projectConfText: "", playbookText: "P", progressDigest: "D",
+      questionsFile: path.join(os.tmpdir(), "golfbits-interactive-enoent.json"),
+      stdio: "ignore", stderr: { write: c => { err += c.toString(); } }
+    });
+    assert.strictEqual(r.status, 127);
+    assert.match(err, /not found on PATH.*golfbits config agent/);
+  });
   await test("ask: failing provider records nothing", async () => {
     const { ask } = require("../lib/ask");
     const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "golfbits-ask-fail-"));

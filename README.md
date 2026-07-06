@@ -25,7 +25,7 @@ Or without linking: `npm start`.
 | `golfbits validate` | Schema-check all bits + progress |
 | `golfbits extend [n] [note] [--agent-flag]` | Your AI agent generates the next *n* bits from your progress |
 | `golfbits restructure [note] [--agent-flag]` | Your AI agent rebuilds the un-read bits — depth, order, visuals (e.g. `golfbits restructure make it more visual`) |
-| `golfbits ask "question" [--agent-flag]` | Ask your configured agent a golf question; answer prints live and Q&A is stored in `data/questions.json` |
+| `golfbits ask ["question"] [--agent-flag]` | **With** a question: one-shot — answer prints live and the Q&A is recorded to `data/questions.json`. **Without** a question: opens the agent interactively, pre-seeded with your golf context, so you converse in its own window (not recorded) |
 | `golfbits config agent <name>` | Switch default agent in `project.conf`: `claude`, `codex`, `gemini`, or `antigravity` |
 | `golf.learn` | Global shortcut for `golfbits open` |
 | `golf.learn.rebuild ["note"] [--agent-flag]` | Global shortcut for `golfbits restructure` |
@@ -36,10 +36,13 @@ Agent flags are valid on `golf.ask`, `golf.learn.rebuild`, and `golfbits extend|
 Examples:
 
 ```bash
-golf.ask "why does my slice get worse with driver than 7-iron?"
+golf.ask                                    # opens your agent, pre-loaded with golf context — just start typing
+golf.ask "why does my slice get worse with driver than 7-iron?"   # one-shot, recorded
 golf.ask --gemini "what should I practice before my first tournament?"
 golf.learn.rebuild "go deeper on rules" --codex
 ```
+
+**Interactive `golf.ask`** launches the configured agent in its own chat window (`stdio` inherited), seeded with your learner profile, `docs/PLAYBOOK.md`, progress digest, and last 5 questions. How each agent enters interactive mode lives in `config/golfbits.json` as `interactiveArgs` (e.g. `claude "<context>"`, `gemini -i "<context>"`); edit it if your CLI differs. Interactive sessions aren't recorded — pass a question on the CLI when you want it saved.
 
 ## Project config
 
@@ -98,6 +101,6 @@ Progress is committed with content, so `git pull` on another machine continues e
 
 ## Agent notes
 
-- Default agent is **claude** (`claude -p ... --permission-mode acceptEdits`). Codex runs via `codex exec --full-auto`, Gemini via `gemini --yolo -p`, and Antigravity is configured as `antigravity -p`.
+- Default agent is **claude** (`claude -p ... --permission-mode acceptEdits`). Codex runs via `codex exec --full-auto`, Gemini via `gemini --yolo -p`, and Antigravity is configured as `antigravity -p`. Each provider also has an `interactiveArgs` template used by a bare `golf.ask` (headless `args` = one-shot; `interactiveArgs` = live chat).
 - Google Antigravity is primarily an IDE; its CLI surface may differ by version. If your install uses different command-line flags, edit the `antigravity` provider in `config/golfbits.json`. The app treats it like any other provider.
 - You can also just open an interactive session (`claude` / `codex` / `gemini`) in this folder and say *"read AGENTS.md and my progress, then extend the bits"* — the contract file does the rest.

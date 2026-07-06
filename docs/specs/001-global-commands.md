@@ -53,9 +53,11 @@ Add to `config/golfbits.json` → `agent.providers`:
 ```
 Google Antigravity is primarily an IDE and its CLI surface may differ by version — the command/args are user-editable config, and the README must say so. Do not special-case it in code; it is just a provider entry. ENOENT handling (below) covers it being absent.
 
+> **Amendment (post-001):** a bare `golf.ask` (no question) no longer prints usage/exit 1. It now opens the configured agent **interactively**, pre-seeded with the same context (§5.2 minus the fixed `QUESTION:` line), so the learner converses in the agent's own TUI. Interactive sessions inherit stdio and are therefore **not** recorded to `data/questions.json`. Providers gain an `interactiveArgs` template in `config/golfbits.json` (falls back to `args`). See `buildAskContext`/`askInteractive` in `lib/ask.js`. The question-on-CLI flow below is unchanged.
+
 ## 5. `golf.ask` — full flow
 
-1. Join non-flag argv into the question. Empty → print usage, exit 1.
+1. Join non-flag argv into the question. Empty → open interactive session (see amendment above). Non-empty → the recorded one-shot flow below.
 2. Build prompt (exact template):
    ```
    You are {learner.name}'s personal golf coach and playing mentor. Context follows.

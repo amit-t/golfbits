@@ -78,7 +78,7 @@ Direct, warm, lightly wry. Second person. India-aware (rupees, caddies, IGU/WHS,
 
 **`restructure`** — rebuild the un-completed tail: apply depth policy, drop redundant core bits for known categories, add visuals, resequence. Honor any learner note passed in the prompt (e.g., "make it more visual", "more rules scenarios").
 
-**`golf.ask`** — Q&A command for the learner. It records questions and suggested topics; use that history as input for future content work, but do not edit content during an ask run.
+**`golf.ask`** — Q&A command for the learner. Two modes: with a question on the CLI it runs one-shot and records the question + suggested topic to `data/questions.json`; with no question it opens the agent interactively, pre-seeded with the learner's context, for a live chat (not recorded). Use the recorded history as input for future content work, but do not edit content during an ask run.
 
 ## Definition of done
 

@@ -73,8 +73,34 @@ function render() {
   if (view === "today") main.innerHTML = renderToday();
   else if (view === "journey") main.innerHTML = renderJourney();
   else if (view === "library") main.innerHTML = renderLibrary();
+  else if (view === "playbook") main.innerHTML = renderPlaybook();
   else main.innerHTML = renderStats();
   bindDynamic();
+}
+
+// ---------- playbook ----------
+let playbookMd = null, playbookLoading = false;
+function renderPlaybook() {
+  if (playbookMd === null) {
+    if (!playbookLoading) {
+      playbookLoading = true;
+      fetch("/api/playbook").then(r => r.json()).then(d => {
+        playbookMd = d.markdown || "";
+        playbookLoading = false;
+        if (view === "playbook") render();
+      }).catch(() => {
+        playbookMd = "";
+        playbookLoading = false;
+        if (view === "playbook") render();
+      });
+    }
+    return `<div class="card done-banner"><div class="big">📖</div><p>Loading your playbook…</p></div>`;
+  }
+  if (!playbookMd) return `<div class="error-box">Playbook not found — expected <code>docs/PLAYBOOK.md</code> in the repo.</div>`;
+  const toc = GolfMd.extractToc(playbookMd, 2);
+  const chips = toc.length ? `<div class="filter-row pb-toc">` + toc.map(t =>
+    `<button data-scroll="${t.id}">${esc(t.text.replace(/^\d+\.\s*/, ""))}</button>`).join("") + `</div>` : "";
+  return chips + `<div class="card md">${GolfMd.renderMarkdown(playbookMd)}</div>`;
 }
 
 function visualHtml(bit) {
@@ -266,6 +292,10 @@ function bindDynamic() {
   document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
     try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = "copied!"; setTimeout(() => b.textContent = "copy", 1200); }
     catch (e) { b.textContent = "select it"; }
+  }));
+  document.querySelectorAll("[data-scroll]").forEach(b => b.addEventListener("click", () => {
+    const el = document.getElementById(b.dataset.scroll);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }));
 }
 

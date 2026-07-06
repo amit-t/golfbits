@@ -80,6 +80,7 @@ Precedence is: CLI agent flag > `project.conf` > `config/golfbits.json` defaults
 bin/golfbits.js      CLI entry; global wrappers live beside it
 lib/                 server, content loader, progress store, agent invoker, validator
 app/                 the web app (served by the daemon)
+docs/PLAYBOOK.md     your golf playbook — readable in-app (Playbook tab) and used by golf.ask
 content/bits/        one JSON file per learning bit ← the content
 data/progress.json   your learning history ← the personalization signal
 data/questions.json  golf.ask history (created lazily) ← coverage-gap signal

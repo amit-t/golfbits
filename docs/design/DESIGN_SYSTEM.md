@@ -34,6 +34,7 @@ State semantics are load-bearing: **green = learned**, **amber ★ = already kne
 - **Journey map**: generated SVG, serpentine path (7 nodes/row = 1 week), 6px track, r=13 nodes, pulse animation on today, red flag on final node, W1–W8 row labels, legend above.
 - **Library row**: seq number, title, category, badge (✓ / ★ / • / 🔒); locked rows at 45% opacity.
 - **Stats**: 4 stat cards, per-category progress bars with known/missed annotations, agent panel with dark `cmd` blocks + copy buttons.
+- **Playbook**: `docs/PLAYBOOK.md` rendered in-app (`GET /api/playbook` + zero-dep renderer in `app/md.js`); sticky TOC chips scroll to h2 sections; markdown styles under `.md` (tables scroll horizontally on mobile, external links open new tab, raw HTML escaped).
 
 ## Interaction rules
 Min target 44px. Focus: 2px accent outline, offset 2. Transitions ≤0.2s; the only looping animation is the today-node pulse. Copy tone: lowercase-friendly, brief, warm-wry ("Done for today", "see you on the tee").

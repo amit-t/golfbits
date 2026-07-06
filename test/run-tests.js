@@ -348,7 +348,57 @@ const get = (port, path, opts = {}) => new Promise((resolve, reject) => {
     const r = await get(port, "/../package.json");
     assert.strictEqual(r.status, 404);
   });
+  await test("api: GET /api/playbook returns the playbook markdown", async () => {
+    const r = await get(port, "/api/playbook");
+    assert.strictEqual(r.status, 200);
+    const d = JSON.parse(r.body);
+    assert.ok(d.markdown.includes("Golf Playbook"), "playbook content missing");
+    assert.ok(d.markdown.includes("## 1."), "expected h2 sections");
+  });
+  await test("static: serves md.js renderer", async () => {
+    const r = await get(port, "/md.js");
+    assert.strictEqual(r.status, 200);
+    assert.ok(r.body.includes("renderMarkdown"));
+  });
   server.close();
+
+  // ---- markdown renderer (playbook view) ----
+  const { renderMarkdown, extractToc } = require("../app/md.js");
+  await test("md: headings, bold, italic, links, hr", () => {
+    const h = renderMarkdown("# Title\n\n---\n\n## Sec One\n\n**bold** and *ital* and [link](https://x.dev) and `code`");
+    assert.ok(h.includes("<h1") && h.includes(">Title</h1>"));
+    assert.ok(h.includes('<h2 id="pb-sec-one">Sec One</h2>'));
+    assert.ok(h.includes("<hr>"));
+    assert.ok(h.includes("<strong>bold</strong>") && h.includes("<em>ital</em>"));
+    assert.ok(h.includes('<a href="https://x.dev" target="_blank" rel="noopener">link</a>'));
+    assert.ok(h.includes("<code>code</code>"));
+  });
+  await test("md: tables and lists", () => {
+    const h = renderMarkdown("| A | B |\n|---|---|\n| 1 | 2 |\n\n- one\n- two\n\n1. first\n2. second");
+    assert.ok(h.includes("<table><thead><tr><th>A</th><th>B</th></tr></thead>"));
+    assert.ok(h.includes("<td>1</td><td>2</td>"));
+    assert.ok(h.includes("<ul><li>one</li><li>two</li></ul>"));
+    assert.ok(h.includes("<ol><li>first</li><li>second</li></ol>"));
+  });
+  await test("md: escapes raw HTML and unsafe links", () => {
+    const h = renderMarkdown("<script>alert(1)</script> and [bad](javascript:alert(1))");
+    assert.ok(!h.includes("<script>"), "raw HTML must be escaped");
+    assert.ok(h.includes("&lt;script&gt;"));
+    assert.ok(!h.includes("javascript:"), "unsafe href must be dropped");
+  });
+  await test("md: extractToc returns h2 sections with ids", () => {
+    const toc = extractToc("# T\n## First Part\ntext\n## Second Part", 2);
+    assert.strictEqual(toc.length, 2);
+    assert.strictEqual(toc[0].id, "pb-first-part");
+    assert.strictEqual(toc[1].text, "Second Part");
+  });
+  await test("md: renders the real playbook without empty output", () => {
+    const fsMd = fs.readFileSync(require("../lib/paths").PLAYBOOK_FILE, "utf8");
+    const h = renderMarkdown(fsMd);
+    assert.ok(h.length > 3000, "rendered playbook suspiciously small");
+    assert.ok(h.includes("<table>"), "playbook tables not rendered");
+    assert.ok(extractToc(fsMd, 2).length >= 4, "expected 4+ playbook sections");
+  });
 
   // ---- CLI smoke ----
   await test("cli: status and validate exit 0", () => {

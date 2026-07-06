@@ -2,7 +2,12 @@
   "name": "golfbits",
   "version": "2.0.0",
   "description": "Daily golf learning bits — local-first, git-tracked, AI-agent-extendable",
-  "bin": { "golfbits": "bin/golfbits.js" },
+  "bin": {
+    "golfbits": "bin/golfbits.js",
+    "golf.learn": "bin/golf-learn.js",
+    "golf.learn.rebuild": "bin/golf-learn-rebuild.js",
+    "golf.ask": "bin/golf-ask.js"
+  },
   "scripts": {
     "start": "node bin/golfbits.js open",
     "serve": "node bin/golfbits.js serve",

@@ -4,7 +4,9 @@
 const assert = require("assert");
 const fs = require("fs");
 const http = require("http");
-const { execFileSync } = require("child_process");
+const os = require("os");
+const path = require("path");
+const { execFileSync, spawnSync } = require("child_process");
 const { ROOT, PROGRESS_FILE } = require("../lib/paths");
 const { loadBits } = require("../lib/content");
 const { validateAll, validateProgress } = require("../lib/validate");
@@ -33,6 +35,9 @@ const get = (port, path, opts = {}) => new Promise((resolve, reject) => {
   // preserve any real progress; tests must not pollute the repo
   const hadProgress = fs.existsSync(PROGRESS_FILE);
   const savedProgress = hadProgress ? fs.readFileSync(PROGRESS_FILE, "utf8") : null;
+  const questionsPath = path.join(ROOT, "data", "questions.json");
+  const hadQuestions = fs.existsSync(questionsPath);
+  const savedQuestions = hadQuestions ? fs.readFileSync(questionsPath, "utf8") : null;
 
   // ---- content ----
   const bits = loadBits();
@@ -82,6 +87,159 @@ const get = (port, path, opts = {}) => new Promise((resolve, reject) => {
     const { prompt } = runAgent("restructure", { dryRun: true });
     assert.ok(prompt.includes("NEVER modify or delete bits"));
     assert.ok(prompt.toLowerCase().includes("depth policy"));
+  });
+  await test("conf: parseProjectConf handles comments, case, whitespace, and malformed lines", () => {
+    const { parseProjectConf } = require("../lib/conf");
+    const parsed = parseProjectConf(`
+      # comment
+      AGENT = codex   # inline comment
+      port = 9999
+      batch_size = 7
+      unknown = ignored
+      malformed line without equals
+    `);
+    assert.deepStrictEqual(parsed, { agent: "codex", port: 9999, batchSize: 7 });
+  });
+  await test("conf: resolveConfig precedence is flag over project.conf over config defaults", () => {
+    const { resolveConfig } = require("../lib/conf");
+    const rawConfig = {
+      agent: {
+        provider: "claude",
+        providers: {
+          claude: { command: "claude", args: [] },
+          codex: { command: "codex", args: [] },
+          gemini: { command: "gemini", args: [] },
+          antigravity: { command: "antigravity", args: [] }
+        }
+      },
+      server: { host: "127.0.0.1", port: 4321 },
+      content: { batchSize: 28 },
+      learner: { name: "Amit", profile: "profile" }
+    };
+    const project = resolveConfig({ rawConfig, projectConfText: "agent = codex\nport = 5000\nbatch_size = 9\n" });
+    assert.strictEqual(project.provider, "codex");
+    assert.strictEqual(project.port, 5000);
+    assert.strictEqual(project.batchSize, 9);
+    const flagged = resolveConfig({ rawConfig, projectConfText: "agent = codex\n", flagAgent: "gemini" });
+    assert.strictEqual(flagged.provider, "gemini");
+    const fallback = resolveConfig({ rawConfig, projectConfText: "not a setting\nport = nope\nbatch_size = -1\n" });
+    assert.strictEqual(fallback.provider, "claude");
+    assert.strictEqual(fallback.port, 4321);
+    assert.strictEqual(fallback.batchSize, 28);
+    assert.throws(
+      () => resolveConfig({ rawConfig, projectConfText: "agent = bogus\n" }),
+      /Unknown agent provider 'bogus'.*claude.*codex.*gemini.*antigravity/
+    );
+  });
+  await test("commands: splitAgentFlags honors last agent flag and strips flags from rest", () => {
+    const { splitAgentFlags } = require("../lib/commands");
+    const providers = ["claude", "codex", "gemini", "antigravity"];
+    assert.deepStrictEqual(
+      splitAgentFlags(["--codex", "5", "--agent=gemini", "go deeper"], providers),
+      { agent: "gemini", rest: ["5", "go deeper"] }
+    );
+    assert.deepStrictEqual(
+      splitAgentFlags(["note", "--claude", "--antigravity"], providers),
+      { agent: "antigravity", rest: ["note"] }
+    );
+    assert.throws(() => splitAgentFlags(["--agent=bogus"], providers), /Unknown agent provider 'bogus'.*claude.*codex.*gemini.*antigravity/);
+    assert.throws(() => splitAgentFlags(["--bogus"], providers), /Unknown flag '--bogus'.*--claude.*--codex.*--gemini.*--antigravity.*--agent=<name>/);
+  });
+  await test("ask: buildAskPrompt embeds context and only five recent questions", () => {
+    const { buildAskPrompt } = require("../lib/ask");
+    const recentQuestions = Array.from({ length: 6 }, (_, i) => ({
+      date: `2026-07-0${i + 1}`,
+      question: `question ${i + 1}`
+    }));
+    const prompt = buildAskPrompt("Why driver slice?", {
+      learner: { name: "Amit", profile: "Bangalore righty" },
+      playbook: "PLAYBOOK_EXCERPT",
+      progressDigest: "DIGEST HEADER",
+      recentQuestions
+    });
+    assert.ok(prompt.includes("You are Amit's personal golf coach"));
+    assert.ok(prompt.includes("LEARNER: Bangalore righty"));
+    assert.ok(prompt.includes("PLAYBOOK_EXCERPT"));
+    assert.ok(prompt.includes("LEARNER PROGRESS DIGEST:\nDIGEST HEADER"));
+    assert.ok(prompt.includes("QUESTION: Why driver slice?"));
+    assert.ok(prompt.includes("- [2026-07-06] question 6"));
+    assert.ok(prompt.includes("- [2026-07-02] question 2"));
+    assert.ok(!prompt.includes("question 1"));
+    assert.ok(prompt.indexOf("question 6") < prompt.indexOf("question 5"));
+  });
+  await test("ask: mock provider tees stdout, records Q&A, parses topic, and increments ids", async () => {
+    const { ask } = require("../lib/ask");
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "golfbits-ask-"));
+    const tempQuestions = path.join(tempDir, "questions.json");
+    const rawConfig = {
+      agent: { provider: "mock", providers: { mock: { command: process.execPath, args: ["-e", "console.log('mock answer SUGGESTED_BIT_TOPIC: wind play')", "{PROMPT}"] } } },
+      server: { host: "127.0.0.1", port: 4321 },
+      content: { batchSize: 28 },
+      learner: { name: "Amit", profile: "profile" }
+    };
+    let live = "";
+    const opts = {
+      rawConfig,
+      projectConfText: "",
+      questionsFile: tempQuestions,
+      playbookText: "PLAYBOOK",
+      progressDigest: "DIGEST",
+      date: "2026-07-06",
+      stdout: { write: c => { live += c.toString(); } }
+    };
+    const first = await ask("how to play wind?", opts);
+    const second = await ask("again?", opts);
+    assert.strictEqual(first.status, 0);
+    assert.strictEqual(second.status, 0);
+    assert.ok(first.stdout.includes("mock answer"));
+    assert.ok(live.includes("mock answer"));
+    const stored = JSON.parse(fs.readFileSync(tempQuestions, "utf8"));
+    assert.strictEqual(stored.schema, "golfbits-questions/1");
+    assert.strictEqual(stored.questions.length, 2);
+    assert.strictEqual(stored.questions[0].id, "q001");
+    assert.strictEqual(stored.questions[1].id, "q002");
+    assert.strictEqual(stored.questions[0].provider, "mock");
+    assert.strictEqual(stored.questions[0].question, "how to play wind?");
+    assert.strictEqual(stored.questions[0].suggestedBitTopic, "wind play");
+    assert.ok(stored.questions[0].answerSummary.includes("mock answer"));
+  });
+  await test("ask: failing provider records nothing", async () => {
+    const { ask } = require("../lib/ask");
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "golfbits-ask-fail-"));
+    const tempQuestions = path.join(tempDir, "questions.json");
+    const rawConfig = {
+      agent: { provider: "mock", providers: { mock: { command: process.execPath, args: ["-e", "process.exit(1)", "{PROMPT}"] } } },
+      server: { host: "127.0.0.1", port: 4321 },
+      content: { batchSize: 28 },
+      learner: { name: "Amit", profile: "profile" }
+    };
+    const result = await ask("will this record?", {
+      rawConfig,
+      projectConfText: "",
+      questionsFile: tempQuestions,
+      playbookText: "PLAYBOOK",
+      progressDigest: "DIGEST",
+      stdout: { write() {} }
+    });
+    assert.strictEqual(result.status, 1);
+    assert.ok(!fs.existsSync(tempQuestions), "questions.json should not be created on provider failure");
+  });
+  await test("agent: progressDigest includes recent question coverage signals", () => {
+    fs.mkdirSync(path.dirname(questionsPath), { recursive: true });
+    fs.writeFileSync(questionsPath, JSON.stringify({
+      schema: "golfbits-questions/1",
+      questions: [
+        { id: "q001", date: "2026-07-01", provider: "claude", question: "How do I judge wind?", answerSummary: "a", suggestedBitTopic: "wind play" },
+        { id: "q002", date: "2026-07-02", provider: "claude", question: "Why driver slice?", answerSummary: "b", suggestedBitTopic: "driver slice" },
+        { id: "q003", date: "2026-07-03", provider: "claude", question: "Wind again?", answerSummary: "c", suggestedBitTopic: "wind play" }
+      ]
+    }, null, 2));
+    const { progressDigest } = require("../lib/agent");
+    const digest = progressDigest();
+    assert.ok(digest.includes("Recent learner questions (signal for coverage):"));
+    assert.ok(digest.includes('"Wind again?" (2026-07-03)'));
+    assert.ok(digest.includes('"How do I judge wind?" (2026-07-01)'));
+    assert.ok(digest.includes("Suggested bit topics from Q&A: driver slice; wind play") || digest.includes("Suggested bit topics from Q&A: wind play; driver slice"));
   });
 
   // ---- server API ----
@@ -137,10 +295,31 @@ const get = (port, path, opts = {}) => new Promise((resolve, reject) => {
     execFileSync(process.execPath, ["bin/golfbits.js", "status"], { cwd: ROOT });
     execFileSync(process.execPath, ["bin/golfbits.js", "validate"], { cwd: ROOT });
   });
+  await test("package: bin map exposes all global commands and files exist", () => {
+    const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf8"));
+    assert.deepStrictEqual(pkg.bin, {
+      golfbits: "bin/golfbits.js",
+      "golf.learn": "bin/golf-learn.js",
+      "golf.learn.rebuild": "bin/golf-learn-rebuild.js",
+      "golf.ask": "bin/golf-ask.js"
+    });
+    for (const rel of Object.values(pkg.bin)) {
+      assert.ok(fs.existsSync(path.join(ROOT, rel)), `${rel} missing`);
+    }
+  });
+  await test("wrapper: golf.learn.rebuild wires agent flag validation", () => {
+    const res = spawnSync(process.execPath, ["bin/golf-learn-rebuild.js", "--agent=bogus"], { cwd: ROOT, encoding: "utf8" });
+    assert.notStrictEqual(res.status, 0);
+    assert.match(res.stderr + res.stdout, /Unknown agent provider 'bogus'.*claude.*codex.*gemini.*antigravity/);
+  });
 
   // restore repo state (reset to fresh rather than delete — works on restricted filesystems too)
   if (hadProgress) fs.writeFileSync(PROGRESS_FILE, savedProgress);
   else fs.writeFileSync(PROGRESS_FILE, JSON.stringify(freshProgress(), null, 2));
+  if (hadQuestions) fs.writeFileSync(questionsPath, savedQuestions);
+  else {
+    try { fs.unlinkSync(questionsPath); } catch (e) { /* absent ok */ }
+  }
 
   console.log(`\n${passed} passed, ${failed} failed`);
   process.exit(failed ? 1 : 0);

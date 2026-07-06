@@ -22,6 +22,8 @@ You are the content engine for this repo: a daily golf-learning app for **Amit**
 - `knownBefore: true` → learner already knew it. **This is the depth signal.**
 - `agentRuns[]` → what previous agent invocations did; don't repeat a restructure the learner just got.
 
+`data/questions.json` is written by `golf.ask`. Treat repeated question themes as high-priority coverage gaps. `suggestedBitTopic` entries should become bits in the next `extend` / `restructure` unless already covered; do not repeat an answer verbatim, turn the gap into a daily-learning bit.
+
 ### Depth-moderation policy (the important part)
 
 Per `config/golfbits.json` → `content.depthPolicy.knownThreshold` (default 3):
@@ -75,6 +77,8 @@ Direct, warm, lightly wry. Second person. India-aware (rupees, caddies, IGU/WHS,
 **`extend` (default batch: `config.content.batchSize`)** — append new bits after the highest existing seq, personalized per the depth policy. Vary `quiz.answerIndex` positions.
 
 **`restructure`** — rebuild the un-completed tail: apply depth policy, drop redundant core bits for known categories, add visuals, resequence. Honor any learner note passed in the prompt (e.g., "make it more visual", "more rules scenarios").
+
+**`golf.ask`** — Q&A command for the learner. It records questions and suggested topics; use that history as input for future content work, but do not edit content during an ask run.
 
 ## Definition of done
 

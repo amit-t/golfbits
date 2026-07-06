@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 "use strict";
-const { runCli } = require("../lib/commands");
+const { runAlias } = require("../lib/commands");
 
-runCli(process.argv.slice(2)).then(status => {
+runAlias("learn.rebuild", process.argv.slice(2)).then(status => {
   if (typeof status === "number") process.exit(status);
 }).catch(err => {
   console.error(err.message || err);

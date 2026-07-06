@@ -5,7 +5,8 @@
     "providers": {
       "claude": { "command": "claude", "args": ["-p", "{PROMPT}", "--permission-mode", "acceptEdits"] },
       "codex":  { "command": "codex",  "args": ["exec", "--full-auto", "{PROMPT}"] },
-      "gemini": { "command": "gemini", "args": ["--yolo", "-p", "{PROMPT}"] }
+      "gemini": { "command": "gemini", "args": ["--yolo", "-p", "{PROMPT}"] },
+      "antigravity": { "command": "antigravity", "args": ["-p", "{PROMPT}"] }
     }
   },
   "content": {

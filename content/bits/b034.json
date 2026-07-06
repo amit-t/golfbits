@@ -1,0 +1,26 @@
+{
+  "id": "b034",
+  "seq": 34,
+  "category": "Scoring & Formats",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "scoring",
+    "formats"
+  ],
+  "title": "The scorecard ritual: marking, attesting, signing",
+  "microFact": "In competition you keep your PARTNER's card, not your own. Signing a wrong card has ended major championships.",
+  "lesson": "Competition scorekeeping is a ritual with real rules:\n\n• On the first tee, cards are exchanged: you become the MARKER for another player. You record THEIR gross score hole-by-hole (your own too, in a spare row, for cross-checking).\n• After each hole, confirm verbally: \"6?\" — \"yes, 6.\"\n• After the round: review, resolve differences, then the marker SIGNS (attests) the card and the player countersigns. Hand it to the committee.\n• Signing for a score LOWER than actual = disqualification, even if accidental. Higher than actual = the higher score stands. This is why everyone double-checks — and why Roberto De Vicenzo lost the 1968 Masters (\"What a stupid I am\").\n\nCasual rounds relax all this — one person often keeps the group's card (or an app; 18Birdies and Hole19 are common, and IGU WHS posting needs your attested gross anyway).\n\nHabit to build now: announce your score walking off every green, honestly, including penalties. \"Seven — six and a penalty.\" Count everything. Reputation compounds.",
+  "visual": null,
+  "quiz": {
+    "question": "You accidentally sign your card with a 5 on a hole where you made 6. What happens in stroke play?",
+    "options": [
+      "The 5 stands",
+      "Corrected to 6, no penalty",
+      "Two-stroke penalty",
+      "Disqualification"
+    ],
+    "answerIndex": 3,
+    "explanation": "Signing for lower than actual = DQ. Signing for higher = the higher score stands. Check every hole before signing."
+  }
+}

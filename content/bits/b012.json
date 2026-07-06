@@ -1,0 +1,26 @@
+{
+  "id": "b012",
+  "seq": 12,
+  "category": "Etiquette",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "etiquette",
+    "social"
+  ],
+  "title": "Where to stand and when to shut up",
+  "microFact": "The safest place during anyone's swing: face them from across, well outside their peripheral vision.",
+  "lesson": "Positioning is silent etiquette — done right, nobody notices; done wrong, everybody does.\n\nWhen someone addresses the ball:\n\n• STAND where they can't see you: roughly facing them from the side, several meters away. Never directly behind the ball looking down their target line (that's reserved for their caddie), never behind the hole on putts, and never ahead of them.\n• FREEZE. No practice swings, no velcro glove rips, no bag rummaging, no coin jingling.\n• SILENCE from the moment they stand over the ball until it lands. Conversations pause mid-sentence; resume walking off the tee.\n• PHONES: silent mode always. Texting between holes is tolerated; a ringtone during a backswing is a genuine social incident at a members' club.\n\nThis is the etiquette area where newcomers most often slip — not from rudeness but obliviousness. Build the habit of tracking whose turn it is at all times, and you'll never be the incident.",
+  "visual": null,
+  "quiz": {
+    "question": "A player is addressing their putt. Where should you NOT be standing?",
+    "options": [
+      "Across from them, out of their vision",
+      "Directly behind the hole in their line of sight",
+      "On the fringe behind them, off their line",
+      "Beside the next tee waiting"
+    ],
+    "answerIndex": 1,
+    "explanation": "Behind the hole (or behind their ball on the line) is distracting and considered rude — it's in their sightline as they putt."
+  }
+}

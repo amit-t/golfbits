@@ -1,0 +1,23 @@
+{
+  "$schema": "golfbits-config/1",
+  "agent": {
+    "provider": "claude",
+    "providers": {
+      "claude": { "command": "claude", "args": ["-p", "{PROMPT}", "--permission-mode", "acceptEdits"] },
+      "codex":  { "command": "codex",  "args": ["exec", "--full-auto", "{PROMPT}"] },
+      "gemini": { "command": "gemini", "args": ["--yolo", "-p", "{PROMPT}"] }
+    }
+  },
+  "content": {
+    "batchSize": 28,
+    "depthPolicy": {
+      "knownThreshold": 3,
+      "comment": "If >= knownThreshold bits in a category are marked 'already knew', the agent must raise that category's baseline depth and stop generating 'core'-depth bits for it."
+    }
+  },
+  "server": { "port": 4321, "host": "127.0.0.1" },
+  "learner": {
+    "name": "Amit",
+    "profile": "Bangalore-based right-handed amateur, ~110 shooter, building toward an IGU/WHS handicap and BMW Golf Cup Category B. Plays Clover Greens, afternoons Wed-Sun."
+  }
+}

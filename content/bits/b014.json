@@ -1,0 +1,26 @@
+{
+  "id": "b014",
+  "seq": 14,
+  "category": "Etiquette",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "etiquette",
+    "social"
+  ],
+  "title": "Caddie culture in India: your most important relationship",
+  "microFact": "How you treat your caddie is the single most-watched social signal at an Indian golf club.",
+  "lesson": "At most Indian courses — Clover Greens included — you'll take a CADDIE. He carries your bag, finds your ball, rakes bunkers, fills divots, reads greens, and knows the course better than most members.\n\nThe protocol:\n\n• Ask his name on the first tee and use it all round.\n• Caddie FEE is paid at booking or the pro shop; the TIP is separate and yours to give directly — ₹300–500 for 18 holes is standard, more for great green-reading or a hot day.\n• Listen to his reads: \"one ball left\" means aim one ball-width left of the hole. On his home course, trust him over your own eyes.\n• Never blame him for your shots. Members are silently watching exactly this.\n• At the end: thank him by name, tip in hand, not tossed.\n\nA caddie who likes you will save you five strokes and teach you the course. One who doesn't will carry your bag in silence. Entirely your choice.",
+  "visual": null,
+  "quiz": {
+    "question": "Your caddie says the putt is 'two balls right'. What does he mean?",
+    "options": [
+      "Aim two ball-widths right of the hole",
+      "Hit it twice as hard as it looks",
+      "The green slopes right two degrees",
+      "Use two balls to practice the line"
+    ],
+    "answerIndex": 0,
+    "explanation": "Green reads are given in ball-widths or cup-widths off the edge of the hole. Aim there; the slope brings it back."
+  }
+}

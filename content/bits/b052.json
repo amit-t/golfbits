@@ -1,0 +1,26 @@
+{
+  "id": "b052",
+  "seq": 52,
+  "category": "Mental & Practice",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "mental",
+    "practice"
+  ],
+  "title": "The pre-shot routine: your portable calm",
+  "microFact": "A repeatable 20-second routine before every shot is the closest thing golf has to a cheat code under pressure.",
+  "lesson": "Watch any good player: before every single shot, the same little ceremony. Not superstition — a PRE-SHOT ROUTINE gives your brain a familiar track to run when nerves arrive, and nerves ALWAYS arrive (first tees, water carries, tournament days).\n\nBuild yours now, while stakes are low. A simple template:\n\n1. BEHIND the ball: pick a precise target (not \"the fairway\" — a specific tree), one rehearsal swing feeling the shot.\n2. Pick an INTERMEDIATE target — a leaf or divot 50cm ahead of your ball on the line. Aiming the clubface at something close is far easier than at something 200m away.\n3. Step in, set the face to the spot, take your stance, one look at the target, breathe out, GO. No second-guessing over the ball — standing frozen breeds tension.\n\nTotal: ~20 seconds, no slower than fidgeting. Same routine for a range ball, a casual round, and the BMW Cup qualifier — that's the entire point. Pressure can't disrupt a groove that's identical ten thousand times.\n\nStart this week: every range ball gets the full routine. Boring is the feature.",
+  "visual": null,
+  "quiz": {
+    "question": "What's the purpose of an intermediate target?",
+    "options": [
+      "Aligning the clubface to a close spot is easier than to a distant target",
+      "It shortens the hole mentally",
+      "It's required by the rules of golf",
+      "It distracts opponents in match play"
+    ],
+    "answerIndex": 0,
+    "explanation": "Aiming at a leaf 50cm away is precise; aiming at a tree 200m away is guesswork. Face first, then build the stance around it."
+  }
+}

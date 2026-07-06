@@ -1,0 +1,26 @@
+{
+  "id": "b041",
+  "seq": 41,
+  "category": "Handicap & Competition",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "handicap",
+    "competition"
+  ],
+  "title": "Sandbagging and vanity caps: golf's twin sins",
+  "microFact": "A padded handicap wins you a trophy once and a reputation forever. Honest posting is non-negotiable.",
+  "lesson": "Two ways to lie with a handicap, both fatal to belonging:\n\nSANDBAGGING: keeping your handicap artificially HIGH — not posting good rounds, tanking casual scores — to hoover up net prizes. In club culture this is treated as genuine cheating. Serial net-prize winners get watched, whispered about, and quietly handicap-reviewed by committees (WHS has automatic exceptional-score reductions for this).\n\nVANITY CAPPING: the ego version — keeping it artificially LOW to sound better (\"I'm off 18\" when you're a 26). Consequence: you're useless to partners in team events and you'll never win anything. Milder sin, still noticed.\n\nYour armor as a newcomer is simple: POST EVERY SCORE. Good, bad, embarrassing — everything, same day. Your Index becomes unimpeachable, your net wins are celebrated instead of side-eyed, and \"he posts everything\" is among the best reputations a new club golfer can carry.\n\nWhen you win your first net event off an honest 28 — and you likely will, new golfers improve fast — you'll want that armor on.",
+  "visual": null,
+  "quiz": {
+    "question": "What's 'sandbagging'?",
+    "options": [
+      "Practicing only bunker shots",
+      "Conceding putts too generously",
+      "Carrying extra weight in your bag for training",
+      "Keeping your handicap artificially high to win net prizes"
+    ],
+    "answerIndex": 3,
+    "explanation": "Inflating your handicap to gain unfair net advantage — golf's most despised offense short of outright cheating."
+  }
+}

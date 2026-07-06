@@ -1,0 +1,26 @@
+{
+  "id": "b040",
+  "seq": 40,
+  "category": "Handicap & Competition",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "handicap",
+    "competition"
+  ],
+  "title": "Handicap allowances: why you don't always get 100%",
+  "microFact": "Formats trim your handicap: ~95% in singles Stableford, 85% in four-ball. It protects fields from hot high-handicappers.",
+  "lesson": "Competition small print that surprises new players: you rarely play off your FULL Course Handicap. Each format applies an ALLOWANCE (recommended by WHS):\n\n• Singles stroke play / Stableford: 95%\n• FOUR-BALL better-ball: 85% each\n• Foursomes: 50% of the pair's COMBINED\n• Scrambles: various team formulas (e.g., 25/20/15/10% of the four players)\n\nWhy: statistics. In big fields, higher handicaps have more score VARIANCE — more chances someone shoots the round of their life. Allowances level the prize table so low handicappers aren't structurally locked out.\n\nSo when the Bangalore corporate event sheet says \"Format: Individual Stableford, 95% handicap allowance,\" you now know: Course Handicap 31 → playing handicap 29 (0.95 × 31, rounded). The starter's sheet or app does the math; your job is only to not be confused when your number differs from your Index — and maybe to explain it quietly to the next confused newcomer, which is exactly how club social capital gets built.",
+  "visual": null,
+  "quiz": {
+    "question": "Why do four-ball events give only ~85% of course handicap?",
+    "options": [
+      "To speed up play",
+      "High handicappers' score variance gives their team outsized best-ball chances",
+      "Tradition from St Andrews",
+      "Because two players share the strokes"
+    ],
+    "answerIndex": 1,
+    "explanation": "A high handicapper only needs a few career holes to lift a best-ball score — the allowance rebalances the odds."
+  }
+}

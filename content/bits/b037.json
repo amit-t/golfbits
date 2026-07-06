@@ -1,0 +1,26 @@
+{
+  "id": "b037",
+  "seq": 37,
+  "category": "Handicap & Competition",
+  "difficulty": 3,
+  "depth": "deep",
+  "tags": [
+    "handicap",
+    "competition"
+  ],
+  "title": "Course rating and slope: why 90 isn't always 90",
+  "microFact": "Course Rating says how hard a course is for a scratch golfer; Slope says how much harder it gets for the rest of us.",
+  "lesson": "Two numbers on every rated tee, and they're why handicaps work across different courses:\n\nCOURSE RATING (e.g., 71.8): the score a SCRATCH golfer (0 handicap) is expected to shoot from those tees. Higher than par = tough course.\n\nSLOPE RATING (55 to 155, standard 113): how much MORE difficulty a bogey golfer faces than a scratch golfer. High-slope courses (130+) have forced carries, water, punishing rough — mistakes compound. Low-slope courses are open and forgiving of the exact mishits average golfers produce.\n\nSo shooting 95 at a 113-slope course and 95 at a 140-slope monster are very different achievements, and WHS accounts for it: your score differential ≈ (your score − course rating) × 113 ÷ slope.\n\nPractical takeaways: always play RATED tees and note which ones (the app asks); and when picking away courses for confidence-building, glance at the slope — lower slope = friendlier day for a 30-index. Your differentials will be fair either way.",
+  "visual": null,
+  "quiz": {
+    "question": "Slope rating measures…",
+    "options": [
+      "The hilliness of the terrain",
+      "Course difficulty for scratch golfers",
+      "How much extra difficulty bogey golfers face vs scratch golfers",
+      "Green speed"
+    ],
+    "answerIndex": 2,
+    "explanation": "Slope is the difficulty MULTIPLIER for average players relative to scratch. 113 is standard; 140+ is brutal for high handicaps."
+  }
+}

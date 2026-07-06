@@ -1,0 +1,26 @@
+{
+  "id": "b013",
+  "seq": 13,
+  "category": "Etiquette",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "etiquette",
+    "social"
+  ],
+  "title": "Honors: who plays first, and when it doesn't matter",
+  "microFact": "Lowest score on the previous hole tees off first — that privilege is called 'the honor'.",
+  "lesson": "Traditional order of play:\n\n• FIRST TEE: order is agreed casually — flip a tee, or just \"you're up.\"\n• EVERY TEE AFTER: the player with the best score on the previous hole has THE HONOR and tees first. Ties = previous order stands.\n• DURING THE HOLE: the player FARTHEST from the hole plays first (\"you're away\").\n\nModern overlay: READY GOLF (byte 8) relaxes all of this in casual stroke play — if you're ready and it's safe, hit. But you should still KNOW the traditional order, for two reasons. First, in MATCH PLAY, order is a real rule — your opponent can make you replay a shot played out of turn. Second, honors culture survives on the tee box at traditional clubs: if a member earns the honor, let them take it. Saying \"your honor\" with a nod after they birdie is exactly the fluency you're building.\n\nWhen in doubt, a cheerful \"ready golf?\" on the first tee sets expectations for the whole round.",
+  "visual": null,
+  "quiz": {
+    "question": "In traditional order of play, who hits first during a hole (after tee shots)?",
+    "options": [
+      "Whoever had the honor on the tee",
+      "The player farthest from the hole",
+      "The best player in the group",
+      "The player whose ball is safest"
+    ],
+    "answerIndex": 1,
+    "explanation": "Farthest from the hole plays first — 'you're away.' The honor only decides tee-shot order."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "b020",
+  "seq": 20,
+  "category": "Rules",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "rules"
+  ],
+  "title": "Net double bogey: permission to pick up",
+  "microFact": "For handicap posting, your score on any hole is capped at net double bogey. Once you're past it, pick up — it's free.",
+  "lesson": "WHS handicapping caps every hole at NET DOUBLE BOGEY: par + 2 + any handicap strokes you receive on that hole. As a ~30-index player you'll receive strokes on most holes, so your cap on a typical par 4 is 4 + 2 + 1 (or 2) = 7 or 8.\n\nWhat this means practically: lying 8 on a par 4 with the ball in a bush? PICK UP. Write down your cap score, move on. Your handicap comes out identical, the group behind stops fuming, and your own head stays intact.\n\nIn casual rounds, announcing \"that's my pickup, I'm at max\" is not shameful — it's exactly what experienced high-handicappers do, and it signals you understand handicapping better than most beginners. In stroke-play competitions proper, you must hole out — but Stableford events (huge in India) build the pickup in: zero points is zero points, walk to the next tee.\n\nThe fastest way to look like you belong is refusing to let one hole become a funeral procession.",
+  "visual": null,
+  "quiz": {
+    "question": "You get 2 handicap strokes on a par 5. What's your maximum score for handicap posting?",
+    "options": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "answerIndex": 2,
+    "explanation": "Net double bogey = par (5) + 2 + handicap strokes on that hole (2) = 9."
+  }
+}

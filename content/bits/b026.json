@@ -1,0 +1,30 @@
+{
+  "id": "b026",
+  "seq": 26,
+  "category": "Equipment & Fitting",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "equipment",
+    "fitting"
+  ],
+  "title": "Wedge bounce: the sole that saves your bunker shots",
+  "microFact": "Bounce is the angle that stops your wedge digging. For most golfers and most Indian conditions, medium bounce (10–12°) is the safe answer.",
+  "lesson": "Look at a wedge's sole: the trailing edge hangs LOWER than the leading edge. That angle is BOUNCE, and it's what makes the club skid through turf and sand instead of digging in like a shovel.\n\n• LOW bounce (4–6°): for firm, tight turf and shallow sweepers. Versatile for opening the face, but dig-prone.\n• MID bounce (7–12°): the all-rounder. If unsure, buy this.\n• HIGH bounce (13°+): for soft/fluffy sand and steep diggers. Bunker-friendly.\n\nHigh-handicap reality: most beginners hit slightly BEHIND the ball. Bounce is your insurance — the club skips forward instead of stabbing the ground, and the shot survives. That's why a mid-to-high bounce sand wedge (56° with 10–12° of bounce) is the standard prescription, and why low-bounce lob wedges wreck beginners.\n\nShop fluency: bounce is stamped on the wedge (e.g., \"56.12\" = 56° loft, 12° bounce). Ask \"what bounce is this?\" and watch the salesperson recalibrate their respect.",
+  "visual": {
+    "type": "svg",
+    "svg": "<svg viewBox=\"0 0 320 200\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"system-ui,sans-serif\">\n<rect width=\"320\" height=\"200\" rx=\"10\" fill=\"#e7f0e2\"/>\n<line x1=\"20\" y1=\"150\" x2=\"300\" y2=\"150\" stroke=\"#d97706\" stroke-width=\"5\"/>\n<text x=\"290\" y=\"168\" font-size=\"9\" text-anchor=\"end\" fill=\"#92400e\">sand / turf</text>\n<path d=\"M120 40 L138 118 L196 138 L206 128 L150 112 Z\" fill=\"#a8a29e\" stroke=\"#57534e\" stroke-width=\"2\"/>\n<line x1=\"196\" y1=\"138\" x2=\"196\" y2=\"150\" stroke=\"#78716c\" stroke-width=\"1.5\" stroke-dasharray=\"3 2\"/>\n<line x1=\"206\" y1=\"128\" x2=\"252\" y2=\"146\" stroke=\"#b91c1c\" stroke-width=\"2\"/>\n<line x1=\"206\" y1=\"128\" x2=\"252\" y2=\"128\" stroke=\"#78716c\" stroke-width=\"1.5\" stroke-dasharray=\"3 2\"/>\n<path d=\"M236 128 A18 18 0 0 1 240 141\" fill=\"none\" stroke=\"#b91c1c\" stroke-width=\"1.5\"/>\n<text x=\"258\" y=\"136\" font-size=\"10\" fill=\"#b91c1c\" font-weight=\"700\">bounce°</text>\n<text x=\"150\" y=\"30\" font-size=\"10\" fill=\"#1c1917\" font-weight=\"700\">wedge (leading edge up ↑)</text>\n<path d=\"M60 132 C90 140 110 146 130 148\" stroke=\"#15803d\" stroke-width=\"2.5\" fill=\"none\" stroke-dasharray=\"5 4\"/>\n<path d=\"M124 144 l8 4 -8 3z\" fill=\"#15803d\"/>\n<text x=\"42\" y=\"124\" font-size=\"9\" fill=\"#15803d\" font-weight=\"700\">skids ✓</text>\n</svg>",
+    "caption": "Bounce: the trailing edge hangs below the leading edge, so the sole skids instead of digging."
+  },
+  "quiz": {
+    "question": "What does '56.12' stamped on a wedge mean?",
+    "options": [
+      "Model number",
+      "56mm sole width, 12° loft",
+      "56° loft, 12° bounce",
+      "56° loft, 12° lie angle offset"
+    ],
+    "answerIndex": 2,
+    "explanation": "Loft dot bounce is the standard stamp. 56° of loft with 12° of bounce — a forgiving sand wedge spec."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "b033",
+  "seq": 33,
+  "category": "Scoring & Formats",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "scoring",
+    "formats"
+  ],
+  "title": "Gross vs net: how a 28-handicap beats a 5",
+  "microFact": "Gross score = strokes taken. Net = gross minus handicap. Net is how amateurs of any level compete fairly.",
+  "lesson": "Every competition score exists twice:\n\nGROSS: the actual strokes you took. 103 shots = 103 gross.\nNET: gross MINUS your course handicap. 103 with a 30 handicap = net 73 — which beats a 10-handicapper's 85 (net 75).\n\nThis is golf's genius: the only mainstream sport where a beginner and an expert can play a genuinely fair, meaningful match. Handicaps convert everyone's game to \"performance versus YOUR OWN expected level.\"\n\nMost club events award BOTH prizes — \"gross winner\" (usually the best raw golfer) and \"net winner\" (whoever beat their own standard by most). As a new player with an honest handicap, you can win net prizes from day one — and new players who play slightly better than their fresh handicap often do. Nobody resents a net win off an honest cap; everyone resents one off a padded cap (byte 41).\n\nWhen results are read at dinner: \"net 68 off 27\" means gross 95 by a 27-handicapper. You'll hear appreciative murmurs — that's a fine round.",
+  "visual": null,
+  "quiz": {
+    "question": "You shoot 104 gross with a course handicap of 29. Your net score?",
+    "options": [
+      "104",
+      "76",
+      "77",
+      "75"
+    ],
+    "answerIndex": 3,
+    "explanation": "Net = gross − handicap: 104 − 29 = 75."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "b031",
+  "seq": 31,
+  "category": "Scoring & Formats",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "scoring",
+    "formats"
+  ],
+  "title": "The scramble: golf's party format",
+  "microFact": "In a scramble, everyone hits, the team picks the best ball, and everyone plays from there. Perfect for beginners in corporate events.",
+  "lesson": "The SCRAMBLE (often \"Texas scramble\") is the standard format for charity days, corporate outings and fun events — and the friendliest possible arena for a newer golfer:\n\n1. All four teammates tee off.\n2. The team picks the BEST of the four balls.\n3. Everyone plays their next shot from that spot.\n4. Repeat until holed. One team score per hole.\n\nWhy it's beginner heaven: your bad shots simply vanish — the team uses someone else's. But your one great drive or holed putt becomes the TEAM's shot, making you a hero. High handicappers genuinely help scramble teams (they often get extra team handicap allowance, and a hot putter is a hot putter).\n\nVariants you'll meet: TEXAS SCRAMBLE (may require using a minimum number of each player's drives — usually 3 or 4), FLORIDA/step-aside scramble (the person whose shot was used sits out the next one).\n\nIf you're invited to a corporate scramble in Bangalore: accept. It's the single best networking-to-pressure ratio in golf.",
+  "visual": null,
+  "quiz": {
+    "question": "In a standard scramble, after the team selects the best drive, who plays the next shot?",
+    "options": [
+      "Only the player whose drive was chosen",
+      "All team members, from that spot",
+      "The player with the lowest handicap",
+      "They alternate by hole"
+    ],
+    "answerIndex": 1,
+    "explanation": "Everyone plays from the chosen spot, then the team again picks the best result. One collective score per hole."
+  }
+}

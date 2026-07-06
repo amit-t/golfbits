@@ -1,0 +1,26 @@
+{
+  "id": "b050",
+  "seq": 50,
+  "category": "Lingo & Culture",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "culture",
+    "lingo"
+  ],
+  "title": "The 19th hole: nassau, skins, and friendly money",
+  "microFact": "A 'nassau' is three bets in one: front nine, back nine, overall. Stakes are small; the ritual is the point.",
+  "lesson": "Golf's social games, so you can nod along and join in:\n\n• NASSAU: the classic. Three equal bets — front 9, back 9, 18 — usually played as match play with handicaps. \"₹100 nassau?\" means ₹300 max exposure.\n• PRESS: when losing a nassau segment, you may 'press' — open a new bet on the remaining holes. Doubling-down culture; accept or decline gracefully.\n• SKINS: each hole is worth a 'skin'; lowest score takes it, ties carry the value forward until someone wins outright.\n• SNAKE: whoever three-putts holds the snake; last holder at 18 pays. Watch putting sharpen instantly.\n\nEtiquette for the newcomer: play if invited and stakes are trivial (they usually are — this is ritual, not gambling); know YOUR handicap so strokes can be set; pay up immediately and cheerfully at the bar; never relitigate a ruling over drinks.\n\nAnd the 19th hole itself: buy a round when you win, linger even when you lose. The community you're trying to join does its actual bonding here, not on the course.",
+  "visual": null,
+  "quiz": {
+    "question": "You're 3 down on the front nine of a nassau and feeling brave. What can you do?",
+    "options": [
+      "Press — open an additional bet on the remaining holes",
+      "Cancel the front-nine bet",
+      "Double your handicap",
+      "Switch to skins mid-round"
+    ],
+    "answerIndex": 0,
+    "explanation": "A press starts a fresh bet on the holes left, giving the loser a comeback path. Accepting a press is near-obligatory in the culture."
+  }
+}

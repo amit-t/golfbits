@@ -1,0 +1,25 @@
+{
+  "id": "b021",
+  "seq": 21,
+  "category": "Rules",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "rules"
+  ],
+  "title": "Local rules: read the scorecard's fine print",
+  "microFact": "Every course adds its own local rules — they're printed on the scorecard, and they change what you can do.",
+  "lesson": "Beyond the universal Rules, each club posts LOCAL RULES on the scorecard or a noticeboard. Common ones in India:\n\n• PREFERRED LIES (\"winter rules\"): during rough turf conditions, you may lift, clean and place the ball within a scorecard's length in the fairway. Only when declared — not a standing right.\n• GROUND UNDER REPAIR (GUR): white-lined areas or marked zones — free relief, and sometimes play is prohibited from them.\n• Staked TREES / flower beds: often mandatory free relief.\n• INTERNAL OB: white stakes between certain holes to stop shortcut lines.\n• Stroke-and-distance alternative (drop near the loss point for 2 strokes) for casual play.\n• ANIMAL scrapes and monkey/dog interference — genuinely common at Indian courses; a moved ball at rest gets replaced without penalty if an animal moved it.\n\nFirst-tee fluency move: flip the scorecard over and scan the local rules while others warm up. Ten seconds, and you'll be the one answering questions mid-round instead of asking them.",
+  "visual": null,
+  "quiz": {
+    "question": "A dog runs off with your ball at rest in the fairway (it happens in India). What's the ruling?",
+    "options": [
+      "Play a new ball with a one-stroke penalty",
+      "Stroke and distance",
+      "Replace a ball on the original spot, no penalty",
+      "The ball must be played where the dog drops it"
+    ],
+    "answerIndex": 2,
+    "explanation": "An outside influence moving your ball at rest = replace it where it was, penalty-free. Estimate the spot if needed."
+  }
+}

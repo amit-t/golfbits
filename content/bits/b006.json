@@ -1,0 +1,25 @@
+{
+  "id": "b006",
+  "seq": 6,
+  "category": "Foundations",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "basics"
+  ],
+  "title": "The flow of a round: check-in to 19th hole",
+  "microFact": "Arrive 45 minutes before your tee time. Rushing to the first tee marks you as a rookie faster than any bad swing.",
+  "lesson": "The rhythm of a golf day, so nothing surprises you:\n\n1. CHECK-IN at the pro shop ~45 min early: pay green fee, caddie fee, confirm your tee time.\n2. WARM-UP: hit a small bucket at the range (start with wedges, finish with driver), then 10 minutes on the practice putting green. Never make the first tee your first swing of the day.\n3. FIRST TEE: be there 10 minutes early. Introduce yourself to the group, count your clubs, agree the format and any friendly game.\n4. FRONT NINE (holes 1–9, \"the front\"), then THE TURN — a quick stop at the halfway hut — then the BACK NINE (10–18).\n5. After 18: shake hands, remove your cap for it, settle the scorecard, tip your caddie.\n6. THE 19TH HOLE: the clubhouse bar. This is where the community you want to join actually lives — budget an hour for it.",
+  "visual": null,
+  "quiz": {
+    "question": "What is 'the turn'?",
+    "options": [
+      "Your backswing rotation",
+      "The dogleg bend on a hole",
+      "The break between holes 9 and 10",
+      "Rotating who tees off first"
+    ],
+    "answerIndex": 2,
+    "explanation": "The turn is the transition from front nine to back nine — often a quick snack stop."
+  }
+}

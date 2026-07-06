@@ -1,0 +1,25 @@
+{
+  "id": "b015",
+  "seq": 15,
+  "category": "Rules",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "rules"
+  ],
+  "title": "Play it as it lies: the first commandment",
+  "microFact": "Golf's core rule: play the ball as it lies, play the course as you find it. Everything else is exceptions.",
+  "lesson": "The modern Rules of Golf (rewritten in 2019, governed by the R&A and USGA) all flow from one principle: PLAY THE BALL AS IT LIES. Bad lie in a divot? Play it. Behind a tree? Play it or take penalty relief.\n\nYou may not improve your lie: no pressing grass down behind the ball, no bending branches, no nudging the ball to a nicer tuft. Moving your ball accidentally (other than on the green or while searching) usually costs a stroke — replace it.\n\nWhat you MAY do: remove LOOSE IMPEDIMENTS (leaves, stones, twigs — natural objects) anywhere, carefully, and MOVABLE OBSTRUCTIONS (rakes, bottles — artificial objects). If the ball moves while removing a loose impediment (off the green), that's a penalty.\n\nWhy this matters socially: quietly playing a terrible lie without complaint is one of the most respected behaviors in golf. Nudgers get spotted, and the label never washes off.",
+  "visual": null,
+  "quiz": {
+    "question": "Your ball sits against a fallen leaf and a candy wrapper. What can you remove penalty-free?",
+    "options": [
+      "Neither — play it as it lies",
+      "Both — carefully",
+      "Only the wrapper",
+      "Only the leaf"
+    ],
+    "answerIndex": 1,
+    "explanation": "Leaves are loose impediments, wrappers are movable obstructions — both removable. Just don't move the ball doing it."
+  }
+}

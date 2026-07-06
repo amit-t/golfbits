@@ -1,0 +1,26 @@
+{
+  "id": "b008",
+  "seq": 8,
+  "category": "Etiquette",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "etiquette",
+    "social"
+  ],
+  "title": "Ready golf: the pace-of-play covenant",
+  "microFact": "Nobody minds a beginner who plays fast. Everybody minds a scratch golfer who plays slow.",
+  "lesson": "Pace of play is the #1 unwritten contract at every club. Your group's job: keep up with the group AHEAD of you — not just stay ahead of the group behind.\n\nREADY GOLF means whoever is ready plays (safely), instead of strictly honoring order. It's now officially encouraged in stroke play. Practical habits:\n\n• Think about your club and shot WHILE others play, not after\n• Walk briskly to YOUR ball, not in a chatty cluster\n• Limit searches — three minutes is the rule limit\n• Take one practice swing, not four\n• On the green, line up your putt while others putt\n• Leave your bag/cart on the exit side of the green toward the next tee\n\nIf your group falls a clear hole behind, wave the group behind through: stand aside, signal them to play. Doing this unprompted earns more respect than a birdie.",
+  "visual": null,
+  "quiz": {
+    "question": "Your group has fallen a full hole behind the group ahead. What does etiquette expect?",
+    "options": [
+      "Invite the group behind to play through",
+      "Skip a hole to catch up",
+      "Nothing, as long as nobody complains",
+      "Have your best player hit first from then on"
+    ],
+    "answerIndex": 0,
+    "explanation": "Falling a hole behind with a group waiting = wave them through. It's the classic courtesy everyone notices."
+  }
+}

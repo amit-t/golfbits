@@ -1,0 +1,26 @@
+{
+  "id": "b025",
+  "seq": 25,
+  "category": "Equipment & Fitting",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "equipment",
+    "fitting"
+  ],
+  "title": "Game-improvement vs players irons: why forgiveness wins",
+  "microFact": "Cavity-back irons forgive off-center hits; blades punish them. Even many pros now play cavity designs.",
+  "lesson": "Iron heads sit on a spectrum:\n\n• SUPER GAME-IMPROVEMENT / GAME-IMPROVEMENT (GI): large heads, thick toplines, wide soles, and a hollowed-out back (CAVITY BACK) that pushes weight to the perimeter. Off-center strikes still fly far and straight-ish. This is your category — think Callaway Elyte X, TaylorMade Qi HL, Ping G440.\n• PLAYERS DISTANCE: mid-size, for single-digit handicaps wanting some feel.\n• BLADES (MUSCLE-BACK): slim, gorgeous, brutally honest. Miss the center by a groove and lose 15m.\n\nThe physics: perimeter weighting raises MOI (moment of inertia) — resistance to twisting when you strike off-center. High MOI = your mishits stay playable.\n\nSocial note, because it matters to you: NOBODY at an elite club judges GI irons — Ping G-series sits in half the bags at any members' club, including low handicappers. What gets silently judged is a 25-handicapper with blades. Forgiveness is what serious golfers choose; ego is what beginners choose.",
+  "visual": null,
+  "quiz": {
+    "question": "What does high MOI in an iron head actually do?",
+    "options": [
+      "Makes the ball spin more",
+      "Lowers the ball flight",
+      "Increases swing speed",
+      "Resists twisting on off-center hits, keeping mishits straighter"
+    ],
+    "answerIndex": 3,
+    "explanation": "MOI is resistance to twisting. Perimeter-weighted heads twist less when you miss the sweet spot, so the ball flies straighter."
+  }
+}

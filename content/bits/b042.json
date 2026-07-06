@@ -1,0 +1,26 @@
+{
+  "id": "b042",
+  "seq": 42,
+  "category": "Handicap & Competition",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "handicap",
+    "competition"
+  ],
+  "title": "Your first tournament: a survival guide",
+  "microFact": "Target a Stableford event via 4moles or a corporate day. Your only goals: post a score, make three friends, get invited back.",
+  "lesson": "What actually happens at an amateur event in India:\n\nBEFORE: entry via the organizer (4moles.com lists Bangalore events monthly; your credit-card golf program runs them too). You'll give your IGU Handicap Index. Arrive 1 hour early: registration desk, goodie bag, breakfast, range balls.\n\nFORMAT: almost always individual Stableford (byte 30) with a shotgun start — all groups tee off simultaneously on different holes (\"you're starting on 14\").\n\nDURING: you're paired with strangers — that's the point. Introduce yourself, announce your ball, keep your marker's card diligently, play ready golf, pick up when you can't score points. Nobody expects a 28-handicap to play well; they expect exactly the etiquette you've been learning for six weeks.\n\nAFTER: return your card SIGNED, then stay for lunch and prizes. Leaving straight after the round is the rookie exit — the entire networking value of the day is at the table.\n\nRealistic goals, in order: finish with a legal card, keep pace, learn three names and follow up, enjoy it. Points are a bonus. Invitations compound.",
+  "visual": null,
+  "quiz": {
+    "question": "What is a 'shotgun start'?",
+    "options": [
+      "A starter's pistol begins play",
+      "All groups tee off at the same time on different holes",
+      "The longest drive contest",
+      "Playing the back nine first"
+    ],
+    "answerIndex": 1,
+    "explanation": "Every group starts simultaneously around the course, so everyone finishes together — standard for tournaments with meals after."
+  }
+}

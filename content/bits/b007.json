@@ -1,0 +1,25 @@
+{
+  "id": "b007",
+  "seq": 7,
+  "category": "Foundations",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "basics"
+  ],
+  "title": "\"FORE!\" — the one word you must never swallow",
+  "microFact": "A golf ball leaves the club at 200+ km/h. 'Fore!' is not embarrassment — it's the sport's safety siren.",
+  "lesson": "If your ball is flying anywhere near people, yell \"FORE!\" — loud, immediately, no hesitation. Add direction if useful: \"Fore right!\" It warns anyone in the landing zone to cover their head and turn away. A ball to the head causes real injuries; a shout costs nothing.\n\nBeginners often go quiet from embarrassment when they hit a wild one. Experienced golfers read that silence as reckless, not shy. Shouting fore instantly signals you understand the culture.\n\nIf you hear \"fore\": do NOT look up at the sky to find the ball. Turn away, crouch, cover your head with your arms.\n\nOther safety habits: never stand ahead of someone hitting, never swing when someone is close, and wait until the group ahead is clearly out of range — if you can reach them, you wait. \"I never thought I'd reach\" is the oldest bad excuse in golf.",
+  "visual": null,
+  "quiz": {
+    "question": "You hear someone yell 'FORE!'. What do you do?",
+    "options": [
+      "Look up to spot the incoming ball",
+      "Run toward the nearest tree",
+      "Yell 'fore' back to acknowledge",
+      "Turn away, crouch, and cover your head"
+    ],
+    "answerIndex": 3,
+    "explanation": "Never look up — turn away and protect your head and neck with your arms."
+  }
+}

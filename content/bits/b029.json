@@ -1,0 +1,26 @@
+{
+  "id": "b029",
+  "seq": 29,
+  "category": "Scoring & Formats",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "scoring",
+    "formats"
+  ],
+  "title": "Stroke play vs match play: two different games",
+  "microFact": "Stroke play counts every stroke over 18 holes. Match play is hole-by-hole combat — you can make a 9 and lose only one hole.",
+  "lesson": "The two mother formats:\n\nSTROKE PLAY (medal play): total your strokes for 18 holes; lowest total wins. Every stroke counts, disasters compound, and you must hole out everything. Most club competitions and all professional majors use it.\n\nMATCH PLAY: you versus an opponent, hole by hole. Win a hole by scoring lower on it; the match score reads like \"2 up\" or \"3&2\" (3 holes up with 2 to play — match over). A blow-up 9 loses you exactly one hole, same as losing by one stroke. You can CONCEDE putts, holes, or the match.\n\nStrategy differs completely: stroke play rewards avoiding disasters; match play rewards pressure and aggression when your opponent is in trouble.\n\nThe language you'll hear: \"all square\" (tied), \"dormie\" (up by exactly the holes remaining — can't lose in regulation), \"1 down with three to play.\" The Ryder Cup is match play — which is why it produces golf's wildest theater.",
+  "visual": null,
+  "quiz": {
+    "question": "A match ends '4&3'. What does that mean?",
+    "options": [
+      "Won by 4 strokes over 3 rounds",
+      "Won 4 holes, lost 3",
+      "4 holes up with 3 holes left to play",
+      "The winner shot 4 under on the back 3"
+    ],
+    "answerIndex": 2,
+    "explanation": "4 up with only 3 holes remaining — mathematically over, so the match ends there."
+  }
+}

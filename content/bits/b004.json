@@ -1,0 +1,25 @@
+{
+  "id": "b004",
+  "seq": 4,
+  "category": "Foundations",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "basics"
+  ],
+  "title": "The 14-club rule and what's in a bag",
+  "microFact": "You may carry a maximum of 14 clubs. Carrying more costs penalty strokes in competition.",
+  "lesson": "The Rules allow at most 14 CLUBS in your bag. A typical composed set:\n\n• DRIVER (1-wood): longest club, tee shots on long holes\n• FAIRWAY WOOD (3W/5W) and/or HYBRIDS: long shots from the ground\n• IRONS 5–9: the scoring workhorses; bigger number = shorter, higher shot\n• WEDGES: pitching (PW), sand (SW ~56°), maybe gap/lob — short precision shots\n• PUTTER: on the green\n\nAt your stage a driver, two hybrids, 6–9 irons, PW, 56° and putter (10–11 clubs) is plenty — fewer decisions, more confidence, and completely normal-looking at any club.\n\nIn competition, extra clubs cost two strokes per hole played with them in the bag (capped at four strokes). Count your clubs on the first tee — pros have lost tournaments to this (Ian Woosnam, 2001 Open, famously).",
+  "visual": null,
+  "quiz": {
+    "question": "What's the maximum number of clubs allowed in your bag?",
+    "options": [
+      "14",
+      "13",
+      "12",
+      "16"
+    ],
+    "answerIndex": 0,
+    "explanation": "14 is the limit. Playing with more brings penalties — count on the first tee."
+  }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>golfbits</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>⛳</text></svg>">
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+        <circle cx="14" cy="14" r="13" fill="#059669"/>
+        <line x1="14" y1="6" x2="14" y2="17" stroke="#fff" stroke-width="2"/>
+        <path d="M14 6 l8 3 -8 3z" fill="#fff"/>
+        <ellipse cx="14" cy="20" rx="6" ry="2" fill="#fff" opacity="0.55"/>
+      </svg>
+      <span>golfbits</span>
+    </div>
+    <div class="topbar-right">
+      <span class="agent-chip" id="agentChip" title="Configured content agent">agent: …</span>
+      <span class="streak-chip" id="streakChip">🔥 <b id="streakNum">0</b></span>
+      <svg class="ring" width="44" height="44" viewBox="0 0 44 44" role="img" aria-label="overall progress">
+        <circle cx="22" cy="22" r="18" fill="none" stroke="#E5E7EB" stroke-width="5"/>
+        <circle id="ringFg" cx="22" cy="22" r="18" fill="none" stroke="#059669" stroke-width="5"
+                stroke-linecap="round" stroke-dasharray="113 113" stroke-dashoffset="113"
+                transform="rotate(-90 22 22)"/>
+        <text id="ringLabel" x="22" y="26" text-anchor="middle" font-size="11" font-weight="600" fill="#1F2937">0%</text>
+      </svg>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button data-view="today" class="active">Today</button>
+    <button data-view="journey">Journey</button>
+    <button data-view="library">Library</button>
+    <button data-view="stats">Stats</button>
+  </nav>
+
+  <main id="main" aria-live="polite"></main>
+
+  <footer class="foot">progress saved to <code>data/progress.json</code> — commit it with your repo</footer>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

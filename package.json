@@ -1,0 +1,15 @@
+{
+  "name": "golfbits",
+  "version": "2.0.0",
+  "description": "Daily golf learning bits — local-first, git-tracked, AI-agent-extendable",
+  "bin": { "golfbits": "bin/golfbits.js" },
+  "scripts": {
+    "start": "node bin/golfbits.js open",
+    "serve": "node bin/golfbits.js serve",
+    "test": "node test/run-tests.js",
+    "validate": "node bin/golfbits.js validate"
+  },
+  "engines": { "node": ">=18" },
+  "license": "MIT",
+  "private": true
+}

@@ -1,0 +1,29 @@
+{
+  "id": "b046",
+  "seq": 46,
+  "category": "Course Management",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "strategy"
+  ],
+  "title": "Around the green: putt > chip > pitch",
+  "microFact": "From off the green, your worst putt usually beats your average chip. Use the least-lofted option that works.",
+  "lesson": "The short-game decision tree, in strict order of preference:\n\n1. PUTT whenever the ground allows — fringe, tight fairway lie, even light rough. Your worst putt ends up 3m away; your worst chip ends up in the bunker. \"The Texas wedge\" (putter from off the green) is smart golf, not timid golf.\n2. CHIP (a low bump with an 8- or 9-iron that lands early and RUNS like a putt) when grass or a bump prevents putting. Minimal air time, minimal risk.\n3. PITCH (a higher, softer shot with your sand or gap wedge) only when you MUST carry something — a bunker, deep rough, a tier.\n\nThe amateur instinct is exactly backwards: grabbing the most lofted wedge for every greenside shot because it looks like TV. High-lofted shots have the smallest margin for error — the difference between cute and chunked is millimeters.\n\nDrill for your range sessions: same 9-iron chip motion, three landing spots, watch the rollout. Learning ONE reliable chip beats owning four mediocre flop shots — and up-and-downs are where 110 becomes 99.",
+  "visual": {
+    "type": "svg",
+    "svg": "<svg viewBox=\"0 0 320 200\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"system-ui,sans-serif\">\n<rect width=\"320\" height=\"200\" rx=\"10\" fill=\"#e7f0e2\"/>\n<rect x=\"94\" y=\"14\" width=\"132\" height=\"26\" rx=\"8\" fill=\"#1c1917\"/>\n<text x=\"160\" y=\"31\" font-size=\"10\" text-anchor=\"middle\" fill=\"#fff\">can the ball ROLL there?</text>\n<line x1=\"120\" y1=\"40\" x2=\"70\" y2=\"66\" stroke=\"#78716c\" stroke-width=\"1.5\"/><text x=\"80\" y=\"52\" font-size=\"9\" fill=\"#15803d\" font-weight=\"700\">yes</text>\n<line x1=\"200\" y1=\"40\" x2=\"250\" y2=\"66\" stroke=\"#78716c\" stroke-width=\"1.5\"/><text x=\"232\" y=\"52\" font-size=\"9\" fill=\"#b91c1c\" font-weight=\"700\">no</text>\n<rect x=\"20\" y=\"66\" width=\"100\" height=\"30\" rx=\"8\" fill=\"#14532d\"/>\n<text x=\"70\" y=\"85\" font-size=\"11\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"700\">1. PUTT</text>\n<rect x=\"196\" y=\"66\" width=\"110\" height=\"26\" rx=\"8\" fill=\"#1c1917\"/>\n<text x=\"251\" y=\"83\" font-size=\"9\" text-anchor=\"middle\" fill=\"#fff\">must CARRY trouble?</text>\n<line x1=\"220\" y1=\"92\" x2=\"180\" y2=\"118\" stroke=\"#78716c\" stroke-width=\"1.5\"/><text x=\"188\" y=\"104\" font-size=\"9\" fill=\"#15803d\" font-weight=\"700\">no</text>\n<line x1=\"280\" y1=\"92\" x2=\"290\" y2=\"118\" stroke=\"#78716c\" stroke-width=\"1.5\"/><text x=\"294\" y=\"106\" font-size=\"9\" fill=\"#b91c1c\" font-weight=\"700\">yes</text>\n<rect x=\"126\" y=\"118\" width=\"106\" height=\"30\" rx=\"8\" fill=\"#15803d\"/>\n<text x=\"179\" y=\"137\" font-size=\"11\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"700\">2. CHIP (8/9i)</text>\n<rect x=\"244\" y=\"118\" width=\"66\" height=\"30\" rx=\"8\" fill=\"#d97706\"/>\n<text x=\"277\" y=\"137\" font-size=\"11\" text-anchor=\"middle\" fill=\"#fff\" font-weight=\"700\">3. PITCH</text>\n<text x=\"160\" y=\"176\" font-size=\"10\" text-anchor=\"middle\" fill=\"#57534e\">lowest loft that works = smallest margin for disaster</text>\n</svg>",
+    "caption": "Greenside decision tree: putt when you can, chip when you can't, pitch only over trouble."
+  },
+  "quiz": {
+    "question": "Ball sits on the fringe, 12m from the hole, nothing between you and it. Best choice?",
+    "options": [
+      "Putter",
+      "Sand wedge pitch",
+      "Lob wedge flop",
+      "9-iron chip"
+    ],
+    "answerIndex": 0,
+    "explanation": "Nothing to carry = putt. Lowest risk, tightest outcome distribution. Chip only when the ground stops a putt working."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "b047",
+  "seq": 47,
+  "category": "Course Management",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "strategy"
+  ],
+  "title": "Take your medicine: the punch-out",
+  "microFact": "From the trees, the pros' default is a sideways punch back to the fairway. One wasted shot beats three.",
+  "lesson": "You will hit it into the trees. What happens NEXT decides your score.\n\nThe amateur move: spotting a 2-meter gap in the branches and attempting the miracle 160m draw. Result, four times out of five: ricochet, still in the trees, now angry. The hole ends in a 9.\n\nThe player's move: TAKE YOUR MEDICINE. Find the widest, safest exit — even if it's sideways or backwards — punch out to the fairway, and play the hole from there. Bogey or double, controlled.\n\nThe PUNCH-OUT technique (worth one range session): ball back in your stance, a 5- or 6-iron, hands ahead, abbreviated swing — a firm putt-like chop that keeps the ball under branches and running.\n\nThe decision rule: attempt a recovery ONLY if you'd bet ₹500 on pulling it off at even odds. Be honest. Under that bar, punch out — no debate, no lingering.\n\nThis is also a belonging signal, oddly enough: experienced partners watch a newcomer in trouble. Chip out sideways without drama and someone will say \"good golf\" — and mean it.",
+  "visual": null,
+  "quiz": {
+    "question": "Deep in trees, one risky gap toward the green, easy sideways exit to the fairway. The disciplined play?",
+    "options": [
+      "Punch out sideways to the fairway",
+      "Hit it low through the gap with a putter",
+      "Declare it unplayable and re-tee",
+      "Thread the gap — fortune favors the brave"
+    ],
+    "answerIndex": 0,
+    "explanation": "Guaranteed recovery beats a low-percentage hero shot. One deliberate 'wasted' stroke caps the damage at bogey territory."
+  }
+}

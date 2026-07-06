@@ -1,0 +1,26 @@
+{
+  "id": "b055",
+  "seq": 55,
+  "category": "Lingo & Culture",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "culture",
+    "lingo"
+  ],
+  "title": "Watching golf: majors, tours, and India's stars",
+  "microFact": "Four men's majors: Masters, PGA Championship, US Open, The Open. Clubhouse small talk runs on them.",
+  "lesson": "Fluency in golf-as-spectacle is clubhouse currency. The essentials:\n\nTHE FOUR MEN'S MAJORS: the MASTERS (Augusta National, every April — the green jacket), the PGA CHAMPIONSHIP (May), the US OPEN (June — brutal setups), and THE OPEN CHAMPIONSHIP (July, links golf in the UK — the oldest, the Claret Jug). Winning all four in a career = the Grand Slam.\n\nTOURS: the PGA TOUR (US) and DP WORLD TOUR (Europe) headline; LIV Golf is the breakaway everyone has opinions about — having a light take on it is practically a membership requirement. Women's golf runs the LPGA and five majors.\n\nINDIA'S NAMES to know: Anirban Lahiri, Shubhankar Sharma, and Gaganjeet Bhullar internationally; ADITI ASHOK, India's biggest golf star, a Bangalorean who nearly medaled at the Tokyo Olympics; the domestic men's circuit is the PGTI (Professional Golf Tour of India). The HERO INDIAN OPEN at DLF G&CC in Gurugram is the country's flagship event.\n\nMinimum viable fandom: watch the majors' final rounds (late Sunday night IST — the golfer's insomnia), and know who's currently world #1. Thirty minutes of highlights a month covers you.",
+  "visual": null,
+  "quiz": {
+    "question": "Which of these is NOT one of the four men's majors?",
+    "options": [
+      "The Masters",
+      "The Open Championship",
+      "The US Open",
+      "The Players Championship"
+    ],
+    "answerIndex": 3,
+    "explanation": "The Players is huge ('the fifth major') but not a major. Masters, PGA Championship, US Open, The Open — that's the slam."
+  }
+}

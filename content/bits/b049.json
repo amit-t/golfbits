@@ -1,0 +1,25 @@
+{
+  "id": "b049",
+  "seq": 49,
+  "category": "Course Management",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "strategy"
+  ],
+  "title": "Know your REAL carry distances",
+  "microFact": "Amateurs remember their best-ever 7-iron. Courses only care about your average one. Measure it.",
+  "lesson": "Ask an amateur their 7-iron distance and they quote their career strike. Then they stand at 150m, pull the 150m-best-case club, and come up short into the front bunker — the single most common amateur miss.\n\nThe fix is one range session with any measuring tool (a launch-monitor bay in Bangalore, a rangefinder, or GPS apps like Hole19/18Birdies on the course):\n\n1. Hit 10 balls with each club, ignore the 2 best and 2 worst.\n2. Record the AVERAGE CARRY (flight distance, not roll) of the middle six.\n3. Write the numbers on a card in your bag or in your phone.\n\nExpect sobering data — a typical 28-handicap carries a 7-iron ~120m, not the 145m of memory. That honesty is a superpower: suddenly approach shots finish pin-high, and pin-high changes everything.\n\nCarry vs TOTAL matters: carry clears the bunker; total is where you finish. Firm Indian summer fairways add serious roll; monsoon-soft ones add none.\n\nThis card also makes byte 45's layup system real: you can't 'leave yourself 80' without knowing which club carries 130. Data first, strategy second.",
+  "visual": null,
+  "quiz": {
+    "question": "Which number should drive your club choice for an approach over a bunker?",
+    "options": [
+      "Your best-ever distance with the club",
+      "Your average TOTAL distance including roll",
+      "The number your partner hits that club",
+      "Your average CARRY distance"
+    ],
+    "answerIndex": 3,
+    "explanation": "Carry is what clears trouble. Averages, not highlights — build the card and trust it over memory."
+  }
+}

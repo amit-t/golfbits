@@ -1,0 +1,25 @@
+{
+  "id": "b002",
+  "seq": 2,
+  "category": "Foundations",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "basics"
+  ],
+  "title": "What 'par' actually means",
+  "microFact": "Par assumes two putts. A par 4 = reach the green in 2 shots, then 2 putts.",
+  "lesson": "PAR is the score an expert is expected to make on a hole, and it always budgets TWO putts. So a par 3 means the expert reaches the green in one shot; a par 4 in two; a par 5 in three. Par is set mainly by length: roughly, par 3s are under ~230m, par 4s to ~450m, par 5s beyond.\n\nA standard 18-hole course is par 70–72, usually with four par 3s, four par 5s and ten par 4s. Clover Greens, your home course, is a full 18-hole championship layout.\n\nHere's the mindset shift that makes golf fun at your level: par is not YOUR target yet. If you shoot 110, your personal par is about a double bogey per hole (bogey golf = 90). Reframing each hole as \"my par is 6\" removes the despair and, ironically, lowers scores.",
+  "visual": null,
+  "quiz": {
+    "question": "On a par 5, how many shots does par assume it takes to REACH the green?",
+    "options": [
+      "3",
+      "2",
+      "4",
+      "5"
+    ],
+    "answerIndex": 0,
+    "explanation": "Par always includes two putts, so a par 5 = 3 shots to reach the green + 2 putts."
+  }
+}

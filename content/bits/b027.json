@@ -1,0 +1,26 @@
+{
+  "id": "b027",
+  "seq": 27,
+  "category": "Equipment & Fitting",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "equipment",
+    "fitting"
+  ],
+  "title": "Golf balls: what to play and why it matters less than you think",
+  "microFact": "At 110, play a soft 2-piece or 3-piece ball around ₹200/ball — losing a ₹450 Pro V1 in a lake hurts twice.",
+  "lesson": "Ball construction, decoded:\n\n• 2-PIECE (Surlyn/ionomer cover): durable, low spin, distance-focused, cheap. Callaway Supersoft, Srixon AD333, Titleist TruFeel.\n• 3+ PIECE URETHANE cover: soft feel, high greenside spin, premium price. Pro V1, TP5, Chrome Soft.\n\nAt your swing stage, greenside spin barely changes your outcomes, but LOST BALLS change your wallet — beginners lose 3–6 per round. The intelligent play everyone respects: a quality mid-tier ball (Srixon AD333 / Q-Star, Supersoft) and — crucially — the SAME model every round. Consistency of ball beats quality of ball, because your distances and feel stay calibrated.\n\nTwo insider habits: (1) mark your ball with a unique dot pattern in Sharpie and ANNOUNCE it on the first tee — \"Srixon 3, two blue dots\" — because playing a wrong ball is a penalty; (2) never tee up a scuffed range ball at a nice club. That's the tell of tells.",
+  "visual": null,
+  "quiz": {
+    "question": "Why announce your ball's make and markings on the first tee?",
+    "options": [
+      "Tradition only",
+      "So others can lend you an identical ball",
+      "Playing a wrong ball is a penalty — identification prevents it",
+      "It's required for handicap posting"
+    ],
+    "answerIndex": 2,
+    "explanation": "Hitting someone else's ball = two-stroke penalty in stroke play. Announcing make, number and markings prevents mix-ups."
+  }
+}

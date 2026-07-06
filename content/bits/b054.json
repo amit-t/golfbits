@@ -1,0 +1,26 @@
+{
+  "id": "b054",
+  "seq": 54,
+  "category": "Mental & Practice",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "mental",
+    "practice"
+  ],
+  "title": "Practice like a golfer, not a ball-beater",
+  "microFact": "Shots inside 100m are ~60% of your score. Spend your practice where your strokes actually live.",
+  "lesson": "The driving-range trap: buy 100 balls, hit 80 drivers, go home. It feels like practice; it's actually rehearsal of one club you use 14 times a round.\n\nWhere a 110-shooter's strokes really go: ~36+ putts, a dozen chips/pitches, several duffed short shots — roughly 60% of your total inside 100 meters. Allocate practice to match:\n\n• 40% SHORT GAME: the byte-46 chip drill, distance-control pitches to three targets, bunker basics once you have the 56°.\n• 25% PUTTING: 1m circle drill (hole 20 in a row — gimmes become real), long-putt ladder for two-putt range control.\n• 35% FULL SWING — with structure: every ball gets a target and the full pre-shot routine. Play 'imaginary Clover Greens': driver, then 7-iron, then wedge, changing clubs like a real round. Random practice transfers to the course; block-hammering one club doesn't.\n\nYour weekly rhythm on non-course days: one range session run exactly like this beats three mindless bucket-beatings. And putting practice needs no booking, no tee time, and a ₹500 mat at home covers monsoon Mondays.",
+  "visual": null,
+  "quiz": {
+    "question": "Roughly what share of a high-handicapper's strokes happen within 100m of the hole?",
+    "options": [
+      "About 20%",
+      "About 40%",
+      "About 80%",
+      "About 60%"
+    ],
+    "answerIndex": 3,
+    "explanation": "Putts alone are ~35%; add chips, pitches and bunker shots and it's ~60%. Practice allocation should look like your scorecard."
+  }
+}

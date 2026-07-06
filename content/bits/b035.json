@@ -1,0 +1,26 @@
+{
+  "id": "b035",
+  "seq": 35,
+  "category": "Scoring & Formats",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "scoring",
+    "formats"
+  ],
+  "title": "Gimmes: the putt that was never missed",
+  "microFact": "A 'gimme' is a short putt your partners concede. Legal in match play, never in stroke play — and knowing the difference matters.",
+  "lesson": "\"That's good\" — three words that mean your short putt is CONCEDED: pick it up, count one stroke, no need to putt it.\n\nThe rules reality:\n• MATCH PLAY: concessions are fully legal and strategic. Once conceded, it can't be withdrawn or refused.\n• STROKE PLAY: NO gimmes exist. Every ball must be holed. Picking up a \"gimme\" in a medal round = penalty territory.\n• CASUAL golf: gimmes \"inside the leather\" (closer than a putter grip's length) keep things moving and friendly.\n\nGimme etiquette for the newcomer:\n1. Never ASK for a gimme. Ever. You wait to be given.\n2. When given one, a small \"thanks\" and pick up briskly.\n3. Give them generously to others on genuinely short putts — stingy gimme-givers are noted.\n4. In anything with a trophy or money: hole everything, and quietly expect the same.\n\nOne warning: don't let casual gimmes rot your short putting. Practice 1-meter putts anyway — competition day exposes everyone whose 'automatic' putts were never actually hit.",
+  "visual": null,
+  "quiz": {
+    "question": "In which format are conceded putts (gimmes) actually legal under the Rules?",
+    "options": [
+      "Stroke play",
+      "Match play",
+      "Stableford",
+      "All formats"
+    ],
+    "answerIndex": 1,
+    "explanation": "Concession is a formal part of match play only. In stroke play and Stableford you must hole out (or pick up for zero points in Stableford)."
+  }
+}

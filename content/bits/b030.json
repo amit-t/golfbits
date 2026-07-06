@@ -1,0 +1,30 @@
+{
+  "id": "b030",
+  "seq": 30,
+  "category": "Scoring & Formats",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "scoring",
+    "formats"
+  ],
+  "title": "Stableford: India's favorite tournament format",
+  "microFact": "Stableford awards points per hole — and lets you pick up when a hole goes wrong. Most Indian corporate events use it.",
+  "lesson": "STABLEFORD converts your NET score on each hole into points:\n\n• Net double bogey or worse: 0 points\n• Net bogey: 1 · Net par: 2 · Net birdie: 3 · Net eagle: 4 · Net albatross: 5\n\nHighest TOTAL points wins. \"Net\" means after your handicap strokes are applied hole-by-hole (the scorecard's stroke index row tells you where — more in the handicap week).\n\nWhy it dominates Indian amateur and corporate golf: a triple bogey doesn't destroy your day — it's just a zero. Once you can't score a point, you PICK UP, keeping play fast with big fields.\n\nA 36-point round means you played exactly to your handicap. Below 32, rough day; 40+, you'll win prizes (and get accusing looks about your handicap — a topic for byte 41).\n\nWhen someone asks \"how many points did you get?\" at an Indian club, they're talking Stableford. Answering fluently — \"34, blobbed two holes on the back\" (a blob = zero-point hole) — is native-speaker golf.",
+  "visual": {
+    "type": "svg",
+    "svg": "<svg viewBox=\"0 0 320 200\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"system-ui,sans-serif\">\n<rect width=\"320\" height=\"200\" rx=\"10\" fill=\"#e7f0e2\"/>\n<text x=\"160\" y=\"24\" font-size=\"12\" text-anchor=\"middle\" fill=\"#1c1917\" font-weight=\"700\">Stableford points (net score)</text>\n<g font-size=\"10\">\n<rect x=\"30\" y=\"40\" width=\"260\" height=\"22\" rx=\"5\" fill=\"#fca5a5\"/><text x=\"44\" y=\"55\" fill=\"#7f1d1d\">net double bogey+</text><text x=\"272\" y=\"55\" text-anchor=\"end\" font-weight=\"700\" fill=\"#7f1d1d\">0 — \"blob\", pick up</text>\n<rect x=\"30\" y=\"66\" width=\"260\" height=\"22\" rx=\"5\" fill=\"#fde68a\"/><text x=\"44\" y=\"81\" fill=\"#78350f\">net bogey</text><text x=\"272\" y=\"81\" text-anchor=\"end\" font-weight=\"700\" fill=\"#78350f\">1</text>\n<rect x=\"30\" y=\"92\" width=\"260\" height=\"22\" rx=\"5\" fill=\"#bbf7d0\"/><text x=\"44\" y=\"107\" fill=\"#14532d\">net par</text><text x=\"272\" y=\"107\" text-anchor=\"end\" font-weight=\"700\" fill=\"#14532d\">2</text>\n<rect x=\"30\" y=\"118\" width=\"260\" height=\"22\" rx=\"5\" fill=\"#86efac\"/><text x=\"44\" y=\"133\" fill=\"#14532d\">net birdie</text><text x=\"272\" y=\"133\" text-anchor=\"end\" font-weight=\"700\" fill=\"#14532d\">3</text>\n<rect x=\"30\" y=\"144\" width=\"260\" height=\"22\" rx=\"5\" fill=\"#4ade80\"/><text x=\"44\" y=\"159\" fill=\"#052e16\">net eagle</text><text x=\"272\" y=\"159\" text-anchor=\"end\" font-weight=\"700\" fill=\"#052e16\">4</text>\n</g>\n<text x=\"160\" y=\"188\" font-size=\"10\" text-anchor=\"middle\" fill=\"#57534e\">36 points = played to your handicap</text>\n</svg>",
+    "caption": "Stableford: points per hole against your net score. Blob = 0, pick up, move on."
+  },
+  "quiz": {
+    "question": "In Stableford, you make a net par on a hole. How many points?",
+    "options": [
+      "1",
+      "0",
+      "3",
+      "2"
+    ],
+    "answerIndex": 3,
+    "explanation": "Net par = 2 points. Net bogey 1, net birdie 3 — and 36 points means you played to your handicap."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "b016",
+  "seq": 16,
+  "category": "Rules",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "rules"
+  ],
+  "title": "Out of bounds and the provisional ball",
+  "microFact": "OB or lost ball = stroke AND distance: add a stroke and replay from where you last hit. The provisional ball saves the long walk back.",
+  "lesson": "OUT OF BOUNDS (white stakes or fence lines) and LOST BALL (not found within 3 minutes) share golf's harshest penalty: STROKE AND DISTANCE. You add one penalty stroke and replay from the ORIGINAL spot. Slice your tee shot OB, and you're hitting your THIRD shot from the tee again.\n\nThe pace-saving tool: the PROVISIONAL BALL. If your ball might be lost or OB, announce clearly — \"I'll play a provisional\" (the announcement is required) — and hit a second ball before walking forward. Find the first ball in bounds? Pick up the provisional, no penalty. Don't find it? The provisional is already in play, lying 3, and you've saved a 300m walk of shame.\n\nMany clubs also post a LOCAL RULE (E-5) letting you drop near where the ball was lost for TWO penalty strokes instead of re-teeing — casual play only, check the scorecard or ask.",
+  "visual": null,
+  "quiz": {
+    "question": "Your tee shot sails toward the trees and might be lost. What must you do to play a provisional?",
+    "options": [
+      "Ask your caddie's permission",
+      "Just quietly hit another ball",
+      "Wait until you've searched 3 minutes first",
+      "Announce 'provisional' before hitting the second ball"
+    ],
+    "answerIndex": 3,
+    "explanation": "You must announce it as a provisional. An unannounced second ball automatically becomes the ball in play — even if you find the first."
+  }
+}

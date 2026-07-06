@@ -1,0 +1,26 @@
+{
+  "id": "b032",
+  "seq": 32,
+  "category": "Scoring & Formats",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "scoring",
+    "formats"
+  ],
+  "title": "Four-ball vs foursomes: don't mix them up",
+  "microFact": "Four-ball: partners each play their own ball, best score counts. Foursomes: partners share ONE ball, alternating shots.",
+  "lesson": "Two classic partner formats with confusingly similar names:\n\nFOUR-BALL (better ball): you and a partner EACH play your own ball; the LOWER of your two scores counts on each hole. Forgiving and social — your partner's par erases your 8. Most weekend team games are four-ball.\n\nFOURSOMES (alternate shot): you and your partner share ONE ball. One drives the odd holes, the other the evens, and you alternate every shot until holed. Ruthless — your partner tees into a bush, YOU play from the bush. It's fast, old-school, and beloved at traditional clubs; also the format that wrecks friendships and Ryder Cup pairings alike.\n\nGREENSOMES: the gentler hybrid — both drive, pick the better one, then alternate from there.\n\nWhen the club noticeboard says \"Saturday: 4BBB Stableford\", that's Four-Ball Better-Ball with Stableford points — each plays their own ball, better net points count. Now you can read it.",
+  "visual": null,
+  "quiz": {
+    "question": "In foursomes, your partner hits your team's drive out of bounds. Who plays the next stroke?",
+    "options": [
+      "Your partner — they made the mistake",
+      "You — shots alternate regardless",
+      "Either of you",
+      "The team forfeits the hole"
+    ],
+    "answerIndex": 1,
+    "explanation": "Alternation is strict (penalty strokes don't change the rotation) — the re-tee after your partner's OB drive is yours. Character-building."
+  }
+}

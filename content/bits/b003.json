@@ -1,0 +1,25 @@
+{
+  "id": "b003",
+  "seq": 3,
+  "category": "Foundations",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "basics"
+  ],
+  "title": "Birdies, bogeys, eagles — the scoring language",
+  "microFact": "Birdie = 1 under par on a hole. Bogey = 1 over. Learn these and half of golf conversation unlocks.",
+  "lesson": "Golf scores on a hole are named relative to par:\n\n• EAGLE: 2 under par (a 3 on a par 5)\n• BIRDIE: 1 under par\n• PAR: even\n• BOGEY: 1 over\n• DOUBLE BOGEY: 2 over — then triple, quadruple...\n• ALBATROSS (or double eagle): 3 under — rarer than a hole-in-one\n• ACE: a hole-in-one\n\nThe bird theme started with 19th-century American slang where \"bird\" meant something excellent.\n\nConversation fluency matters: when a playing partner says \"I was two over through twelve,\" they mean 2 over par after 12 holes. When someone asks \"what did you make?\" walking off a green, answer in this language: \"double\" beats \"I got a six.\" Small thing, instant insider signal.\n\nTradition alert: if you ever make an ace, you buy drinks for everyone at the clubhouse. Non-negotiable.",
+  "visual": null,
+  "quiz": {
+    "question": "You score a 4 on a par 5. What's it called?",
+    "options": [
+      "Bogey",
+      "Par",
+      "Birdie",
+      "Eagle"
+    ],
+    "answerIndex": 2,
+    "explanation": "One under par on the hole = birdie, regardless of which hole or par it is."
+  }
+}

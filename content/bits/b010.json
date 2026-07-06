@@ -1,0 +1,30 @@
+{
+  "id": "b010",
+  "seq": 10,
+  "category": "Etiquette",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "etiquette",
+    "social"
+  ],
+  "title": "Bunker craft: enter low, rake back, walk out clean",
+  "microFact": "Enter a bunker from its lowest side — never down the steep face — and rake your way out backwards.",
+  "lesson": "Bunkers have their own choreography:\n\n1. ENTER from the LOW side, nearest your ball. Climbing down the steep face collapses the edge and leaves ugly footprints on the slope.\n2. Once in: you may NOT ground your club in the sand before your stroke (no touching sand on practice swings or at address). Penalty if you do. Hover the club.\n3. After your shot, RAKE everything — your footprints, your blast crater, the path you walked. Rake smoothly, walking backwards toward your entry point.\n4. Leave the rake as you found it — at Indian courses usually outside the bunker, lying flat, handle parallel to play. Your caddie may rake for you; thank him, but know the craft yourself.\n\nA fluffed bunker shot is forgiven instantly. Footprints left in the sand for the next player's ball to land in? That story gets retold at the 19th hole.",
+  "visual": {
+    "type": "svg",
+    "svg": "<svg viewBox=\"0 0 320 200\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"system-ui,sans-serif\">\n<rect width=\"320\" height=\"200\" rx=\"10\" fill=\"#e7f0e2\"/>\n<ellipse cx=\"160\" cy=\"105\" rx=\"110\" ry=\"60\" fill=\"#fde68a\" stroke=\"#d97706\" stroke-width=\"2\"/>\n<path d=\"M78 70 C95 52 130 45 160 47\" stroke=\"#92400e\" stroke-width=\"7\" fill=\"none\" stroke-linecap=\"round\" opacity=\"0.5\"/>\n<text x=\"98\" y=\"38\" font-size=\"10\" fill=\"#92400e\">steep face — never enter here ✗</text>\n<circle cx=\"185\" cy=\"110\" r=\"5\" fill=\"#fff\" stroke=\"#1c1917\" stroke-width=\"1.5\"/>\n<path d=\"M250 150 C230 140 205 125 192 115\" stroke=\"#15803d\" stroke-width=\"2.5\" fill=\"none\" stroke-dasharray=\"5 4\" marker-end=\"none\"/>\n<path d=\"M196 119 l-8 -5 9 -2z\" fill=\"#15803d\"/>\n<text x=\"252\" y=\"166\" font-size=\"10\" fill=\"#15803d\" font-weight=\"700\">enter low side ✓</text>\n<path d=\"M192 122 C210 133 228 143 246 152\" stroke=\"#78716c\" stroke-width=\"2.5\" fill=\"none\"/>\n<path d=\"M240 148 l9 5 -10 1z\" fill=\"#78716c\"/>\n<text x=\"205\" y=\"146\" font-size=\"9\" fill=\"#57534e\" transform=\"rotate(24 205 146)\">rake backwards out</text>\n</svg>",
+    "caption": "Bunker choreography: enter at the low side, rake backwards out along your own path."
+  },
+  "quiz": {
+    "question": "Which of these is a RULES violation (not just etiquette) in a bunker?",
+    "options": [
+      "Entering from the steep face",
+      "Grounding your club in the sand before the stroke",
+      "Forgetting to thank the caddie",
+      "Taking two practice swings outside the bunker"
+    ],
+    "answerIndex": 1,
+    "explanation": "Touching sand with your club before the stroke (practice swing or address) is a penalty. Entry and raking are etiquette."
+  }
+}

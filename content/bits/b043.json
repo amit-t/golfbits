@@ -1,0 +1,25 @@
+{
+  "id": "b043",
+  "seq": 43,
+  "category": "Course Management",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "strategy"
+  ],
+  "title": "The tee shot lie: driver is a choice, not a duty",
+  "microFact": "The scorecard doesn't have a picture column. A 3-hybrid in the fairway beats a driver in the trees every single time.",
+  "lesson": "Course management is scoring without swinging better, and it starts on the tee.\n\nThe question isn't \"how far can I hit it?\" but \"where do I want my NEXT shot from?\" On a tight par 4 with trouble at driver distance, a hybrid to your favorite wedge range often produces a lower score than a heroic driver — with a tenth of the risk.\n\nA simple pre-tee routine that instantly upgrades your golf:\n1. Where is the DANGER? (water, OB, bunkers — and at what distance?)\n2. Where is the ideal MISS? (short of the bunkers, away from the water side)\n3. Which club puts me there with my NORMAL swing — not my best-ever?\n\nHigh handicappers lose most strokes to doubles and triples caused by tee-shot disasters, not to lack of birdies. Cutting blow-ups from 6 a round to 3 is worth ~8 strokes — no swing change required.\n\nCaddie synergy: ask \"what's the play here?\" on unfamiliar tees. At Clover Greens, learn the three holes where driver is a trap, and your home-course scores drop this month.",
+  "visual": null,
+  "quiz": {
+    "question": "What's the smartest first question on any tee box?",
+    "options": [
+      "Is my driver warmed up?",
+      "How far is the green?",
+      "What did my partner hit?",
+      "Where's the trouble and what's the safe miss?"
+    ],
+    "answerIndex": 3,
+    "explanation": "Identify danger first, pick the target and club that avoids it with your normal swing. Distance is the last input, not the first."
+  }
+}

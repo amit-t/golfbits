@@ -1,0 +1,26 @@
+{
+  "id": "b011",
+  "seq": 11,
+  "category": "Etiquette",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "etiquette",
+    "social"
+  ],
+  "title": "Green etiquette: lines, marks, and the flagstick",
+  "microFact": "Never walk on the invisible line between anyone's ball and the hole. It's the most sacred real estate in golf.",
+  "lesson": "The green has the densest etiquette in golf:\n\n• THE LINE: every player has an imaginary putting line from ball to hole. Never step on anyone's line — your spikes dent the surface. Walk around, or step OVER it if you must.\n• MARKING: on the green you may lift your ball after placing a MARKER (coin or flat disc) directly behind it. Mark whenever your ball might distract another player or sits near their line.\n• THE FLAGSTICK: since 2019 you may putt with it in. If a player asks you to TEND it (hold it and pull as the ball approaches) or remove it, closest player to the hole usually does the job. Lay a removed flag gently on the fringe, never drop it on the green.\n• SHADOWS: don't let your shadow fall across someone's line or the hole while they putt.\n• Stand still and silent, outside their field of vision.\n\nFirst ball in the hole? Don't celebrate across someone's unfinished putt.",
+  "visual": null,
+  "quiz": {
+    "question": "Since the 2019 rules update, putting with the flagstick left in the hole is…",
+    "options": [
+      "A two-stroke penalty",
+      "Allowed only off the green",
+      "Allowed",
+      "Allowed only in match play"
+    ],
+    "answerIndex": 2,
+    "explanation": "It's fully legal now. Many players leave it in for pace; remove or tend it if a partner asks."
+  }
+}

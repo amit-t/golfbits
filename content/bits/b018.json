@@ -1,0 +1,25 @@
+{
+  "id": "b018",
+  "seq": 18,
+  "category": "Rules",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "rules"
+  ],
+  "title": "Unplayable ball: your escape hatch",
+  "microFact": "Anywhere except a penalty area, YOU alone can declare your ball unplayable — for one stroke, three escape routes.",
+  "lesson": "Ball wedged against a tree root? Buried in a bush? You may declare it UNPLAYABLE — your call alone, no one's approval needed. Costs ONE penalty stroke, then choose:\n\n1. STROKE AND DISTANCE: replay from the previous spot.\n2. BACK-ON-A-LINE: drop on the line from the hole through the ball's spot, as far back as you like.\n3. LATERAL: drop within two club-lengths of the ball, no nearer the hole.\n\nIn a BUNKER, options 2 and 3 must stay in the sand — or take a fourth option: drop OUTSIDE the bunker back on the line for TWO penalty strokes total.\n\nThe amateur mistake isn't using this rule too much — it's not using it enough. Hacking three times at a ball under a bush costs three strokes and your composure; one penalty drop costs one. Knowing when to take your medicine is the difference between a blow-up hole and a bogey, and it reads as course intelligence to everyone watching.",
+  "visual": null,
+  "quiz": {
+    "question": "Who decides whether your ball is unplayable?",
+    "options": [
+      "You alone",
+      "The caddie confirms the lie",
+      "Your marker must agree",
+      "The club captain"
+    ],
+    "answerIndex": 0,
+    "explanation": "It's entirely your call, anywhere except inside a penalty area. One stroke, three options."
+  }
+}

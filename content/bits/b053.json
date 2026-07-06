@@ -1,0 +1,26 @@
+{
+  "id": "b053",
+  "seq": 53,
+  "category": "Mental & Practice",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "mental",
+    "practice"
+  ],
+  "title": "The bounce-back: surviving the blow-up hole",
+  "microFact": "Everyone makes 9s. Good golfers make a 9 and then a par. The skill is the SECOND number.",
+  "lesson": "The round-wrecker isn't the triple bogey — it's the three angry holes AFTER the triple. Tilt is golf's real handicap.\n\nTools that work:\n\n• THE 10-STEP RULE: you get ten angry steps off the green. Feel it fully, then it's over — next tee is a new hole. (Some players physically unvelcro and re-velcro their glove as the 'reset switch.')\n• NO STORY-TELLING: \"I always blow up on the back nine\" is a script your brain will happily follow. The honest frame: one bad hole is ONE data point, already in the past.\n• NEXT-SHOT FOCUS: the only shot that exists is the one in front of you. Not the 9 behind you, not the water two holes ahead.\n• The stat that heals: even scratch golfers average worse-than-par rounds. Your net double bogey cap (byte 20) literally limits the damage — a blob is a blob, never a catastrophe.\n\nTournament truth: Stableford fields aren't won by the best golfer; they're won by whoever wasted the fewest holes on emotions. As a newcomer, equanimity after disaster is ALSO your loudest belonging signal — clubs are full of talented tantrums, and nobody wants to play with them twice.",
+  "visual": null,
+  "quiz": {
+    "question": "You make a 10 on the 7th hole. The highest-value skill right now is…",
+    "options": [
+      "Analyzing every mistake immediately while it's fresh",
+      "A short deliberate reset, then full focus on the 8th tee",
+      "Playing the next three holes extra aggressively to win it back",
+      "Apologizing repeatedly to your group"
+    ],
+    "answerIndex": 1,
+    "explanation": "Brief reset ritual, close the file, next shot. Chasing losses and public flagellation both compound the damage."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "b048",
+  "seq": 48,
+  "category": "Course Management",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "strategy"
+  ],
+  "title": "Wind, slopes and Bangalore afternoons",
+  "microFact": "Into the wind, club up and swing EASIER — hard swings add spin, and spin makes headwinds crueler.",
+  "lesson": "Adjustments that separate course players from range players:\n\nWIND: a headwind punishes SPIN — a hard-swung ball balloons and falls short. The counterintuitive fix: take MORE club and swing SMOOTHER (\"when it's breezy, swing easy\"). Rough guide: one extra club per 10 km/h into the wind; downwind helps less than headwind hurts. Crosswind? Aim off and let it ride. Check wind at the GREEN too — treetops and the flag itself.\n\nYour 1–5 PM Bangalore slot is the windiest, warmest slice of the day — afternoon thermals are real, especially Feb–May. The ball also flies slightly farther in hot air. Learn your afternoon distances as your TRUE distances.\n\nSLOPES: uphill shot = plays longer (add a club); downhill = shorter. Ball ABOVE your feet wants to go left; BELOW your feet, right — aim to allow for it.\n\nLIES: from rough, expect less spin and more roll-out (\"flyer\"). Off hardpan, ball first, low expectations.\n\nNone of this needs talent — just the habit of asking \"what changes this shot today?\" before pulling a club. Your caddie knows all of it; ask him and cross-check.",
+  "visual": null,
+  "quiz": {
+    "question": "Playing into a stiff headwind, the smart adjustment is…",
+    "options": [
+      "Swing harder with the same club",
+      "Take more club and swing smoother",
+      "Aim higher to ride over the wind",
+      "Use less club — wind lifts the ball"
+    ],
+    "answerIndex": 1,
+    "explanation": "Hard swings add backspin, and headwinds feast on spin. More club + smooth tempo keeps the flight controlled and penetrating."
+  }
+}

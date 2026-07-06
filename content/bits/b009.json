@@ -1,0 +1,26 @@
+{
+  "id": "b009",
+  "seq": 9,
+  "category": "Etiquette",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "etiquette",
+    "social"
+  ],
+  "title": "Divots and pitch marks: leave no trace",
+  "microFact": "Fix your pitch mark plus one more. Greens keepers — and members — notice who repairs and who doesn't.",
+  "lesson": "Two types of damage you'll create, and must repair:\n\nDIVOTS — the strip of turf your iron cuts from the fairway. Depending on the course's grass, either replace the divot and press it down with your foot, or fill the scar with the sand-mix bottle provided (your caddie usually carries it). In India, sand-filling is the norm — ask your caddie \"sand?\" and he'll handle it, but YOU should look like you care.\n\nPITCH MARKS — the dent your ball makes landing on a soft green. Repair with a pitch-mark tool: insert at the EDGES of the dent, lever the turf toward the center (never lift upward — that tears roots), then tap flat with your putter. An unrepaired mark takes weeks to heal; a repaired one, a day.\n\nThe belonging move: repair yours, then fix one more you didn't make. Members literally watch for this.",
+  "visual": null,
+  "quiz": {
+    "question": "What's the correct way to repair a pitch mark?",
+    "options": [
+      "Press it flat with your shoe",
+      "Lift the center of the dent upward with the tool",
+      "Fill it with sand from the bunker",
+      "Push the edges toward the center, then tap flat"
+    ],
+    "answerIndex": 3,
+    "explanation": "Work the edges toward the middle and flatten. Lifting upward tears the roots and kills the patch."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "b056",
+  "seq": 56,
+  "category": "India Golf",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "india"
+  ],
+  "title": "Your Bangalore golf map — and what happens next",
+  "microFact": "Home base Clover Greens, rotation partners Zion Hills, Eagleton, Prestige Golfshire, KGA. Goal: BMW Golf Cup Category B.",
+  "lesson": "Eight weeks of bytes — here's your territory and your ladder.\n\nYOUR COURSES: CLOVER GREENS (Hosur Rd) — your 18-hole home; learn it deeply, one course known well is worth five known barely. ZION HILLS (Kolar) — beginner-friendly, great confidence builder. EAGLETON (Bidadi) — classic resort track, easy pay-and-play. PRESTIGE GOLFSHIRE (Nandi Hills) — Bangalore's glamour course; book it as your monthly 'measuring stick'. KGA — the members' institution; go as a guest when invited, and be the guest who gets re-invited. BANGALORE GOLF CLUB — heritage, old-money, tight fairways.\n\nYOUR LADDER: (1) IGU WHS Index established — done or imminent if you followed byte 39. (2) Index under 28 → BMW GOLF CUP Category B eligible, Bengaluru qualifier — THE year-one target. (3) Monthly 4moles/corporate Stablefords for reps and network. (4) Index under 20 → most corporate opens. (5) Under 12 → Category A and IGU amateur events.\n\nYOU'VE FINISHED the core curriculum. Export your progress (Stats tab) and run your CLI agent per AGENTS.md — it will build your next bytes around whatever your quiz stats say you're weakest at. See you on the tee. Fore please — Amit, now driving.",
+  "visual": null,
+  "quiz": {
+    "question": "What's the realistic year-one competition target on your ladder?",
+    "options": [
+      "IGU All-India Amateur",
+      "BMW Golf Cup Category B (handicap 13–28)",
+      "PGTI Qualifying School",
+      "Hero Indian Open pro-am"
+    ],
+    "answerIndex": 1,
+    "explanation": "Category B takes handicaps to 28 — attainable within months of honest posting. The rest come as the Index falls."
+  }
+}

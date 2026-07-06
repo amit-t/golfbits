@@ -1,0 +1,26 @@
+{
+  "id": "b028",
+  "seq": 28,
+  "category": "Equipment & Fitting",
+  "difficulty": 1,
+  "depth": "core",
+  "tags": [
+    "equipment",
+    "fitting"
+  ],
+  "title": "Grips: the only part of the club you actually touch",
+  "microFact": "Worn, shiny grips force you to squeeze harder — and grip tension is the silent killer of golf swings.",
+  "lesson": "GRIPS wear out: sweat, sun, and Bangalore humidity harden and glaze them. A shiny, slick grip makes you clench, and a clenched grip locks your wrists and forearms → lost speed and slices. Regrip roughly once a year for a weekly player (₹300–700 per grip fitted in India).\n\nSIZE matters: grips come undersize, standard, midsize, jumbo. Quick check: grip a club with your left hand — your fingertips should LIGHTLY touch your palm. Digging in = too small (encourages hooks); not reaching = too big (encourages slices, blocks). Fitters size off your hand measurement in seconds.\n\nWhile we're at your hands: the GLOVE goes on your LEFT hand (right-handed player), exists for grip not warmth, and comes off for putting — watch any good player peel the glove walking onto the green and hang it half-out of a pocket. Replace it when it goes shiny. A crusty, board-stiff glove is another quiet tell.\n\nPressure rule you'll hear forever: hold the club like a tube of toothpaste with the cap off — firm enough to control, soft enough not to squeeze.",
+  "visual": null,
+  "quiz": {
+    "question": "Which hand wears the glove for a right-handed golfer?",
+    "options": [
+      "Left",
+      "Both",
+      "Right",
+      "Whichever sweats more"
+    ],
+    "answerIndex": 0,
+    "explanation": "The lead (left) hand — it's the connection point that bears the grip pressure. Most players remove it to putt."
+  }
+}

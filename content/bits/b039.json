@@ -1,0 +1,26 @@
+{
+  "id": "b039",
+  "seq": 39,
+  "category": "Handicap & Competition",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "handicap",
+    "competition"
+  ],
+  "title": "Posting scores in India: the IGU WHS system",
+  "microFact": "India's official handicaps run through the IGU WHS portal — ₹2,500/year for non-club members. No membership needed.",
+  "lesson": "India's handicaps are administered by the INDIAN GOLF UNION (IGU) on the World Handicap System. The part most beginners don't know: you do NOT need a club membership. The IGU offers a NON-CLUB MEMBER subscription — ₹2,500/year (plus gateway fee and GST) at whs.indiangolfunion.org — and it produces the same official Handicap Index as any member's.\n\nYour process:\n1. Register on the IGU WHS portal as a non-club member.\n2. Play rated courses (Clover Greens and all major Bangalore courses are rated).\n3. Have your card kept and signed by a playing partner.\n4. Enter the score in the portal/app the SAME DAY — pre-registering your intent to post before teeing off is the expected discipline.\n5. After 54 holes posted: your Index appears. It updates overnight after each round.\n\nThat Index is what tournament entries ask for, what the BMW Golf Cup categories check, and what makes \"what do you play off?\" answerable. Getting officially handicapped in your first two months — before your golf is even good — is the single strongest belonging move available to you.",
+  "visual": null,
+  "quiz": {
+    "question": "How many holes must you post to receive your first Handicap Index?",
+    "options": [
+      "54",
+      "18",
+      "36",
+      "90"
+    ],
+    "answerIndex": 0,
+    "explanation": "54 holes in any combination of 9- and 18-hole rounds. At your schedule, that's about 3 weeks of golf."
+  }
+}

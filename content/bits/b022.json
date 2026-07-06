@@ -1,0 +1,26 @@
+{
+  "id": "b022",
+  "seq": 22,
+  "category": "Equipment & Fitting",
+  "difficulty": 2,
+  "depth": "core",
+  "tags": [
+    "equipment",
+    "fitting"
+  ],
+  "title": "Shaft flex: the spine of your set",
+  "microFact": "If your driver carries under ~200m, you're a Regular flex player. Buying Stiff 'to grow into' costs you distance today.",
+  "lesson": "The SHAFT bends during your swing and unloads at impact. FLEX ratings — Ladies (L), Senior (A), Regular (R), Stiff (S), Extra Stiff (X) — describe how much.\n\nToo stiff for your speed: the shaft never unloads → low, weak shots right, harsh feel. Too soft: high spinny shots left, inconsistency. Matched: effortless height and your real distance.\n\nRough driver-swing-speed guide: under 75 mph → Senior; 75–95 mph (driver carry roughly 170–210m) → REGULAR; 95–105 → Stiff. Most 110-shooters are Regular, some Senior — and there is zero shame in the right shaft, only in the wrong one.\n\nAlso decide GRAPHITE vs STEEL for irons: graphite is lighter, easier to swing, easier on the joints; light steel gives more feedback and consistency. At your stage, either works — lightweight steel (or graphite if you value comfort) in Regular is the smart default. A launch monitor fitting settles it in 20 minutes; ask for exactly that at Clubworks.",
+  "visual": null,
+  "quiz": {
+    "question": "Your shots with a too-stiff shaft will typically fly…",
+    "options": [
+      "Too high with extra spin",
+      "Low and to the right, feeling harsh",
+      "Left with a hook",
+      "Exactly the same — flex is marketing"
+    ],
+    "answerIndex": 1,
+    "explanation": "A shaft that's too stiff doesn't unload for you: low launch, right miss (for a right-hander), dead feel."
+  }
+}

@@ -355,6 +355,16 @@ const get = (port, path, opts = {}) => new Promise((resolve, reject) => {
     assert.ok(d.markdown.includes("Golf Playbook"), "playbook content missing");
     assert.ok(d.markdown.includes("## 1."), "expected h2 sections");
   });
+  await test("api: GET /api/plan returns the structured plan", async () => {
+    const r = await get(port, "/api/plan");
+    assert.strictEqual(r.status, 200);
+    const d = JSON.parse(r.body);
+    assert.ok(Array.isArray(d.weeks) && d.weeks.length, "plan weeks missing");
+    assert.ok(d.weeks.every(w => Array.isArray(w.tasks)), "each week needs a tasks array");
+    const ids = d.weeks.flatMap(w => w.tasks.map(t => t.id));
+    assert.strictEqual(new Set(ids).size, ids.length, "plan task ids must be unique");
+    assert.ok(ids.every(Boolean), "every plan task needs an id (checkbox persistence key)");
+  });
   await test("static: serves md.js renderer", async () => {
     const r = await get(port, "/md.js");
     assert.strictEqual(r.status, 200);

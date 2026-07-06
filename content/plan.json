@@ -1,0 +1,79 @@
+{
+  "schema": "golfbits-plan/1",
+  "title": "Your 12-Week Ramp",
+  "intro": "Lessons first, then fit, then buy, then post scores. Tick items as you go — progress saves to disk with the rest of your app. Built from your coaching session on 2026-07-06.",
+  "weeks": [
+    {
+      "label": "This week",
+      "focus": "Book coaching + register for a handicap",
+      "tasks": [
+        { "id": "p-book-tsg", "text": "Call TSG @ Clover Greens and book the Adult Game Improvement Program", "detail": "+91 96866 06223 (Gagan) / +91 89040 82386 · reach_us@tsgolf.in. Ask for the 10 × 60-min package price, weekday afternoon slots, confirm coaching runs at the Hosur site, and whether you can borrow range clubs." },
+        { "id": "p-register-whs", "text": "Register with IGU WHS as a Non-Club Member", "detail": "whs.indiangolfunion.org — ₹2,500/yr (+GST ≈ ₹3,100). Official India handicap, no club membership needed." },
+        { "id": "p-hold-fitting", "text": "Pencil a Clubworks fitting slot for ~3 weeks out", "detail": "Don't fit yet — your strike is too inconsistent to read on a launch monitor. Fit after a few lessons." }
+      ]
+    },
+    {
+      "label": "Weeks 1–2",
+      "focus": "Build fundamentals on the set you already own",
+      "tasks": [
+        { "id": "p-lessons", "text": "Take 2–3 lessons on your Decathlon set (or range clubs)", "detail": "Tell the coach: 'I mishit more than I strike clean — fix my fundamentals first.' Most beginner mishits trace to grip, setup/posture, or swinging too hard." },
+        { "id": "p-range-7iron", "text": "Range practice: 7-iron only, half-swings first", "detail": "Waist-high to waist-high, clean contact, then lengthen. Slow tempo ('one-and-two'), aim at a target every ball. 40 focused balls beats 120 rushed ones." },
+        { "id": "p-skip-driver", "text": "Do NOT touch the driver yet", "detail": "It magnifies every flaw. Earn it after your iron strike settles." }
+      ]
+    },
+    {
+      "label": "Weeks 3–4",
+      "focus": "Get fitted, then buy the set",
+      "tasks": [
+        { "id": "p-fitting", "text": "Attend the Clubworks fitting once your strike settles", "detail": "Ask for a lie-angle check, a gapping check PW→56°, and flex confirmation on the launch monitor. Say: 'I want a Callaway game-improvement set, Regular flex.'" },
+        { "id": "p-buy-clubs", "text": "Buy the all-Callaway set (≈ ₹88k)", "detail": "See the gear list below. Go pre-owned on driver + putter; new irons via GolfEdge against your spec sheet." },
+        { "id": "p-buy-soft", "text": "Buy the pending soft gear (≈ ₹20k)", "detail": "Callaway cart bag + headcovers, glove, Supersoft balls, pitch tool + ball marker, 2 collared polos. You already have UA shoes + pants." },
+        { "id": "p-retire-decathlon", "text": "Retire the Decathlon set", "detail": "Sell or donate it — don't mix a starter set into your new bag." }
+      ]
+    },
+    {
+      "label": "Weeks 5–8",
+      "focus": "First rounds + post every score",
+      "tasks": [
+        { "id": "p-rounds", "text": "Play 3 rounds per 2 weeks at Clover Greens", "detail": "Learn one course deeply. Tee off by 1:00–1:15 PM in winter to beat sunset." },
+        { "id": "p-post-scores", "text": "Post every score to the IGU WHS portal, same day", "detail": "Card signed by a playing partner. Net double bogey is your max on any hole — pick up and keep pace." },
+        { "id": "p-coach-cont", "text": "Keep fortnightly coaching going", "detail": "₹1,500–2,500/session. Coached 110-shooters reach low 90s in a year; self-taught ones plateau at 100." },
+        { "id": "p-index", "text": "Reach 54 holes posted → your Handicap Index arrives", "detail": "This is the milestone that makes you a real, ranked amateur." }
+      ]
+    },
+    {
+      "label": "Weeks 9–12",
+      "focus": "On-course lesson + first event",
+      "tasks": [
+        { "id": "p-oncourse", "text": "Book a 9-hole on-course lesson with TSG", "detail": "Fastest respectability gain there is — a pro walking the course with you, not the range." },
+        { "id": "p-4moles", "text": "Enter a 4moles Stableford social event", "detail": "4moles.com/golf-world/events — forgiving format, great for network-building." },
+        { "id": "p-track", "text": "Start tracking fairways / GIR / putts per round", "detail": "This is how you find the 3–4 shots you're leaking and where to practise next." }
+      ]
+    }
+  ],
+  "gear": {
+    "title": "The all-Callaway set (≈ ₹88k)",
+    "note": "Pre-owned unless marked. Regular flex, game-improvement throughout. Odyssey is Callaway-owned, so the whole bag reads as one composed family.",
+    "items": [
+      { "slot": "Irons 6–PW", "pick": "Callaway Rogue ST Max (one gen old)", "price": "₹40k" },
+      { "slot": "Driver 10.5°", "pick": "Callaway Paradym X or Rogue ST Max", "price": "₹27k" },
+      { "slot": "Hybrid 5H", "pick": "Rogue ST Max hybrid", "price": "₹9k" },
+      { "slot": "Wedge 56°", "pick": "Callaway CB (cavity, not blade)", "price": "₹6k" },
+      { "slot": "Putter", "pick": "Odyssey White Hot mallet", "price": "₹6k" }
+    ],
+    "soft": [
+      { "slot": "Cart bag + headcovers", "pick": "Callaway (what people see first)", "price": "₹15–18k" },
+      { "slot": "Glove", "pick": "Left hand, leather", "price": "₹1.2k" },
+      { "slot": "Balls", "pick": "Callaway Supersoft (1 dozen)", "price": "₹2.5k" },
+      { "slot": "Pitch tool + ball marker", "pick": "Keep in pocket always", "price": "₹300" },
+      { "slot": "2 collared polos", "pick": "Any brand, must be collared", "price": "₹4k" }
+    ]
+  },
+  "contacts": [
+    { "name": "TSG @ Clover Greens (coaching)", "value": "+91 96866 06223 · +91 89040 82386 · reach_us@tsgolf.in" },
+    { "name": "Clover Greens resort / tee times (Hosur)", "value": "WhatsApp +91 97917 83444" },
+    { "name": "Clubworks (fitting + pre-owned)", "value": "Book a launch-monitor fitting; fee often waived on purchase" },
+    { "name": "IGU WHS (handicap registration)", "value": "whs.indiangolfunion.org" },
+    { "name": "GolfEdge India (new clubs, online)", "value": "golfedgeindia.com — buy against your fitting spec sheet" }
+  ]
+}

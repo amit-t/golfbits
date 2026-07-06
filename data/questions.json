@@ -1,0 +1,53 @@
+{
+  "schema": "golfbits-questions/1",
+  "questions": [
+    {
+      "id": "q001",
+      "date": "2026-07-06",
+      "provider": "interactive",
+      "question": "Can I buy a set of clubs now and get them fitted later?",
+      "answerSummary": "Fitting is how you choose clubs, not a later add-on. Shaft (flex/material/weight) and head model are locked at purchase; lie angle, grip size, adjustable loft, and length can be adjusted after. Fit first at Clubworks, then buy.",
+      "suggestedBitTopic": "what a club fitting actually measures (flex, lie, length, grip) and which specs are locked at purchase vs adjustable later"
+    },
+    {
+      "id": "q002",
+      "date": "2026-07-06",
+      "provider": "interactive",
+      "question": "Full set under 90k, where to fit near Clover Greens, and what soft gear is still pending?",
+      "answerSummary": "Sub-88k pre-owned GI set (irons, used driver, one hybrid, 56 wedge, mallet putter). Fit at Clubworks (launch monitor), buy used at Golf Garage, new irons via GolfEdge. Pending soft gear: bag+headcovers, glove, balls, tools, collared polos.",
+      "suggestedBitTopic": "pre-owned vs new golf clubs — what's safe to buy used (driver, putter, irons) vs buy new (grips, wedges)"
+    },
+    {
+      "id": "q003",
+      "date": "2026-07-06",
+      "provider": "interactive",
+      "question": "Tailor an all-Callaway purchase list — does everything one brand look good or bad?",
+      "answerSummary": "One-brand reads as composed/intentional; Odyssey putter is Callaway-owned so a full Callaway/Odyssey bag has zero downside. All-Callaway sub-88k set given. Caveat: fit beats brand on the monitor.",
+      "suggestedBitTopic": "how club families/sets work — why matching irons+hybrid+wedge in one model line improves consistency"
+    },
+    {
+      "id": "q004",
+      "date": "2026-07-06",
+      "provider": "interactive",
+      "question": "Explain the fitting terms: launch monitor, gapping check PW to 56, head.",
+      "answerSummary": "Launch monitor = radar/camera that measures ball+club data. Gapping check = confirming even distance gaps between clubs, e.g. PW to 56 wedge. Head = the clubhead, chosen for forgiveness (game-improvement vs blade).",
+      "suggestedBitTopic": "fitting-shop vocabulary decoded: launch monitor, gapping, lie angle, and clubhead types"
+    },
+    {
+      "id": "q005",
+      "date": "2026-07-06",
+      "provider": "interactive",
+      "question": "I mishit more than I strike clean at the range — what should I do?",
+      "answerSummary": "Mishitting more than striking pure is normal at 110; game-improvement clubs exist for exactly this. Get a coach (Rs 1500-2500/session at Clover Greens/KGA) before fitting so launch-monitor data is meaningful. Range: one club (7-iron), half-swings first, slow tempo, aim at a target, quality over quantity. Most beginner mishits trace to grip, setup/posture, or swinging too hard.",
+      "suggestedBitTopic": "the three most common causes of mishits for beginners (grip, setup/posture, tempo) and a simple self-check for each"
+    },
+    {
+      "id": "q006",
+      "date": "2026-07-06",
+      "provider": "interactive",
+      "question": "I feel embarrassed taking lessons with my basic Decathlon set — won't the trainer judge me?",
+      "answerSummary": "Coaches judge coachability, not clubs; beginners are their core business. Decathlon Inesis is legit game-improvement gear, fine for lessons, and the package-set stigma is a peers-on-course thing, not a lesson-bay thing. Best sequence: learn on the Decathlon set (or range rentals) first, get fitted once the strike settles, then buy the Callaway set so you never tee up competitively with the starter set.",
+      "suggestedBitTopic": "why beginner gear is fine for lessons — coaches judge coachability, not clubs; when to learn first vs buy first"
+    }
+  ]
+}

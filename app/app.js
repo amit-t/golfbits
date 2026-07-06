@@ -72,6 +72,7 @@ function render() {
   const main = $("#main");
   if (view === "today") main.innerHTML = renderToday();
   else if (view === "journey") main.innerHTML = renderJourney();
+  else if (view === "plan") main.innerHTML = renderPlan();
   else if (view === "library") main.innerHTML = renderLibrary();
   else if (view === "playbook") main.innerHTML = renderPlaybook();
   else main.innerHTML = renderStats();
@@ -101,6 +102,84 @@ function renderPlaybook() {
   const chips = toc.length ? `<div class="filter-row pb-toc">` + toc.map(t =>
     `<button data-scroll="${t.id}">${esc(t.text.replace(/^\d+\.\s*/, ""))}</button>`).join("") + `</div>` : "";
   return chips + `<div class="card md">${GolfMd.renderMarkdown(playbookMd)}</div>`;
+}
+
+// ---------- plan ----------
+let planData = null, planLoading = false;
+
+async function togglePlanTask(taskId, checked) {
+  if (!progress.plan) progress.plan = {};
+  if (checked) progress.plan[taskId] = true; else delete progress.plan[taskId];
+  render(); // optimistic
+  const res = await fetch("/api/progress", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(progress) });
+  if (!res.ok) { alert("Failed to save plan: " + (await res.json()).error); }
+}
+
+function planChecked(id) { return !!(progress.plan && progress.plan[id]); }
+
+function renderPlan() {
+  if (planData === null) {
+    if (!planLoading) {
+      planLoading = true;
+      fetch("/api/plan").then(r => r.json()).then(d => {
+        planData = d; planLoading = false;
+        if (view === "plan") render();
+      }).catch(() => { planData = false; planLoading = false; if (view === "plan") render(); });
+    }
+    return `<div class="card done-banner"><div class="big">🗺️</div><p>Loading your plan…</p></div>`;
+  }
+  if (!planData || !Array.isArray(planData.weeks)) {
+    return `<div class="error-box">Plan not found — expected <code>content/plan.json</code> in the repo.</div>`;
+  }
+  const allTasks = planData.weeks.flatMap(w => w.tasks || []);
+  const done = allTasks.filter(t => planChecked(t.id)).length;
+  const pct = allTasks.length ? Math.round(100 * done / allTasks.length) : 0;
+
+  const header = `<div class="card plan-head">
+    <h1 class="bit-title">${esc(planData.title || "Your Plan")}</h1>
+    <p class="plan-intro">${esc(planData.intro || "")}</p>
+    <div class="plan-progress"><div class="track"><div class="fill" style="width:${pct}%"></div></div><span class="pct">${done}/${allTasks.length} done</span></div>
+  </div>`;
+
+  const weeks = planData.weeks.map(w => {
+    const tasks = (w.tasks || []).map(t => {
+      const on = planChecked(t.id);
+      return `<label class="plan-task ${on ? "on" : ""}">
+        <input type="checkbox" data-plan-task="${esc(t.id)}" ${on ? "checked" : ""}>
+        <span class="box" aria-hidden="true"></span>
+        <span class="body"><span class="txt">${esc(t.text)}</span>${t.detail ? `<span class="detail">${esc(t.detail)}</span>` : ""}</span>
+      </label>`;
+    }).join("");
+    return `<div class="card plan-week">
+      <div class="plan-week-head"><span class="wk">${esc(w.label)}</span><span class="focus">${esc(w.focus || "")}</span></div>
+      ${tasks}</div>`;
+  }).join("");
+
+  let gear = "";
+  if (planData.gear) {
+    const g = planData.gear;
+    const rows = arr => arr.map(x =>
+      `<tr><td>${esc(x.slot)}</td><td>${esc(x.pick)}</td><td class="pr">${esc(x.price)}</td></tr>`).join("");
+    gear = `<div class="card plan-gear">
+      <h3>${esc(g.title || "Gear")}</h3>
+      ${g.note ? `<p class="plan-intro">${esc(g.note)}</p>` : ""}
+      <table><thead><tr><th>Slot</th><th>Pick</th><th class="pr">~Price</th></tr></thead>
+      <tbody>${rows(g.items || [])}</tbody></table>
+      ${g.soft && g.soft.length ? `<h3 style="margin-top:18px">Soft gear still pending</h3>
+      <table><thead><tr><th>Item</th><th>Pick</th><th class="pr">~Price</th></tr></thead>
+      <tbody>${rows(g.soft)}</tbody></table>` : ""}
+    </div>`;
+  }
+
+  let contacts = "";
+  if (Array.isArray(planData.contacts) && planData.contacts.length) {
+    contacts = `<div class="card plan-contacts"><h3>Contacts</h3>` +
+      planData.contacts.map(c =>
+        `<div class="contact-row"><span class="cn">${esc(c.name)}</span><span class="cv">${esc(c.value)}</span></div>`).join("") +
+      `</div>`;
+  }
+
+  return header + weeks + gear + contacts;
 }
 
 function visualHtml(bit) {
@@ -297,6 +376,8 @@ function bindDynamic() {
     const el = document.getElementById(b.dataset.scroll);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }));
+  document.querySelectorAll("[data-plan-task]").forEach(cb =>
+    cb.addEventListener("change", () => togglePlanTask(cb.dataset.planTask, cb.checked)));
 }
 
 boot();

@@ -2,7 +2,7 @@
 /* golfbits frontend — talks to the local daemon; progress lives on disk (data/progress.json). */
 
 let bits = [], progress = null, config = { agent: "claude" };
-let view = "today", quizAnswered = null, readingId = null, libFilter = "All";
+let view = "today", quizAnswered = null, readingId = null, libFilter = "All", continuing = false;
 
 const $ = sel => document.querySelector(sel);
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -28,7 +28,7 @@ async function boot() {
     bits = b; progress = p; config = c;
     $("#agentChip").textContent = "agent: " + config.agent;
     document.querySelectorAll(".tabs button").forEach(btn =>
-      btn.addEventListener("click", () => { view = btn.dataset.view; readingId = null; quizAnswered = null; render(); }));
+      btn.addEventListener("click", () => { view = btn.dataset.view; readingId = null; quizAnswered = null; continuing = false; render(); }));
     render();
   } catch (e) {
     $("#main").innerHTML = `<div class="error-box"><b>Can't reach the golfbits daemon.</b><br>Start it from the repo folder with <code>golfbits open</code> (or <code>npm start</code>) and reload.</div>`;
@@ -43,17 +43,23 @@ function answerQuiz(picked) {
 }
 
 async function completeBit(knownBefore) {
-  if (doneToday()) return;
+  const already = doneToday();
+  if (already && !continuing) return;   // one bit/day unless the learner chose to keep going
   const bit = bits[nextIndex()];
+  if (!bit) return;
   progress.entries.push({
     id: bit.id, date: localDate(),
     quizCorrect: quizAnswered ? quizAnswered.correct : null,
     knownBefore: !!knownBefore
   });
-  progress.streak = progress.lastCompletedDate === yesterday() ? progress.streak + 1 : 1;
-  progress.lastCompletedDate = localDate();
-  progress.longestStreak = Math.max(progress.longestStreak, progress.streak);
+  if (!already) {
+    // first bit of the day drives the streak; extra bits count toward progress but don't re-bump it
+    progress.streak = progress.lastCompletedDate === yesterday() ? progress.streak + 1 : 1;
+    progress.lastCompletedDate = localDate();
+    progress.longestStreak = Math.max(progress.longestStreak, progress.streak);
+  }
   quizAnswered = null;
+  continuing = false;   // land back on the done banner, which re-offers "keep going"
   const res = await fetch("/api/progress", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(progress) });
   if (!res.ok) { alert("Failed to save progress: " + (await res.json()).error); }
   render();
@@ -230,10 +236,13 @@ function renderToday() {
   if (!bits.length) return `<div class="error-box">No bits found in <code>content/bits/</code>.</div>`;
   const idx = nextIndex();
   if (idx >= bits.length) return agentCard(true);
-  if (doneToday()) {
+  if (doneToday() && !continuing) {
     const last = bits.find(b => b.id === progress.entries[progress.entries.length - 1].id);
+    const next = bits[idx];
+    const keepGoing = `<button class="btn primary" data-continue="1">Keep going — bit ${idx + 1}: ${esc(next.title)} →</button>`;
     return `<div class="card done-banner"><div class="big">⛳</div><h2>Done for today</h2>
-      <p>Bit ${idx + 1} unlocks tomorrow. Revisit today's bit below, walk the Journey map, or revise in the Library.</p></div>` +
+      <p>Your streak is locked in. Got time? Carry straight on to the next lesson — or come back tomorrow.</p>
+      <div class="finish-row" style="justify-content:center">${keepGoing}</div></div>` +
       (last ? bitCard(last, { revealed: true }) : "") +
       (bits.length - idx <= 7 ? agentCard(false) : "");
   }
@@ -362,6 +371,7 @@ function renderStats() {
 function bindDynamic() {
   document.querySelectorAll("[data-opt]").forEach(b => b.addEventListener("click", () => answerQuiz(+b.dataset.opt)));
   document.querySelectorAll("[data-finish]").forEach(b => b.addEventListener("click", () => completeBit(b.dataset.finish === "known")));
+  document.querySelectorAll("[data-continue]").forEach(b => b.addEventListener("click", () => { continuing = true; quizAnswered = null; render(); }));
   document.querySelectorAll("[data-read]").forEach(b => b.addEventListener("click", () => { readingId = b.dataset.read; render(); }));
   document.querySelectorAll("[data-back]").forEach(b => b.addEventListener("click", () => { readingId = null; render(); }));
   document.querySelectorAll("[data-filter]").forEach(b => b.addEventListener("click", () => { libFilter = b.dataset.filter; render(); }));

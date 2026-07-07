@@ -3,8 +3,8 @@
   "agent": {
     "provider": "claude",
     "providers": {
-      "claude": { "command": "claude", "args": ["-p", "{PROMPT}", "--permission-mode", "acceptEdits"], "interactiveArgs": ["{PROMPT}"] },
-      "codex":  { "command": "codex",  "args": ["exec", "--full-auto", "{PROMPT}"], "interactiveArgs": ["{PROMPT}"] },
+      "claude": { "command": "claude", "args": ["-p", "{PROMPT}", "--permission-mode", "acceptEdits"], "interactiveArgs": ["{PROMPT}"], "interactiveCommand": "clscb" },
+      "codex":  { "command": "codex",  "args": ["exec", "--full-auto", "{PROMPT}"], "interactiveArgs": ["{PROMPT}"], "interactiveCommand": "cxscb" },
       "gemini": { "command": "gemini", "args": ["--yolo", "-p", "{PROMPT}"], "interactiveArgs": ["-i", "{PROMPT}"] },
       "antigravity": { "command": "antigravity", "args": ["-p", "{PROMPT}"], "interactiveArgs": ["{PROMPT}"] }
     }

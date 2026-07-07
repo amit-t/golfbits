@@ -246,6 +246,44 @@ const get = (port, path, opts = {}) => new Promise((resolve, reject) => {
     assert.ok(r.args.some(a => a.includes("PLAYBOOK") && a.includes("interactive session")), "prompt must carry seeded context");
     assert.ok(!r.args.some(a => /\bQUESTION:/.test(a)));
   });
+  await test("ask: interactiveInvocation routes wrapper commands through an interactive shell", () => {
+    const { interactiveInvocation } = require("../lib/ask");
+    const w = interactiveInvocation({ command: "codex", interactiveCommand: "cxscb" }, ["THE PROMPT"]);
+    assert.strictEqual(w.command, "zsh", "wrapper aliases must launch via zsh so .zshrc defines them");
+    assert.deepStrictEqual(w.spawnArgs, ["-ic", 'cxscb "$@"', "cxscb", "THE PROMPT"], "prompt forwarded as a quoted positional, unescaped");
+    assert.strictEqual(w.display, "cxscb");
+    const custom = interactiveInvocation({ command: "claude", interactiveCommand: "clscb", interactiveShell: "bash" }, ["P"]);
+    assert.strictEqual(custom.command, "bash", "interactiveShell overrides the default zsh");
+    const d = interactiveInvocation({ command: "gemini" }, ["-i", "P"]);
+    assert.strictEqual(d.command, "gemini", "providers without a wrapper spawn the command directly");
+    assert.deepStrictEqual(d.spawnArgs, ["-i", "P"]);
+    assert.strictEqual(d.display, "gemini");
+  });
+  await test("ask: askInteractive launches via interactiveCommand wrapper when configured", async () => {
+    const { askInteractive } = require("../lib/ask");
+    const rawConfig = {
+      agent: { provider: "mock", providers: { mock: {
+        command: "codex",
+        interactiveArgs: ["{PROMPT}"],
+        interactiveCommand: "cxscb",
+        interactiveShell: process.execPath   // spawn node (guaranteed present) instead of zsh — deterministic
+      } } },
+      server: { host: "127.0.0.1", port: 4321 },
+      content: { batchSize: 28 },
+      learner: { name: "Amit", profile: "profile" }
+    };
+    const r = await askInteractive({
+      rawConfig, projectConfText: "",
+      questionsFile: path.join(os.tmpdir(), "golfbits-interactive-wrap.json"),
+      playbookText: "PLAYBOOK", progressDigest: "DIGEST", stdio: "ignore"
+    });
+    assert.strictEqual(r.command, process.execPath, "wrapper launch must go through the configured interactive shell");
+    assert.strictEqual(r.args[0], "-ic");
+    assert.strictEqual(r.args[1], 'cxscb "$@"');
+    assert.strictEqual(r.args[2], "cxscb");
+    assert.ok(r.args[3].includes("interactive session") && r.args[3].includes("PLAYBOOK"),
+      "the seeded prompt must be forwarded as the wrapper's positional argument");
+  });
   await test("ask: askInteractive on missing command exits 127 with switch hint", async () => {
     const { askInteractive } = require("../lib/ask");
     const rawConfig = {

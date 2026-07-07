@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="display:flex; flex-direction:column; gap:16px">
+  <div style="display:flex; flex-wrap:wrap; gap:8px; position:sticky; top:0; z-index:2; background:var(--bg); padding:8px 0">
+    <sc-for list="{{ chips }}" as="ch" hint-placeholder-count="4">
+      <button onClick="{{ ch.onClick }}" style="font-family:var(--sans); font-size:13px; font-weight:500; padding:7px 14px; min-height:32px; border-radius:999px; cursor:pointer; border:1px solid var(--line); background:var(--card); color:var(--ink-2); transition:border-color 0.15s" style-hover="border-color:var(--accent)">{{ ch.label }}</button>
+    </sc-for>
+  </div>
+  <sc-for list="{{ sections }}" as="s" hint-placeholder-count="3">
+    <div id="{{ s.anchor }}" style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:var(--pad); box-shadow:var(--shadow); scroll-margin-top:56px">
+      <h2 style="font-family:var(--display); font-size:22px; font-weight:600; color:var(--ink); margin:0 0 12px 0; line-height:1.25">{{ s.title }}</h2>
+      <div style="white-space:pre-line; color:var(--ink-2); font-size:15px; line-height:1.6">{{ s.body }}</div>
+    </div>
+  </sc-for>
+  <p style="font-size:13px; color:var(--ink-4); text-align:center; margin:0">excerpt — the full playbook renders from <code style="background:var(--track); padding:2px 6px; border-radius:4px">docs/PLAYBOOK.md</code></p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;760px&quot;,&quot;height&quot;:&quot;700px&quot;},&quot;chips&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;Array&lt;{label:string,onClick:()=&gt;void}&gt;&quot;},&quot;sections&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;Array&lt;{anchor:string,title:string,body:string}&gt;&quot;}}"></script>
+</body>
+</html>

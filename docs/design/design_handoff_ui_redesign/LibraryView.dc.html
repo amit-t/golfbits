@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div>
+  <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px">
+    <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+      <sc-if value="{{ f.on }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ f.onClick }}" style="font-family:var(--sans); font-size:13px; font-weight:600; padding:7px 14px; min-height:32px; border-radius:999px; cursor:pointer; border:1px solid var(--ink); background:var(--ink); color:var(--bg)">{{ f.name }}</button>
+      </sc-if>
+      <sc-if value="{{ f.off }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ f.onClick }}" style="font-family:var(--sans); font-size:13px; font-weight:500; padding:7px 14px; min-height:32px; border-radius:999px; cursor:pointer; transition:border-color 0.15s; border:1px solid var(--line); background:var(--card); color:var(--ink-2)" style-hover="border-color:var(--ink-4)">{{ f.name }}</button>
+      </sc-if>
+    </sc-for>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:8px">
+    <sc-for list="{{ items }}" as="it" hint-placeholder-count="8">
+      <sc-if value="{{ it.unlocked }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ it.open }}" style="display:flex; align-items:center; gap:14px; width:100%; text-align:left; padding:12px 16px; min-height:52px; background:var(--card); border:1px solid var(--line); border-radius:12px; cursor:pointer; font-family:var(--sans); font-size:15px; color:var(--ink); transition:border-color 0.15s, box-shadow 0.15s" style-hover="border-color:var(--accent); box-shadow:var(--shadow)">
+          <span style="font-family:var(--display); font-size:15px; font-weight:600; color:var(--ink-4); min-width:28px; font-variant-numeric:tabular-nums">{{ it.n }}</span>
+          <span style="flex:1; font-weight:500; color:var(--ink)">{{ it.title }}</span>
+          <span style="font-size:12px; color:var(--ink-3)">{{ it.category }}</span>
+          <sc-if value="{{ it.stLearned }}" hint-placeholder-val="{{ true }}">
+            <span style="width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; background:var(--accent); color:var(--on-accent); border:2px solid var(--accent-ink)">✓</span>
+          </sc-if>
+          <sc-if value="{{ it.stKnew }}" hint-placeholder-val="{{ false }}">
+            <span style="width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; background:var(--knew); color:var(--on-knew); border:2px solid var(--knew-bd)">★</span>
+          </sc-if>
+          <sc-if value="{{ it.stToday }}" hint-placeholder-val="{{ false }}">
+            <span style="width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; background:var(--card); color:var(--accent-ink); border:2px solid var(--accent)">•</span>
+          </sc-if>
+        </button>
+      </sc-if>
+      <sc-if value="{{ it.locked }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; align-items:center; gap:14px; width:100%; text-align:left; padding:12px 16px; min-height:52px; background:var(--card); border:1px solid var(--line); border-radius:12px; opacity:0.45; font-family:var(--sans); font-size:15px; color:var(--ink)">
+          <span style="font-family:var(--display); font-size:15px; font-weight:600; color:var(--ink-4); min-width:28px; font-variant-numeric:tabular-nums">{{ it.n }}</span>
+          <span style="flex:1; font-weight:500; color:var(--ink)">{{ it.title }}</span>
+          <span style="font-size:12px; color:var(--ink-3)">{{ it.category }}</span>
+          <span style="width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; border:2px dashed var(--line)"></span>
+        </div>
+      </sc-if>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;760px&quot;,&quot;height&quot;:&quot;600px&quot;},&quot;filters&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;Array&lt;{name:string,bg:string,fg:string,bd:string,onClick:()=&gt;void}&gt;&quot;},&quot;items&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;Array&lt;object&gt;&quot;}}"></script>
+</body>
+</html>

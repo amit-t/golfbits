@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="golfbits UI redesign" description="Clickable redesign prototype — journey-map hero, quiz→completion flow, light/dark, course vs scorecard tweaks" -->
+<helmet>
+  <script src="./ds-base.js"></script>
+  <style>
+    body {
+      margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink);
+      font-family: var(--sans); line-height: 1.5; font-size: 16px;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --display: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+      --bg: #F5F3ED; --card: #FFFFFF; --track: #EDEAE0;
+      --ink: #1E2722; --ink-2: #3C4A42; --ink-3: #68766C; --ink-4: #98A49B;
+      --line: #E2DFD3;
+      --accent: #166B47; --accent-ink: #115538; --accent-soft: #E7F0E7;
+      --amber: #A85B08; --amber-soft: #F8EFDD;
+      --knew: #D97706; --knew-bd: #B45309; --on-knew: #FFFFFF; --on-accent: #FFFFFF; --on-danger: #FFFFFF;
+      --danger: #B3261E; --danger-soft: #FAECEA;
+      --shadow: 0 1px 2px rgba(28,35,30,0.06); --shadow-lg: 0 6px 18px rgba(28,35,30,0.10);
+      --pad: 24px; --gap: 16px;
+    }
+    body[data-gb-theme="dark"] {
+      --bg: #131A15; --card: #1B241D; --track: #242F26;
+      --ink: #EDEFE8; --ink-2: #C6CFC4; --ink-3: #93A295; --ink-4: #5F6E62;
+      --line: #2B372D;
+      --accent: #3FA97A; --accent-ink: #7FCBA4; --accent-soft: #20362A;
+      --amber: #E3A44A; --amber-soft: #352A18;
+      --knew: #E3A44A; --knew-bd: #B57F2E; --on-knew: #221703; --on-accent: #0F1D15; --on-danger: #2B1210;
+      --danger: #E07B6E; --danger-soft: #3A241F;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3); --shadow-lg: 0 6px 18px rgba(0,0,0,0.35);
+    }
+    body[data-gb-type="sans"] { --display: var(--sans); }
+    body[data-gb-density="compact"] { --pad: 16px; --gap: 10px; }
+    a { color: var(--accent-ink); }
+    a:hover { color: var(--accent); }
+    button { font-family: inherit; }
+    button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    @keyframes gbPulse { 0%,100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.5); opacity: 0; } }
+    @keyframes gbPop { 0% { transform: translateY(10px) scale(0.92); opacity: 0; } 100% { transform: none; opacity: 1; } }
+    @media (prefers-reduced-motion: no-preference) {
+      .gb-pulse { transform-box: fill-box; transform-origin: center; animation: gbPulse 1.8s ease-in-out infinite; }
+      .gb-pop { animation: gbPop 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.15) both; }
+    }
+  </style>
+</helmet>
+
+<div style="max-width:800px; margin:0 auto; padding:28px 16px 64px" data-screen-label="golfbits app">
+
+  <header style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:20px">
+    <div style="display:flex; align-items:center; gap:10px">
+      <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="var(--accent)"></circle>
+        <line x1="16" y1="7" x2="16" y2="20" stroke="#fff" stroke-width="2"></line>
+        <path d="M16 7 l9 3.5 -9 3.5z" fill="#fff"></path>
+        <ellipse cx="16" cy="23" rx="7" ry="2.2" fill="#fff" opacity="0.5"></ellipse>
+      </svg>
+      <span style="display:flex; flex-direction:column; line-height:1.15">
+        <span style="font-family:var(--display); font-size:22px; font-weight:600; letter-spacing:0.2px; color:var(--ink)">golfbits</span>
+        <span style="font-size:11px; letter-spacing:1.6px; text-transform:uppercase; color:var(--ink-4)">Clover Greens · one bit a day</span>
+      </span>
+    </div>
+    <div style="display:flex; align-items:center; gap:8px">
+      <span title="Configured content agent" style="background:var(--card); border:1px solid var(--line); border-radius:999px; padding:6px 12px; font-size:13px; color:var(--ink-2)">agent: {{ agent }}</span>
+      <span style="background:var(--card); border:1px solid var(--line); border-radius:999px; padding:6px 12px; font-size:13px; color:var(--ink-2)">🔥 <b style="font-weight:700">{{ streak }}</b></span>
+      <svg width="46" height="46" viewBox="0 0 46 46" role="img" aria-label="overall progress">
+        <circle cx="23" cy="23" r="18" fill="none" stroke="var(--track)" stroke-width="5"></circle>
+        <circle cx="23" cy="23" r="18" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" stroke-dasharray="{{ ringDash }}" transform="rotate(-90 23 23)"></circle>
+        <text x="23" y="27" text-anchor="middle" font-size="11" font-weight="600" fill="var(--ink)">{{ ringLabel }}</text>
+      </svg>
+    </div>
+  </header>
+
+  <nav role="tablist" style="display:flex; gap:2px; margin-bottom:var(--gap); border-bottom:1px solid var(--line); overflow-x:auto">
+    <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="6">
+      <sc-if value="{{ tb.on }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ tb.onClick }}" role="tab" aria-selected="true" style="padding:12px 16px 10px; min-height:44px; border:none; background:none; cursor:pointer; font-size:14px; white-space:nowrap; font-weight:600; color:var(--ink); border-bottom:2px solid var(--accent); margin-bottom:-1px">{{ tb.label }}</button>
+      </sc-if>
+      <sc-if value="{{ tb.off }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ tb.onClick }}" role="tab" style="padding:12px 16px 10px; min-height:44px; border:none; background:none; cursor:pointer; font-size:14px; white-space:nowrap; font-weight:500; color:var(--ink-3); border-bottom:2px solid transparent; margin-bottom:-1px; transition:color 0.15s" style-hover="color:var(--ink)">{{ tb.label }}</button>
+      </sc-if>
+    </sc-for>
+  </nav>
+
+  <main aria-live="polite" style="display:flex; flex-direction:column; gap:var(--gap)">
+
+    <sc-if value="{{ showError }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="daemon-off" style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:40px var(--pad); text-align:center; box-shadow:var(--shadow)">
+        <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true" style="margin-bottom:12px">
+          <circle cx="28" cy="28" r="26" fill="var(--track)"></circle>
+          <line x1="28" y1="14" x2="28" y2="34" stroke="var(--ink-4)" stroke-width="2.5"></line>
+          <path d="M28 14 l13 5 -13 5z" fill="var(--ink-4)"></path>
+        </svg>
+        <h2 style="font-family:var(--display); font-size:24px; font-weight:600; margin:0 0 8px 0">The clubhouse is closed</h2>
+        <p style="color:var(--ink-3); font-size:15px; max-width:420px; margin:0 auto 16px">Can't reach the golfbits daemon. Start it from the repo folder and reload.</p>
+        <div style="display:inline-flex; align-items:center; gap:10px; background:#1D2A22; color:#D9E3DA; border-radius:10px; padding:10px 16px; font-family:ui-monospace, Menlo, monospace; font-size:13px">
+          <span>golfbits open</span>
+          <button onClick="{{ copyOpen }}" style="background:none; border:1px solid #46584C; color:#9FB0A3; border-radius:6px; padding:4px 10px; font-size:12px; cursor:pointer; font-family:var(--sans)">{{ copyOpenLabel }}</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showWelcome }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="fresh start" style="display:flex; align-items:center; gap:14px; background:var(--accent-soft); border:1px solid var(--line); border-radius:14px; padding:16px var(--pad)">
+        <span style="font-family:var(--display); font-size:30px; font-weight:600; color:var(--accent-ink); line-height:1">1</span>
+        <span style="font-size:14px; color:var(--ink-2)"><b style="font-family:var(--display); font-weight:600; color:var(--ink)">Welcome to the club.</b> 28 holes ahead, one a day. Read, take the quiz, and be honest at the end — it shapes what comes next.</span>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showDoneBanner }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="done for today" style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:40px var(--pad); text-align:center; box-shadow:var(--shadow)">
+        <div class="gb-pop" style="display:flex; flex-direction:column; align-items:center">
+          <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true" style="margin-bottom:10px">
+            <ellipse cx="32" cy="50" rx="22" ry="6" fill="var(--accent-soft)"></ellipse>
+            <circle cx="32" cy="50" r="3.5" fill="var(--card)" stroke="var(--ink-2)" stroke-width="1.5"></circle>
+            <line x1="32" y1="50" x2="32" y2="12" stroke="var(--ink-2)" stroke-width="2.5"></line>
+            <path d="M32 12 l20 7 -20 7z" fill="var(--danger)"></path>
+          </svg>
+          <h2 style="font-family:var(--display); font-size:26px; font-weight:600; margin:0 0 8px 0">{{ doneTitle }}</h2>
+          <p style="color:var(--ink-3); font-size:15px; max-width:440px; margin:0">{{ doneBody }}</p>
+          <p style="color:var(--amber); font-size:13px; margin:12px 0 0">{{ doneNote }}</p>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showAllDone }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="all done" style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:var(--pad); box-shadow:var(--shadow)">
+        <div style="text-align:center; padding:16px 0 24px">
+          <span style="font-family:var(--display); font-size:44px; font-weight:600; color:var(--accent-ink); line-height:1">28 / 28</span>
+          <h2 style="font-family:var(--display); font-size:24px; font-weight:600; margin:10px 0 6px">Course walked. Every hole.</h2>
+          <p style="color:var(--ink-3); font-size:15px; max-width:440px; margin:0 auto">Your agent reads what you marked "already knew" and what you missed — the next 28 will meet you where you are.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px">
+          <sc-for list="{{ agentCmds }}" as="cm" hint-placeholder-count="2">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; background:#1D2A22; color:#D9E3DA; border-radius:10px; padding:10px 14px; font-family:ui-monospace, Menlo, monospace; font-size:13px">
+              <span>{{ cm.c }}</span>
+              <button onClick="{{ cm.copy }}" style="background:none; border:1px solid #46584C; color:#9FB0A3; border-radius:6px; padding:4px 10px; font-size:12px; cursor:pointer; font-family:var(--sans)">{{ cm.label }}</button>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+      <div><button onClick="{{ goBack }}" style="background:none; border:none; cursor:pointer; color:var(--accent-ink); font-size:15px; font-weight:500; padding:8px 0; min-height:44px">← Back to library</button></div>
+    </sc-if>
+
+    <sc-if value="{{ showCard }}" hint-placeholder-val="{{ true }}">
+      <article data-screen-label="bit card" style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:var(--pad); box-shadow:var(--shadow)">
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap">
+          <span style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:999px; background:var(--accent-soft); color:var(--accent-ink)">{{ cardCategory }}</span>
+          <span style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:999px; background:var(--track); color:var(--ink-3)">{{ cardCount }}</span>
+          <sc-if value="{{ cardKnew }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:999px; background:var(--amber-soft); color:var(--amber)">★ already knew</span>
+          </sc-if>
+        </div>
+        <h1 style="font-family:var(--display); font-size:30px; line-height:1.15; font-weight:600; margin:14px 0 16px; color:var(--ink); text-wrap:balance">{{ cardTitle }}</h1>
+        <div style="background:var(--accent-soft); border-left:3px solid var(--accent); padding:14px 18px; border-radius:0 10px 10px 0; margin-bottom:var(--gap); font-weight:500; font-size:16px">
+          <small style="display:block; font-size:11px; text-transform:uppercase; letter-spacing:1.2px; color:var(--accent-ink); font-weight:700; margin-bottom:4px">30-second fact</small>{{ cardFact }}
+        </div>
+        <sc-if value="{{ cardHasVisual }}" hint-placeholder-val="{{ false }}">
+          <figure style="margin:var(--gap) 0; text-align:center">
+            {{ cardVisual }}
+            <figcaption style="font-size:13px; color:var(--ink-3); margin-top:8px">{{ cardCaption }}</figcaption>
+          </figure>
+        </sc-if>
+        <div style="white-space:pre-line; color:var(--ink-2); font-size:16px; line-height:1.6">{{ cardLesson }}</div>
+
+        <div style="margin-top:var(--pad); border-top:1px solid var(--line); padding-top:var(--pad)">
+          <h3 style="font-size:11px; text-transform:uppercase; letter-spacing:1.4px; color:var(--ink-3); margin:0 0 8px 0; font-weight:700">{{ quizHead }}</h3>
+          <p style="font-weight:600; margin:0 0 16px 0; font-size:16px">{{ quizQuestion }}</p>
+          <div style="display:flex; flex-direction:column; gap:8px">
+            <sc-for list="{{ quizOpts }}" as="o" hint-placeholder-count="4">
+              <sc-if value="{{ o.stLive }}" hint-placeholder-val="{{ true }}">
+                <button onClick="{{ o.pick }}" style="display:flex; align-items:center; gap:12px; width:100%; text-align:left; padding:12px 16px; min-height:48px; border-radius:10px; font-size:15px; font-family:var(--sans); transition:border-color 0.15s, background 0.15s; cursor:pointer; border:1px solid var(--line); background:var(--card); color:var(--ink)" style-hover="border-color:var(--accent); background:var(--accent-soft)">
+                  <span style="width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; font-family:var(--display); border:1px solid var(--line); background:transparent; color:var(--ink-3)">{{ o.key }}</span>
+                  <span>{{ o.text }}</span>
+                </button>
+              </sc-if>
+              <sc-if value="{{ o.stCorrect }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex; align-items:center; gap:12px; width:100%; text-align:left; padding:12px 16px; min-height:48px; border-radius:10px; font-size:15px; font-family:var(--sans); border:1px solid var(--accent); background:var(--accent-soft); color:var(--ink)">
+                  <span style="width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; font-family:var(--display); border:1px solid var(--accent); background:var(--accent); color:var(--on-accent)">{{ o.key }}</span>
+                  <span>{{ o.text }}</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ o.stWrong }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex; align-items:center; gap:12px; width:100%; text-align:left; padding:12px 16px; min-height:48px; border-radius:10px; font-size:15px; font-family:var(--sans); border:1px solid var(--danger); background:var(--danger-soft); color:var(--ink)">
+                  <span style="width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; font-family:var(--display); border:1px solid var(--danger); background:var(--danger); color:var(--on-danger)">{{ o.key }}</span>
+                  <span>{{ o.text }}</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ o.stFaded }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex; align-items:center; gap:12px; width:100%; text-align:left; padding:12px 16px; min-height:48px; border-radius:10px; font-size:15px; font-family:var(--sans); border:1px solid var(--line); background:var(--card); color:var(--ink); opacity:0.45">
+                  <span style="width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; font-family:var(--display); border:1px solid var(--line); background:transparent; color:var(--ink-3)">{{ o.key }}</span>
+                  <span>{{ o.text }}</span>
+                </div>
+              </sc-if>
+            </sc-for>
+          </div>
+          <sc-if value="{{ quizAnswered }}" hint-placeholder-val="{{ false }}">
+            <div style="background:var(--track); border:1px solid var(--line); border-radius:10px; padding:12px 16px; font-size:14px; margin-top:10px; color:var(--ink-2)"><b style="color:var(--ink)">{{ explainHead }}</b> {{ explainText }}</div>
+          </sc-if>
+          <sc-if value="{{ finishVisible }}" hint-placeholder-val="{{ false }}">
+            <div>
+              <div style="display:flex; gap:10px; margin-top:var(--pad); flex-wrap:wrap">
+                <button onClick="{{ finishNew }}" style="padding:12px 24px; min-height:48px; border:none; border-radius:10px; font-size:15px; font-weight:600; cursor:pointer; background:var(--accent); color:#fff; box-shadow:var(--shadow); transition:background 0.2s" style-hover="background:var(--accent-ink)">Learned something new ✓</button>
+                <button onClick="{{ finishKnown }}" style="padding:12px 24px; min-height:48px; border-radius:10px; font-size:15px; font-weight:500; cursor:pointer; background:var(--card); color:var(--amber); border:1px solid var(--line); transition:border-color 0.2s" style-hover="border-color:var(--amber)">★ I already knew this</button>
+              </div>
+              <p style="margin:12px 0 0; font-size:13px; color:var(--amber)">"Already knew" tells your AI agent to go deeper on {{ cardCategory }} next time it rebuilds content.</p>
+            </div>
+          </sc-if>
+        </div>
+      </article>
+    </sc-if>
+
+    <sc-if value="{{ showJourney }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="journey map" style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:var(--pad); box-shadow:var(--shadow)">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:12px">
+          <h2 style="font-family:var(--display); font-size:22px; font-weight:600; margin:0">{{ journeyTitle }}</h2>
+          <div style="display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--ink-3)">
+            <span style="display:inline-flex; align-items:center; gap:6px"><span style="width:12px; height:12px; border-radius:50%; display:inline-block; background:var(--accent)"></span>learned</span>
+            <span style="display:inline-flex; align-items:center; gap:6px"><span style="width:12px; height:12px; border-radius:50%; display:inline-block; background:var(--knew)"></span>already knew</span>
+            <span style="display:inline-flex; align-items:center; gap:6px"><span style="width:12px; height:12px; border-radius:50%; display:inline-block; background:var(--card); border:2px solid var(--accent)"></span>today</span>
+            <span style="display:inline-flex; align-items:center; gap:6px"><span style="width:12px; height:12px; border-radius:50%; display:inline-block; background:var(--track); border:2px solid var(--line)"></span>ahead</span>
+          </div>
+        </div>
+        <sc-if value="{{ showCourse }}" hint-placeholder-val="{{ true }}">
+          <div>{{ journeySvg }}</div>
+        </sc-if>
+        <sc-if value="{{ showScorecard }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px">
+            <sc-for list="{{ scWeeks }}" as="w" hint-placeholder-count="4">
+              <div style="display:flex; align-items:center; gap:10px">
+                <span style="width:38px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--ink-4)">{{ w.label }}</span>
+                <div style="display:grid; grid-template-columns:repeat(7, 1fr); gap:8px; flex:1">
+                  <sc-for list="{{ w.holes }}" as="h" hint-placeholder-count="7">
+                    <sc-if value="{{ h.stLearned }}" hint-placeholder-val="{{ false }}">
+                      <button onClick="{{ h.open }}" title="{{ h.title }}" style="min-height:48px; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; padding:4px 0; font-family:var(--sans); cursor:pointer; background:var(--accent); border:2px solid var(--accent-ink); color:var(--on-accent)">
+                        <span style="font-family:var(--display); font-size:15px; font-weight:600; line-height:1.1">{{ h.n }}</span>
+                        <span style="font-size:10px; line-height:1">✓</span>
+                      </button>
+                    </sc-if>
+                    <sc-if value="{{ h.stKnew }}" hint-placeholder-val="{{ false }}">
+                      <button onClick="{{ h.open }}" title="{{ h.title }}" style="min-height:48px; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; padding:4px 0; font-family:var(--sans); cursor:pointer; background:var(--knew); border:2px solid var(--knew-bd); color:var(--on-knew)">
+                        <span style="font-family:var(--display); font-size:15px; font-weight:600; line-height:1.1">{{ h.n }}</span>
+                        <span style="font-size:10px; line-height:1">★</span>
+                      </button>
+                    </sc-if>
+                    <sc-if value="{{ h.stToday }}" hint-placeholder-val="{{ false }}">
+                      <button onClick="{{ h.open }}" title="{{ h.title }}" style="min-height:48px; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; padding:4px 0; font-family:var(--sans); cursor:pointer; background:var(--card); border:2px solid var(--accent); color:var(--accent-ink)">
+                        <span style="font-family:var(--display); font-size:15px; font-weight:600; line-height:1.1">{{ h.n }}</span>
+                        <span style="font-size:10px; line-height:1">today</span>
+                      </button>
+                    </sc-if>
+                    <sc-if value="{{ h.stAhead }}" hint-placeholder-val="{{ true }}">
+                      <div title="{{ h.title }}" style="min-height:48px; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; padding:4px 0; font-family:var(--sans); background:var(--track); border:2px solid var(--line); color:var(--ink-4)">
+                        <span style="font-family:var(--display); font-size:15px; font-weight:600; line-height:1.1">{{ h.n }}</span>
+                        <span style="font-size:10px; line-height:1">·</span>
+                      </div>
+                    </sc-if>
+                  </sc-for>
+                </div>
+                <span style="width:34px; text-align:right; font-size:12px; color:var(--ink-3); font-variant-numeric:tabular-nums">{{ w.tally }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <p style="font-size:13px; color:var(--ink-3); text-align:center; margin:12px 0 0">click any visited hole to reread it · ★ = you already knew it</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showLibrary }}" hint-placeholder-val="{{ false }}">
+      <dc-import name="LibraryView" filters="{{ libFilters }}" items="{{ libItems }}" hint-size="100%,600px"></dc-import>
+    </sc-if>
+
+    <sc-if value="{{ showPlan }}" hint-placeholder-val="{{ false }}">
+      <dc-import name="PlanView" title="{{ planTitle }}" intro="{{ planIntro }}" pct-width="{{ planPctWidth }}" done-label="{{ planDoneLabel }}" weeks="{{ planWeeks }}" gear="{{ planGear }}" contacts="{{ planContacts }}" hint-size="100%,800px"></dc-import>
+    </sc-if>
+
+    <sc-if value="{{ showPlaybook }}" hint-placeholder-val="{{ false }}">
+      <dc-import name="PlaybookView" chips="{{ pbChips }}" sections="{{ pbSections }}" hint-size="100%,700px"></dc-import>
+    </sc-if>
+
+    <sc-if value="{{ showStats }}" hint-placeholder-val="{{ false }}">
+      <dc-import name="StatsView" stat-done="{{ statDone }}" stat-acc="{{ statAcc }}" stat-streak="{{ statStreak }}" stat-streak-label="{{ statStreakLabel }}" stat-known="{{ statKnown }}" cats="{{ statCats }}" agent="{{ agent }}" cmds="{{ statCmds }}" hint-size="100%,700px"></dc-import>
+    </sc-if>
+
+  </main>
+
+  <footer style="text-align:center; font-size:12px; color:var(--ink-4); margin-top:36px">progress saved to <code style="background:var(--track); padding:2px 6px; border-radius:4px">data/progress.json</code> — commit it with your repo</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {&quot;width&quot;: &quot;1100px&quot;, &quot;height&quot;: &quot;900px&quot;},
+  &quot;theme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;light&quot;, &quot;dark&quot;], &quot;default&quot;: &quot;light&quot;, &quot;section&quot;: &quot;Appearance&quot;, &quot;tsType&quot;: &quot;string&quot;},
+  &quot;typeStyle&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;serif&quot;, &quot;sans&quot;], &quot;default&quot;: &quot;serif&quot;, &quot;section&quot;: &quot;Appearance&quot;, &quot;tsType&quot;: &quot;string&quot;},
+  &quot;density&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;comfortable&quot;, &quot;compact&quot;], &quot;default&quot;: &quot;comfortable&quot;, &quot;section&quot;: &quot;Appearance&quot;, &quot;tsType&quot;: &quot;string&quot;},
+  &quot;journeyStyle&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;course&quot;, &quot;scorecard&quot;], &quot;default&quot;: &quot;course&quot;, &quot;section&quot;: &quot;Journey map&quot;, &quot;tsType&quot;: &quot;string&quot;},
+  &quot;appState&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;fresh&quot;, &quot;mid&quot;, &quot;doneToday&quot;, &quot;allDone&quot;, &quot;daemonOff&quot;], &quot;default&quot;: &quot;mid&quot;, &quot;section&quot;: &quot;App state&quot;, &quot;tsType&quot;: &quot;string&quot;}
+}">
+class Component extends DCLogic {
+  state = {
+    d: null, view: "today", picked: null, readingId: null, libFilter: "All",
+    sessionDone: false, sessionKnown: false, celebrate: false,
+    ticks: { "p-book-tsg": true, "p-register-whs": true }, copied: ""
+  };
+
+  componentDidMount() {
+    import("./data.js").then(m => this.setState({ d: m }));
+    this.applyBody();
+  }
+  componentDidUpdate(prevProps) {
+    this.applyBody();
+    if (prevProps && prevProps.appState !== this.props.appState) {
+      this.setState({ view: "today", picked: null, readingId: null, sessionDone: false, sessionKnown: false, celebrate: false });
+    }
+  }
+  applyBody() {
+    const b = document.body;
+    b.dataset.gbTheme = this.props.theme ?? "light";
+    b.dataset.gbType = this.props.typeStyle ?? "serif";
+    b.dataset.gbDensity = this.props.density ?? "comfortable";
+  }
+
+  pal() {
+    const dark = (this.props.theme ?? "light") === "dark";
+    return dark ? {
+      fairOut: "#23392B", fairIn: "#2C4634", contour: "#20291F", dash: "#5F6E62",
+      learnedBg: "#3FA97A", learnedBd: "#2C7D58", learnedFg: "#0F1D15",
+      knewBg: "#E3A44A", knewBd: "#B57F2E", knewFg: "#221703",
+      todayBg: "#1B241D", todayBd: "#3FA97A", todayFg: "#7FCBA4",
+      aheadBg: "#242F26", aheadBd: "#2B372D", aheadFg: "#5F6E62",
+      wk: "#5F6E62", flag: "#E07B6E", pole: "#C6CFC4", halo: "#3FA97A"
+    } : {
+      fairOut: "#CBDCC2", fairIn: "#DEEAD6", contour: "#E9E5D8", dash: "#98A49B",
+      learnedBg: "#166B47", learnedBd: "#115538", learnedFg: "#FFFFFF",
+      knewBg: "#D97706", knewBd: "#B45309", knewFg: "#FFFFFF",
+      todayBg: "#FFFFFF", todayBd: "#166B47", todayFg: "#166B47",
+      aheadBg: "#EDEAE0", aheadBd: "#DBD7C9", aheadFg: "#98A49B",
+      wk: "#98A49B", flag: "#B3261E", pole: "#1E2722", halo: "#166B47"
+    };
+  }
+
+  model() {
+    const d = this.state.d;
+    if (!d) return null;
+    const key = this.props.appState ?? "mid";
+    const S = d.STATES[key] || d.STATES.mid;
+    let done = S.done, streak = S.streak;
+    const known = new Set(S.known), missed = new Set(S.missed);
+    let doneToday = key === "doneToday" || key === "allDone";
+    if (this.state.sessionDone && key === "mid") {
+      if (this.state.sessionKnown) known.add(d.BITS[done].id);
+      done += 1; streak += 1; doneToday = true;
+    }
+    const n = d.BITS.length;
+    const todayIdx = done < n && !doneToday ? done : -1;
+    return { d, key, done, streak, known, missed, doneToday, n, todayIdx, best: S.best };
+  }
+
+  nodeState(m, i) {
+    const b = m.d.BITS[i];
+    if (i < m.done) return m.known.has(b.id) ? "knew" : "learned";
+    if (i === m.done && !m.doneToday && m.key !== "daemonOff") return "today";
+    return "ahead";
+  }
+
+  openBit(id) { this.setState({ readingId: id, view: "library" }); }
+
+  courseSvg(m) {
+    const P = this.pal(), R = React.createElement;
+    const perRow = 7, rows = Math.ceil(m.n / perRow);
+    const W = 700, padX = 64, gapX = (W - padX * 2) / (perRow - 1), padY = 64, rowH = 106;
+    const H = padY * 2 + (rows - 1) * rowH;
+    const pos = i => {
+      const r = Math.floor(i / perRow), c = i % perRow;
+      return { x: padX + (r % 2 === 0 ? c : perRow - 1 - c) * gapX, y: padY + r * rowH };
+    };
+    let path = "";
+    for (let i = 0; i < m.n; i++) {
+      const { x, y } = pos(i);
+      if (i === 0) { path += `M ${x} ${y}`; continue; }
+      const p = pos(i - 1);
+      path += p.y === y ? ` L ${x} ${y}` : ` C ${p.x + (p.x > W / 2 ? 72 : -72)} ${p.y + rowH / 2}, ${x + (x > W / 2 ? 72 : -72)} ${y - rowH / 2}, ${x} ${y}`;
+    }
+    const contours = [40, 150, 262, 372].map((y, i) =>
+      R("path", { key: "c" + i, d: `M -10 ${y + (i % 2) * 14} C 130 ${y - 18}, 260 ${y + 20}, 390 ${y - 6} C 520 ${y - 26}, 620 ${y + 16}, 710 ${y}`, fill: "none", stroke: P.contour, strokeWidth: 1.5 }));
+    const weekLabels = Array.from({ length: rows }, (_, r) =>
+      R("text", { key: "w" + r, x: 14, y: padY + r * rowH + 4, fontSize: 11, fill: P.wk, fontWeight: 700, letterSpacing: 1 }, "W" + (r + 1)));
+    const nodes = m.d.BITS.map((b, i) => {
+      const { x, y } = pos(i);
+      const st = this.nodeState(m, i);
+      const visited = i < m.done;
+      const kids = [];
+      if (i === m.n - 1) {
+        kids.push(R("line", { key: "fp", x1: x, y1: y - 44, x2: x, y2: y - 17, stroke: P.pole, strokeWidth: 2.5 }));
+        kids.push(R("path", { key: "ff", d: `M ${x} ${y - 44} l 17 6 -17 6z`, fill: P.flag }));
+      }
+      if (st === "today") kids.push(R("circle", { key: "halo", className: "gb-pulse", cx: x, cy: y, r: 15, fill: "none", stroke: P.halo, strokeWidth: 2 }));
+      const c = st === "learned" ? [P.learnedBg, P.learnedBd, P.learnedFg] : st === "knew" ? [P.knewBg, P.knewBd, P.knewFg] : st === "today" ? [P.todayBg, P.todayBd, P.todayFg] : [P.aheadBg, P.aheadBd, P.aheadFg];
+      kids.push(R("circle", { key: "c", cx: x, cy: y, r: 15, fill: c[0], stroke: c[1], strokeWidth: 2.5 }));
+      const mark = st === "knew" ? "★" : st === "learned" ? "✓" : String(i + 1);
+      kids.push(R("text", { key: "t", x, y: y + 4.5, textAnchor: "middle", fontSize: visited ? 13 : 11, fontWeight: 700, fill: c[2], style: { pointerEvents: "none" } }, mark));
+      kids.push(R("title", { key: "ti" }, b.title + (st === "knew" ? " — already knew" : st === "learned" ? " — done" : st === "today" ? " — today" : "")));
+      return R("g", {
+        key: b.id, style: { cursor: visited ? "pointer" : "default" },
+        onClick: visited ? () => this.openBit(b.id) : undefined,
+        tabIndex: visited ? 0 : undefined, role: visited ? "button" : undefined,
+        onKeyDown: visited ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); this.openBit(b.id); } } : undefined
+      }, kids);
+    });
+    const tee = pos(0);
+    return R("svg", { viewBox: `0 0 ${W} ${H}`, xmlns: "http://www.w3.org/2000/svg", style: { width: "100%", height: "auto", display: "block", fontFamily: "inherit" }, role: "img", "aria-label": "journey map: " + m.done + " of " + m.n + " bits walked" }, [
+      ...contours,
+      R("path", { key: "ro", d: path, fill: "none", stroke: P.fairOut, strokeWidth: 44, strokeLinecap: "round", strokeLinejoin: "round" }),
+      R("path", { key: "ri", d: path, fill: "none", stroke: P.fairIn, strokeWidth: 30, strokeLinecap: "round", strokeLinejoin: "round" }),
+      R("path", { key: "rd", d: path, fill: "none", stroke: P.dash, strokeWidth: 2, strokeDasharray: "1 9", strokeLinecap: "round" }),
+      R("rect", { key: "tee", x: tee.x - 24, y: tee.y - 7, width: 10, height: 14, rx: 2, fill: P.learnedBg, opacity: 0.85 }),
+      ...weekLabels, ...nodes
+    ]);
+  }
+
+  copyCmd(c) {
+    try { navigator.clipboard.writeText(c); } catch (e) {}
+    this.setState({ copied: c });
+    clearTimeout(this._ct);
+    this._ct = setTimeout(() => this.setState({ copied: "" }), 1200);
+  }
+
+  renderVals() {
+    const m = this.model();
+    const view = this.state.view;
+    const P = this.pal();
+    if (!m) return { agent: "claude", streak: 0, ringDash: "0 113", ringLabel: "…", tabs: [], showCard: false };
+    const { d } = m;
+    const C = 2 * Math.PI * 18, pct = Math.round(100 * m.done / m.n);
+    const isErr = m.key === "daemonOff";
+
+    const tabs = ["Today", "Journey", "Plan", "Library", "Playbook", "Stats"].map(l => {
+      const k = l.toLowerCase(), on = view === k;
+      return { label: l, on, off: !on,
+        onClick: () => this.setState({ view: k, readingId: null, picked: null }) };
+    });
+
+    // --- bit card (today quiz OR library reread OR done-today revealed) ---
+    const reading = this.state.readingId ? d.BITS.find(b => b.id === this.state.readingId) : null;
+    let cardBit = null, interactive = false;
+    if (view === "library" && reading) { cardBit = reading; }
+    else if (view === "today" && !isErr) {
+      if (m.todayIdx >= 0) { cardBit = d.BITS[m.todayIdx]; interactive = true; }
+      else if (m.doneToday && m.done <= m.n) { cardBit = d.BITS[m.done - 1]; }
+    }
+    const answered = interactive && this.state.picked !== null;
+    const revealed = cardBit && !interactive;
+    let quizOpts = [], quizHead = "", quizQuestion = "", explainHead = "", explainText = "";
+    if (cardBit) {
+      const q = cardBit.quiz, ansIdx = q.answerIndex;
+      quizQuestion = q.question;
+      quizHead = interactive ? "Quick quiz" : "Quiz (answer shown)";
+      quizOpts = q.options.map((t, i) => {
+        const isAns = i === ansIdx, isPick = answered && this.state.picked === i;
+        const settled = answered || revealed;
+        const live = interactive && !answered;
+        return { key: "ABCD"[i], text: t,
+          stLive: live,
+          stCorrect: settled && isAns,
+          stWrong: settled && isPick && !isAns,
+          stFaded: settled && !isAns && !isPick,
+          pick: live ? () => this.setState({ picked: i }) : undefined };
+      });
+      if (answered || revealed) {
+        explainHead = revealed ? "" : (this.state.picked === ansIdx ? "Correct." : "Not quite.");
+        explainText = cardBit.quiz.explanation;
+      }
+    }
+    const cardIdx = cardBit ? d.BITS.indexOf(cardBit) : 0;
+    const entryKnew = cardBit ? m.known.has(cardBit.id) && cardIdx < m.done : false;
+
+    // --- journey ---
+    const style = this.props.journeyStyle ?? "course";
+    const stateOf = i => this.nodeState(m, i);
+    const scWeeks = Array.from({ length: 4 }, (_, r) => {
+      const holes = d.BITS.slice(r * 7, r * 7 + 7).map((b, ci) => {
+        const i = r * 7 + ci, st = stateOf(i), visited = i < m.done;
+        return { n: i + 1, title: b.title,
+          stLearned: st === "learned", stKnew: st === "knew",
+          stToday: st === "today", stAhead: st === "ahead",
+          open: visited ? () => this.openBit(b.id) : st === "today" ? () => this.setState({ view: "today", readingId: null }) : undefined };
+      });
+      const doneCt = holes.filter(h => h.stLearned || h.stKnew).length;
+      return { label: "W" + (r + 1), holes, tally: doneCt + "/7" };
+    });
+    // --- library ---
+    const cats = ["All", ...new Set(d.BITS.map(b => b.category))];
+    const libFilters = cats.map(c => {
+      const on = this.state.libFilter === c;
+      return { name: c, on, off: !on, onClick: () => this.setState({ libFilter: c }) };
+    });
+    const libItems = d.BITS.map((b, i) => {
+      if (this.state.libFilter !== "All" && b.category !== this.state.libFilter) return null;
+      const st = stateOf(i), visited = i < m.done, today = st === "today";
+      const unlocked = visited || today;
+      return { n: i + 1, title: unlocked ? b.title : "Locked — day " + (i + 1), category: b.category,
+        stLearned: st === "learned", stKnew: st === "knew", stToday: today,
+        locked: !unlocked, unlocked,
+        open: visited ? () => this.openBit(b.id) : today ? () => this.setState({ view: "today", readingId: null }) : undefined };
+    }).filter(Boolean);
+
+    // --- plan ---
+    const allTasks = d.PLAN.weeks.flatMap(w => w.tasks);
+    const doneTasks = allTasks.filter(t => this.state.ticks[t.id]).length;
+    const planWeeks = d.PLAN.weeks.map(w => ({ label: w.label, focus: w.focus,
+      tasks: w.tasks.map(t => {
+        const on = !!this.state.ticks[t.id];
+        return { text: t.text, detail: t.detail, on, off: !on,
+          toggle: () => this.setState(s => ({ ticks: { ...s.ticks, [t.id]: !s.ticks[t.id] } })) };
+      }) }));
+
+    // --- stats ---
+    const knownCt = [...m.known].filter(id => d.BITS.findIndex(b => b.id === id) < m.done).length;
+    const attempts = m.done, correct = m.done - [...m.missed].length;
+    const acc = attempts ? Math.round(100 * Math.max(correct, 0) / attempts) : 0;
+    const byCat = {};
+    d.BITS.forEach((b, i) => {
+      byCat[b.category] = byCat[b.category] || { total: 0, done: 0, known: 0, wrong: 0 };
+      const c = byCat[b.category]; c.total++;
+      if (i < m.done) { c.done++; if (m.known.has(b.id)) c.known++; if (m.missed.has(b.id)) c.wrong++; }
+    });
+    const statCats = Object.entries(byCat).map(([name, c]) => {
+      const p = Math.round(100 * c.done / c.total);
+      const notes = [c.known ? "★" + c.known + " known" : "", c.wrong ? c.wrong + " missed" : ""].filter(Boolean).join(" · ");
+      return { name, width: p + "%", notes: notes || p + "%" };
+    });
+    const mkCmd = c => ({ c, label: this.state.copied === c ? "copied!" : "copy", copy: () => this.copyCmd(c) });
+    const statCmds = ["golfbits status", "golfbits extend", "golfbits restructure make it more visual", "golfbits config agent codex"].map(mkCmd);
+
+    const doneJustNow = this.state.celebrate;
+
+    return {
+      agent: "claude", streak: m.streak,
+      ringDash: `${C * pct / 100} ${C}`, ringLabel: pct + "%", tabs,
+
+      showError: isErr && view === "today",
+      copyOpen: () => this.copyCmd("golfbits open"),
+      copyOpenLabel: this.state.copied === "golfbits open" ? "copied!" : "copy",
+
+      showWelcome: view === "today" && m.key === "fresh" && !m.doneToday,
+      showDoneBanner: view === "today" && m.doneToday && m.done < m.n,
+      doneTitle: doneJustNow ? "That's a hole walked." : "Done for today",
+      doneBody: `Bit ${m.done + 1} unlocks tomorrow. Revisit today's bit below, walk the Journey map, or revise in the Library.`,
+      doneNote: (doneJustNow && this.state.sessionKnown) ? "★ marked as already known — your agent will go deeper here." : "see you on the tee",
+      showAllDone: view === "today" && m.done >= m.n && !isErr,
+      agentCmds: ["golfbits extend", "golfbits restructure"].map(mkCmd),
+
+      showBack: view === "library" && !!reading,
+      goBack: () => this.setState({ readingId: null }),
+
+      showCard: !!cardBit,
+      cardCategory: cardBit ? cardBit.category : "", cardCount: cardBit ? `hole ${cardIdx + 1} of ${m.n}` : "",
+      cardKnew: entryKnew, cardTitle: cardBit ? cardBit.title : "", cardFact: cardBit ? cardBit.microFact : "",
+      cardHasVisual: !!(cardBit && cardBit.visual),
+      cardVisual: cardBit && cardBit.visual ? React.createElement("div", { style: { maxWidth: 480, margin: "0 auto", border: "1px solid var(--line)", borderRadius: 10, overflow: "hidden", lineHeight: 0 }, dangerouslySetInnerHTML: { __html: cardBit.visual.svg } }) : null,
+      cardCaption: cardBit && cardBit.visual ? cardBit.visual.caption : "",
+      cardLesson: cardBit ? cardBit.lesson : "",
+      quizHead, quizQuestion, quizOpts, quizAnswered: answered || (revealed && !!explainText),
+      explainHead, explainText,
+      finishVisible: interactive && answered,
+      finishNew: () => this.setState({ sessionDone: true, sessionKnown: false, celebrate: true, picked: null }),
+      finishKnown: () => this.setState({ sessionDone: true, sessionKnown: true, celebrate: true, picked: null }),
+
+      showJourney: view === "journey",
+      journeyTitle: `The course — ${m.done} of ${m.n} walked`,
+      showCourse: view === "journey" && style === "course",
+      showScorecard: view === "journey" && style === "scorecard",
+      journeySvg: view === "journey" && style === "course" ? this.courseSvg(m) : null,
+      scWeeks,
+
+      showLibrary: view === "library" && !reading, libFilters, libItems,
+
+      showPlan: view === "plan",
+      planTitle: d.PLAN.title, planIntro: d.PLAN.intro,
+      planPctWidth: Math.round(100 * doneTasks / allTasks.length) + "%",
+      planDoneLabel: `${doneTasks}/${allTasks.length} done`,
+      planWeeks, planGear: d.PLAN.gear, planContacts: d.PLAN.contacts,
+
+      showPlaybook: view === "playbook",
+      pbChips: d.PLAYBOOK.map(s => ({ label: s.title, onClick: () => {
+        const el = document.getElementById("pb-" + s.id);
+        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 64, behavior: "smooth" });
+      } })),
+      pbSections: d.PLAYBOOK.map(s => ({ anchor: "pb-" + s.id, title: s.title, body: s.body })),
+
+      showStats: view === "stats",
+      statDone: String(m.done), statAcc: acc + "%",
+      statStreak: m.streak + "🔥", statStreakLabel: `streak (best ${m.best})`,
+      statKnown: knownCt + "★",
+      statCats, statCmds
+    };
+  }
+}
+</script>
+</body>
+</html>

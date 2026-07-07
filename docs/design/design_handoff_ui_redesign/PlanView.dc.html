@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="display:flex; flex-direction:column; gap:16px">
+  <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:var(--pad); box-shadow:var(--shadow)">
+    <h1 style="font-family:var(--display); font-size:26px; font-weight:600; color:var(--ink); margin:0 0 6px 0; line-height:1.2">{{ title }}</h1>
+    <p style="font-size:14px; color:var(--ink-3); margin:0 0 14px 0; line-height:1.5">{{ intro }}</p>
+    <div style="display:flex; align-items:center; gap:12px">
+      <div style="flex:1; height:8px; background:var(--track); border-radius:99px; overflow:hidden">
+        <svg width="100%" height="8" style="display:block" aria-hidden="true"><rect x="0" y="0" width="{{ pctWidth }}" height="8" rx="4" fill="var(--accent)"></rect></svg>
+      </div>
+      <span style="color:var(--ink-3); font-size:13px; white-space:nowrap">{{ doneLabel }}</span>
+    </div>
+  </div>
+
+  <sc-for list="{{ weeks }}" as="w" hint-placeholder-count="3">
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:var(--pad); box-shadow:var(--shadow)">
+      <div style="display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:12px; padding-bottom:10px; border-bottom:1px solid var(--line)">
+        <span style="font-family:var(--sans); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent-ink); background:var(--accent-soft); padding:4px 12px; border-radius:999px">{{ w.label }}</span>
+        <span style="font-family:var(--display); font-size:16px; font-weight:600; color:var(--ink)">{{ w.focus }}</span>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:2px">
+        <sc-for list="{{ w.tasks }}" as="t" hint-placeholder-count="3">
+          <sc-if value="{{ t.on }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ t.toggle }}" style="display:flex; align-items:flex-start; gap:12px; padding:10px 8px; border-radius:10px; cursor:pointer; background:none; border:none; text-align:left; width:100%; font-family:var(--sans); transition:background 0.15s" style-hover="background:var(--track)">
+              <span aria-hidden="true" style="flex-shrink:0; width:22px; height:22px; margin-top:1px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; border:2px solid var(--accent); background:var(--accent); color:#fff">✓</span>
+              <span style="display:flex; flex-direction:column; gap:3px">
+                <span style="font-size:15px; font-weight:500; color:var(--ink-3); text-decoration:line-through">{{ t.text }}</span>
+                <span style="font-size:13px; color:var(--ink-3); line-height:1.45">{{ t.detail }}</span>
+              </span>
+            </button>
+          </sc-if>
+          <sc-if value="{{ t.off }}" hint-placeholder-val="{{ true }}">
+            <button onClick="{{ t.toggle }}" style="display:flex; align-items:flex-start; gap:12px; padding:10px 8px; border-radius:10px; cursor:pointer; background:none; border:none; text-align:left; width:100%; font-family:var(--sans); transition:background 0.15s" style-hover="background:var(--track)">
+              <span aria-hidden="true" style="flex-shrink:0; width:22px; height:22px; margin-top:1px; border-radius:6px; border:2px solid var(--ink-4); background:transparent"></span>
+              <span style="display:flex; flex-direction:column; gap:3px">
+                <span style="font-size:15px; font-weight:500; color:var(--ink)">{{ t.text }}</span>
+                <span style="font-size:13px; color:var(--ink-3); line-height:1.45">{{ t.detail }}</span>
+              </span>
+            </button>
+          </sc-if>
+        </sc-for>
+      </div>
+    </div>
+  </sc-for>
+
+  <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:var(--pad); box-shadow:var(--shadow)">
+    <h3 style="font-family:var(--display); font-size:18px; font-weight:600; color:var(--ink); margin:0 0 12px 0">The all-Callaway set (≈ ₹88k)</h3>
+    <div style="display:flex; flex-direction:column">
+      <sc-for list="{{ gear }}" as="g" hint-placeholder-count="5">
+        <div style="display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-bottom:1px solid var(--line); font-size:14px">
+          <span style="font-weight:600; color:var(--ink); min-width:110px">{{ g.slot }}</span>
+          <span style="flex:1; color:var(--ink-2)">{{ g.pick }}</span>
+          <span style="color:var(--ink-3); white-space:nowrap; font-variant-numeric:tabular-nums">{{ g.price }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:var(--pad); box-shadow:var(--shadow)">
+    <h3 style="font-family:var(--display); font-size:18px; font-weight:600; color:var(--ink); margin:0 0 12px 0">Contacts</h3>
+    <div style="display:flex; flex-direction:column">
+      <sc-for list="{{ contacts }}" as="c" hint-placeholder-count="4">
+        <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:9px 0; border-bottom:1px solid var(--line); font-size:14px">
+          <span style="font-weight:500; color:var(--ink)">{{ c.name }}</span>
+          <span style="color:var(--ink-3)">{{ c.value }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;760px&quot;,&quot;height&quot;:&quot;800px&quot;},&quot;title&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;intro&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;pctWidth&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;doneLabel&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;weeks&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;Array&lt;object&gt;&quot;},&quot;gear&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;Array&lt;object&gt;&quot;},&quot;contacts&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;Array&lt;object&gt;&quot;}}"></script>
+</body>
+</html>

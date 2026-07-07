@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="display:flex; flex-direction:column; gap:16px">
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px">
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 16px; text-align:center; box-shadow:var(--shadow)">
+      <div style="font-family:var(--display); font-size:32px; font-weight:600; line-height:1.1; color:var(--accent-ink)">{{ statDone }}</div>
+      <div style="font-family:var(--sans); font-size:12px; letter-spacing:0.6px; text-transform:uppercase; color:var(--ink-3); margin-top:6px">bits completed</div>
+    </div>
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 16px; text-align:center; box-shadow:var(--shadow)">
+      <div style="font-family:var(--display); font-size:32px; font-weight:600; line-height:1.1; color:var(--ink)">{{ statAcc }}</div>
+      <div style="font-family:var(--sans); font-size:12px; letter-spacing:0.6px; text-transform:uppercase; color:var(--ink-3); margin-top:6px">quiz accuracy</div>
+    </div>
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 16px; text-align:center; box-shadow:var(--shadow)">
+      <div style="font-family:var(--display); font-size:32px; font-weight:600; line-height:1.1; color:var(--ink)">{{ statStreak }}</div>
+      <div style="font-family:var(--sans); font-size:12px; letter-spacing:0.6px; text-transform:uppercase; color:var(--ink-3); margin-top:6px">{{ statStreakLabel }}</div>
+    </div>
+    <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 16px; text-align:center; box-shadow:var(--shadow)">
+      <div style="font-family:var(--display); font-size:32px; font-weight:600; line-height:1.1; color:var(--amber)">{{ statKnown }}</div>
+      <div style="font-family:var(--sans); font-size:12px; letter-spacing:0.6px; text-transform:uppercase; color:var(--ink-3); margin-top:6px">already knew</div>
+    </div>
+  </div>
+
+  <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:var(--pad); box-shadow:var(--shadow)">
+    <h3 style="font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--ink-3); margin:0 0 16px 0">Progress by category</h3>
+    <div style="display:flex; flex-direction:column; gap:14px">
+      <sc-for list="{{ cats }}" as="c" hint-placeholder-count="5">
+        <div style="display:flex; align-items:center; gap:12px; font-size:14px">
+          <span style="min-width:150px; font-weight:500; color:var(--ink-2)">{{ c.name }}</span>
+          <div style="flex:1; height:8px; background:var(--track); border-radius:99px; overflow:hidden">
+            <svg width="100%" height="8" style="display:block" aria-hidden="true"><rect x="0" y="0" width="{{ c.width }}" height="8" rx="4" fill="var(--accent)"></rect></svg>
+          </div>
+          <span style="min-width:96px; text-align:right; color:var(--ink-3); font-size:13px">{{ c.notes }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="background:var(--card); border:1px solid var(--line); border-radius:14px; padding:var(--pad); box-shadow:var(--shadow)">
+    <h3 style="font-family:var(--display); font-size:18px; font-weight:600; color:var(--ink); margin:0 0 6px 0">Your AI content agent: {{ agent }}</h3>
+    <p style="font-size:14px; color:var(--ink-3); margin:0 0 14px 0; line-height:1.5">These run in a terminal from the repo folder. The agent reads <code style="background:var(--track); padding:2px 6px; border-radius:4px; font-size:0.85em">data/progress.json</code> — quiz misses pull more coverage, "already knew" markings push depth up.</p>
+    <div style="display:flex; flex-direction:column; gap:8px">
+      <sc-for list="{{ cmds }}" as="cm" hint-placeholder-count="3">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; background:#1D2A22; color:#D9E3DA; border-radius:10px; padding:10px 14px; font-family:ui-monospace, Menlo, monospace; font-size:13px">
+          <span>{{ cm.c }}</span>
+          <button onClick="{{ cm.copy }}" style="background:none; border:1px solid #46584C; color:#9FB0A3; border-radius:6px; padding:4px 10px; font-size:12px; cursor:pointer; font-family:var(--sans)">{{ cm.label }}</button>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;760px&quot;,&quot;height&quot;:&quot;700px&quot;},&quot;statDone&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;statAcc&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;statStreak&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;statStreakLabel&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;statKnown&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;cats&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;Array&lt;object&gt;&quot;},&quot;agent&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;},&quot;cmds&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;Array&lt;object&gt;&quot;}}"></script>
+</body>
+</html>

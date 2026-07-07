@@ -6,39 +6,54 @@
 <title>golfbits</title>
 <link rel="stylesheet" href="/styles.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>⛳</text></svg>">
+<script>
+  // Resolve theme before first paint: stored choice wins, else prefers-color-scheme.
+  (function () {
+    try {
+      var t = localStorage.getItem("gb-theme");
+      if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", t);
+    } catch (e) { document.documentElement.setAttribute("data-theme", "light"); }
+  })();
+</script>
 </head>
 <body>
+<script>document.body.setAttribute("data-theme", document.documentElement.getAttribute("data-theme"));</script>
 <div class="wrap">
   <header class="topbar">
     <div class="brand">
-      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
-        <circle cx="14" cy="14" r="13" fill="#059669"/>
-        <line x1="14" y1="6" x2="14" y2="17" stroke="#fff" stroke-width="2"/>
-        <path d="M14 6 l8 3 -8 3z" fill="#fff"/>
-        <ellipse cx="14" cy="20" rx="6" ry="2" fill="#fff" opacity="0.55"/>
+      <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="var(--accent)"/>
+        <line x1="16" y1="7" x2="16" y2="20" stroke="#fff" stroke-width="2"/>
+        <path d="M16 7 l9 3.5 -9 3.5z" fill="#fff"/>
+        <ellipse cx="16" cy="23" rx="7" ry="2.2" fill="#fff" opacity="0.5"/>
       </svg>
-      <span>golfbits</span>
+      <span class="wordmark">
+        <span class="name">golfbits</span>
+        <span class="tag">Clover Greens · one bit a day</span>
+      </span>
     </div>
     <div class="topbar-right">
       <span class="agent-chip" id="agentChip" title="Configured content agent">agent: …</span>
       <span class="streak-chip" id="streakChip">🔥 <b id="streakNum">0</b></span>
-      <svg class="ring" width="44" height="44" viewBox="0 0 44 44" role="img" aria-label="overall progress">
-        <circle cx="22" cy="22" r="18" fill="none" stroke="#E5E7EB" stroke-width="5"/>
-        <circle id="ringFg" cx="22" cy="22" r="18" fill="none" stroke="#059669" stroke-width="5"
-                stroke-linecap="round" stroke-dasharray="113 113" stroke-dashoffset="113"
-                transform="rotate(-90 22 22)"/>
-        <text id="ringLabel" x="22" y="26" text-anchor="middle" font-size="11" font-weight="600" fill="#1F2937">0%</text>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode"></button>
+      <svg class="ring" width="46" height="46" viewBox="0 0 46 46" role="img" aria-label="overall progress">
+        <circle cx="23" cy="23" r="18" fill="none" stroke="var(--track)" stroke-width="5"/>
+        <circle id="ringFg" cx="23" cy="23" r="18" fill="none" stroke="var(--accent)" stroke-width="5"
+                stroke-linecap="round" stroke-dasharray="0 113" stroke-dashoffset="0"
+                transform="rotate(-90 23 23)"/>
+        <text id="ringLabel" x="23" y="27" text-anchor="middle" font-size="11" font-weight="600" fill="var(--ink)">0%</text>
       </svg>
     </div>
   </header>
 
   <nav class="tabs" role="tablist">
-    <button data-view="today" class="active">Today</button>
-    <button data-view="journey">Journey</button>
-    <button data-view="plan">Plan</button>
-    <button data-view="library">Library</button>
-    <button data-view="playbook">Playbook</button>
-    <button data-view="stats">Stats</button>
+    <button data-view="today" role="tab" class="active">Today</button>
+    <button data-view="journey" role="tab">Journey</button>
+    <button data-view="plan" role="tab">Plan</button>
+    <button data-view="library" role="tab">Library</button>
+    <button data-view="playbook" role="tab">Playbook</button>
+    <button data-view="stats" role="tab">Stats</button>
   </nav>
 
   <main id="main" aria-live="polite"></main>

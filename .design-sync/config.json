@@ -1,6 +1,7 @@
 {
   "pkg": "@golfbits/design-system",
   "globalName": "GolfbitsDS",
+  "projectId": "c821a0a9-f83d-4e54-9274-b6043527a6f7",
   "shape": "package",
   "buildCmd": "cd design-system && node build.mjs",
   "cssEntry": "dist/golfbits-ds.css",

@@ -1,0 +1,47 @@
+{
+  "pkg": "@golfbits/design-system",
+  "globalName": "GolfbitsDS",
+  "shape": "package",
+  "buildCmd": "cd design-system && node build.mjs",
+  "cssEntry": "dist/golfbits-ds.css",
+  "readmeHeader": ".design-sync/conventions.md",
+  "overrides": {
+    "CatRow": { "cardMode": "column" },
+    "PlanTask": { "cardMode": "column" },
+    "LibItem": { "cardMode": "column" },
+    "Tab": { "cardMode": "column" },
+    "QuizOption": { "cardMode": "column" }
+  },
+  "componentSrcMap": {
+    "Button": "src/components/Button.jsx",
+    "Chip": "src/components/Chip.jsx",
+    "Card": "src/components/Card.jsx",
+    "StatTile": "src/components/StatTile.jsx",
+    "ProgressBar": "src/components/ProgressBar.jsx",
+    "ProgressRing": "src/components/ProgressRing.jsx",
+    "Tab": "src/components/Tab.jsx",
+    "MicroFact": "src/components/MicroFact.jsx",
+    "QuizOption": "src/components/QuizOption.jsx",
+    "LibItem": "src/components/LibItem.jsx",
+    "PlanTask": "src/components/PlanTask.jsx",
+    "CatRow": "src/components/CatRow.jsx",
+    "DoneBanner": "src/components/DoneBanner.jsx",
+    "Brand": "src/components/Brand.jsx"
+  },
+  "dtsPropsFor": {
+    "Button": "  /** Visual style. @default \"primary\" */\n  variant?: \"primary\" | \"secondary\" | \"ghost\";\n  children?: React.ReactNode;\n  className?: string;\n  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;\n  disabled?: boolean;",
+    "Chip": "  /** Pill tone. @default \"default\" */\n  variant?: \"default\" | \"new\" | \"deep\";\n  children?: React.ReactNode;\n  className?: string;",
+    "Card": "  children?: React.ReactNode;\n  className?: string;",
+    "StatTile": "  /** Big value shown in the tile. */\n  value: React.ReactNode;\n  /** Caption under the value. */\n  label: React.ReactNode;\n  /** Render the value in the accent green. @default false */\n  green?: boolean;\n  className?: string;",
+    "ProgressBar": "  /** Fill percentage, 0–100 (clamped). */\n  pct: number;\n  className?: string;",
+    "ProgressRing": "  /** Fill percentage, 0–100 (clamped). */\n  pct: number;\n  /** Diameter in px. @default 44 */\n  size?: number;\n  className?: string;",
+    "Tab": "  /** Selected (dark) state. @default false */\n  active?: boolean;\n  children?: React.ReactNode;\n  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;\n  className?: string;",
+    "MicroFact": "  /** Small uppercase label above the body. */\n  label?: React.ReactNode;\n  children?: React.ReactNode;\n  className?: string;",
+    "QuizOption": "  /** Key badge, e.g. \"A\". */\n  letter: React.ReactNode;\n  /** Answer state. @default \"default\" */\n  state?: \"default\" | \"correct\" | \"wrong\" | \"faded\";\n  disabled?: boolean;\n  children?: React.ReactNode;\n  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;\n  className?: string;",
+    "LibItem": "  /** Index label, e.g. \"01\". */\n  n: React.ReactNode;\n  title: React.ReactNode;\n  category?: React.ReactNode;\n  badge?: React.ReactNode;\n  /** Dim + disable the row. @default false */\n  locked?: boolean;\n  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;\n  className?: string;",
+    "PlanTask": "  text: React.ReactNode;\n  detail?: React.ReactNode;\n  /** Checked (strikes through text). @default false */\n  checked?: boolean;\n  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;\n  className?: string;",
+    "CatRow": "  name: React.ReactNode;\n  /** Progress percentage, 0–100 (clamped). */\n  pct: number;\n  className?: string;",
+    "DoneBanner": "  emoji?: React.ReactNode;\n  title?: React.ReactNode;\n  children?: React.ReactNode;\n  className?: string;",
+    "Brand": "  /** Logo size in px. @default 28 */\n  size?: number;\n  className?: string;"
+  }
+}

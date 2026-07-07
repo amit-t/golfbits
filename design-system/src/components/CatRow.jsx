@@ -5,7 +5,10 @@ const clamp = (n) => {
   return Number.isFinite(v) ? Math.min(100, Math.max(0, v)) : 0;
 };
 
-/** Category progress row: name, inline track, percent label. pct: 0-100 (clamped). */
+/**
+ * Category progress row: name, inline track, percent label. pct: 0-100 (clamped).
+ * @category Data Display
+ */
 export function CatRow({ name, pct = 0, className = "", ...rest }) {
   const p = clamp(pct);
   return (

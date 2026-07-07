@@ -1,6 +1,9 @@
 import React from "react";
 
-/** Centered completion banner: large emoji, title, supporting copy. */
+/**
+ * Centered completion banner: large emoji, title, supporting copy.
+ * @category Feedback
+ */
 export function DoneBanner({ emoji, title, className = "", children, ...rest }) {
   return (
     <div className={`done-banner${className ? " " + className : ""}`} {...rest}>

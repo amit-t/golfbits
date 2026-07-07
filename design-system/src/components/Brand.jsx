@@ -1,6 +1,9 @@
 import React from "react";
 
-/** golfbits wordmark + flag logo. size sets the logo px (default 28). */
+/**
+ * golfbits wordmark + flag logo. size sets the logo px (default 28).
+ * @category Brand
+ */
 export function Brand({ size = 28, className = "", ...rest }) {
   return (
     <div className={`brand${className ? " " + className : ""}`} {...rest}>

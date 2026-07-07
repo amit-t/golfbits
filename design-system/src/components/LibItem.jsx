@@ -1,6 +1,9 @@
 import React from "react";
 
-/** Library row: index, title, category, optional badge. locked dims + disables it. */
+/**
+ * Library row: index, title, category, optional badge. locked dims + disables it.
+ * @category Navigation
+ */
 export function LibItem({ n, title, category, badge, locked = false, className = "", ...rest }) {
   const cls = ["lib-item", locked ? "locked" : "", className].filter(Boolean).join(" ");
   return (

@@ -1,6 +1,9 @@
 import React from "react";
 
-/** Accent-highlighted fact callout with an uppercase label. */
+/**
+ * Accent-highlighted fact callout with an uppercase label.
+ * @category Content
+ */
 export function MicroFact({ label, className = "", children, ...rest }) {
   return (
     <div className={`microfact${className ? " " + className : ""}`} {...rest}>

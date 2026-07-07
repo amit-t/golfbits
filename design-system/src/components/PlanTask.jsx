@@ -1,7 +1,10 @@
 import React from "react";
 
-/** Checklist task with a custom checkbox. checked strikes through the text.
- *  Controlled: pass checked + onChange. */
+/**
+ * Checklist task with a custom checkbox. checked strikes through the text.
+ * Controlled: pass checked + onChange.
+ * @category Forms
+ */
 export function PlanTask({ text, detail, checked = false, onChange, className = "", ...rest }) {
   const cls = ["plan-task", checked ? "on" : "", className].filter(Boolean).join(" ");
   return (

@@ -4,5 +4,7 @@
   "longestStreak": 0,
   "lastCompletedDate": null,
   "entries": [],
-  "plan": {}
+  "plan": {
+    "p-book-tsg": true
+  }
 }

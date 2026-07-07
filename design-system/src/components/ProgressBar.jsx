@@ -5,7 +5,10 @@ const clamp = (n) => {
   return Number.isFinite(v) ? Math.min(100, Math.max(0, v)) : 0;
 };
 
-/** Horizontal progress track. pct: 0-100 (clamped). */
+/**
+ * Horizontal progress track. pct: 0-100 (clamped).
+ * @category Data Display
+ */
 export function ProgressBar({ pct = 0, className = "", ...rest }) {
   const p = clamp(pct);
   return (

@@ -5,8 +5,11 @@ const clamp = (n) => {
   return Number.isFinite(v) ? Math.min(100, Math.max(0, v)) : 0;
 };
 
-/** Circular progress ring with a centered % label. Mirrors the app topbar ring.
- *  pct: 0-100 (clamped). size: px (default 44). */
+/**
+ * Circular progress ring with a centered % label. Mirrors the app topbar ring.
+ * pct: 0-100 (clamped). size: px (default 44).
+ * @category Data Display
+ */
 export function ProgressRing({ pct = 0, size = 44, className = "", ...rest }) {
   const p = clamp(pct);
   const stroke = 5;

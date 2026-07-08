@@ -1,9 +1,16 @@
 {
   "schema": "golfbits-progress/2",
-  "streak": 0,
-  "longestStreak": 0,
-  "lastCompletedDate": null,
-  "entries": [],
+  "streak": 1,
+  "longestStreak": 1,
+  "lastCompletedDate": "2026-07-08",
+  "entries": [
+    {
+      "id": "b001",
+      "date": "2026-07-08",
+      "quizCorrect": false,
+      "knownBefore": false
+    }
+  ],
   "plan": {
     "p-book-tsg": true
   }

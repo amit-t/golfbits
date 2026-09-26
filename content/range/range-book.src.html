@@ -1,0 +1,552 @@
+<title>Range Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#E9EFE7; --paper:#FFFFFF; --sunk:#F3F6F2; --ink:#0F1A13; --ink2:#33433A; --muted:#5B6B60;
+  --line:#CAD5CB; --line2:#AFBDB2;
+  --green:#14532D; --green-soft:#DCEBDF; --on-green:#FFFFFF;
+  --marker:#F2C230; --marker-ink:#1B1604; --flag:#C8243A; --flag-soft:#F8DEE1; --good:#1D7A42; --good-soft:#D9EFE0;
+  --shadow:0 1px 2px rgba(15,26,19,.06),0 10px 24px -18px rgba(15,26,19,.35);
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0B120E; --paper:#141D17; --sunk:#101814; --ink:#E6EFE7; --ink2:#BCCBBE; --muted:#88978B;
+    --line:#26352B; --line2:#35473A;
+    --green:#7CD39A; --green-soft:#193A25; --on-green:#07140C;
+    --marker:#F5CE4A; --marker-ink:#1B1604; --flag:#FF7474; --flag-soft:#3A1A1E; --good:#74D197; --good-soft:#173524;
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 24px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0B120E; --paper:#141D17; --sunk:#101814; --ink:#E6EFE7; --ink2:#BCCBBE; --muted:#88978B;
+  --line:#26352B; --line2:#35473A;
+  --green:#7CD39A; --green-soft:#193A25; --on-green:#07140C;
+  --marker:#F5CE4A; --marker-ink:#1B1604; --flag:#FF7474; --flag-soft:#3A1A1E; --good:#74D197; --good-soft:#173524;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 10px 24px -18px rgba(0,0,0,.9);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:0 72px}
+a{color:var(--green)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:.005em;text-wrap:balance;margin:0}
+
+.mast{padding-block:20px 18px}
+.back{display:inline-block;margin-bottom:14px;font-family:var(--display);font-weight:600;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--green)}
+.eyebrow{font-family:var(--display);font-weight:600;font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin:0 0 4px}
+h1{font-size:clamp(2.6rem,11vw,3.6rem);line-height:.95;text-transform:uppercase}
+.stand{color:var(--ink2);margin:12px 0 0;max-width:60ch}
+.bag{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.bag span{font-family:var(--display);font-weight:600;font-size:.95rem;letter-spacing:.04em;padding:2px 9px;border:1px solid var(--line2);border-radius:4px;background:var(--paper);font-variant-numeric:tabular-nums}
+.bag span.soon{border-style:dashed;color:var(--muted)}
+
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bg);display:flex;gap:4px;padding-block:10px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;border:1px solid var(--line2);background:var(--paper);border-radius:999px;padding:6px 11px;font-family:var(--display);font-weight:600;font-size:.98rem;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;color:var(--ink2)}
+.tab[aria-selected="true"]{background:var(--green);border-color:var(--green);color:var(--on-green)}
+
+section[role="tabpanel"]{padding-top:18px}
+.lead{color:var(--ink2);margin:0 0 16px;max-width:60ch}
+
+/* level picker */
+.picker{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}
+.pk{width:44px;height:44px;border-radius:50%;border:2px solid var(--line2);background:var(--paper);font-family:var(--display);font-weight:700;font-size:1.3rem;cursor:pointer;display:grid;place-items:center;font-variant-numeric:tabular-nums;position:relative}
+.pk[aria-pressed="true"]{background:var(--marker);border-color:var(--marker);color:var(--marker-ink)}
+.pk.done::after{content:"";position:absolute;right:-1px;top:-1px;width:12px;height:12px;border-radius:50%;background:var(--good);border:2px solid var(--bg)}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:18px 16px;display:flex;flex-direction:column;gap:14px}
+.card + .card{margin-top:14px}
+.lvhead{display:flex;gap:12px;align-items:center}
+.num{flex:none;width:52px;height:52px;border-radius:50%;background:var(--green);color:var(--on-green);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.9rem;font-variant-numeric:tabular-nums}
+.lvhead h2{font-size:1.9rem;line-height:1;text-transform:uppercase}
+.lvhead p{margin:3px 0 0;color:var(--muted);font-size:.92rem}
+.goal{margin:0;font-size:1.05rem}
+.why{margin:0;color:var(--ink2);font-size:.97rem}
+
+.cue{background:var(--marker);color:var(--marker-ink);border-radius:8px;padding:12px 14px}
+.cue small{display:block;font-family:var(--display);font-weight:600;font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.cue b{display:block;font-family:var(--display);font-weight:700;font-size:1.8rem;line-height:1.05;text-transform:uppercase}
+.cue span{display:block;margin-top:4px;font-size:.95rem}
+
+.label{font-family:var(--display);font-weight:600;font-size:.9rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.drills{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.drill{display:grid;grid-template-columns:58px minmax(0,1fr);gap:10px;align-items:start;padding:10px;border-radius:8px;background:var(--sunk);border:1px solid var(--line)}
+.balls{font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1;text-align:center;font-variant-numeric:tabular-nums}
+.balls small{display:block;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:2px}
+.drill h4{margin:0;font-family:var(--display);font-weight:700;font-size:1.2rem;letter-spacing:.01em}
+.drill h4 em{font-style:normal;font-weight:600;color:var(--muted);font-size:1rem;margin-left:6px}
+.drill p{margin:3px 0 0;font-size:.96rem;color:var(--ink2)}
+
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.checks li{padding-left:22px;position:relative;font-size:.97rem}
+.checks li::before{content:"";position:absolute;left:4px;top:.55em;width:9px;height:9px;border-radius:2px;background:var(--green)}
+.miss li::before{background:var(--flag);border-radius:50%}
+
+.shots{display:flex;flex-direction:column;gap:10px}
+figure{margin:0}
+figure img{display:block;width:100%;max-width:100%;height:auto;border-radius:6px;border:1px solid var(--line)}
+figure.half img{max-width:460px}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:4px}
+.diagram{background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:8px;overflow-x:auto}
+.diagram svg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto}
+
+.reels{display:flex;flex-wrap:wrap;gap:8px}
+.reel{display:inline-flex;align-items:center;gap:8px;text-decoration:none;border:1px solid var(--line2);border-radius:999px;padding:6px 12px 6px 8px;font-size:.9rem;color:var(--ink);background:var(--paper)}
+.reel:hover{border-color:var(--green)}
+.play{width:22px;height:22px;border-radius:50%;background:var(--flag);display:grid;place-items:center;flex:none}
+.play::after{content:"";border-left:7px solid #fff;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;margin-left:2px}
+.reel b{font-weight:700}
+.reel i{font-style:normal;color:var(--muted);font-size:.8rem}
+
+.grad{border:2px dashed var(--good);border-radius:8px;padding:10px 12px;background:var(--good-soft)}
+.grad b{font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase;color:var(--good)}
+.grad p{margin:2px 0 0}
+
+details.more{border-top:1px solid var(--line);padding-top:10px}
+details.more summary{cursor:pointer;font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green);list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"+ "}
+details.more[open] summary::before{content:"– "}
+details.more > div{display:flex;flex-direction:column;gap:14px;margin-top:12px}
+
+/* today */
+.plan{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.step{display:grid;grid-template-columns:62px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:0}
+.t{font-family:var(--display);font-weight:700;font-size:1.25rem;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--green)}
+.t small{display:block;font-size:.78rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.step h4{margin:0;font-family:var(--display);font-weight:700;font-size:1.2rem}
+.step p{margin:2px 0 0;font-size:.95rem;color:var(--ink2)}
+.counter{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cbtn{border:0;border-radius:10px;padding:18px 8px;font-family:var(--display);font-weight:700;font-size:1.5rem;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;min-height:72px}
+.cbtn.clean{background:var(--good);color:var(--paper)}
+.cbtn.miss{background:var(--flag);color:var(--paper)}
+.dots{display:flex;gap:6px;flex-wrap:wrap;min-height:22px}
+.dots i{width:20px;height:20px;border-radius:50%;display:block}
+.dots i.c{background:var(--good)} .dots i.m{background:var(--flag)} .dots i.e{border:2px dashed var(--line2)}
+.score{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.score b{font-family:var(--display);font-weight:700;font-size:3rem;line-height:1;font-variant-numeric:tabular-nums}
+.score span{color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line2);background:var(--paper);border-radius:8px;padding:9px 14px;font-family:var(--display);font-weight:600;font-size:1.05rem;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.btn.primary{background:var(--green);border-color:var(--green);color:var(--on-green)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.note{font-size:.88rem;color:var(--muted);margin:0}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+.tablewrap{overflow-x:auto}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:.85rem;color:var(--muted)}
+td.club{font-family:var(--display);font-weight:700;font-size:1.15rem;white-space:nowrap}
+td.num2{font-variant-numeric:tabular-nums;white-space:nowrap}
+.clubhead,.crow{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 84px;gap:8px;align-items:center}
+.clubhead span{font-family:var(--display);font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:.82rem;color:var(--muted)}
+.clublist{list-style:none;margin:0;padding:0}
+.clublist li{padding:10px 0;border-top:1px solid var(--line)}
+.clublist p{margin:4px 0 0;font-size:.9rem;color:var(--ink2)}
+.cname{font-family:var(--display);font-weight:700;font-size:1.2rem}
+.cname small{font-weight:600;color:var(--muted);font-size:.95rem}
+.num2{font-variant-numeric:tabular-nums}
+.crow input{width:72px;padding:6px 8px;border:1px solid var(--line2);border-radius:6px;background:var(--sunk);color:var(--ink);font:inherit;font-variant-numeric:tabular-nums}
+.hist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.hist li{display:flex;justify-content:space-between;gap:8px;font-variant-numeric:tabular-nums;font-size:.95rem;border-bottom:1px dashed var(--line);padding-bottom:6px}
+.pass{color:var(--good);font-weight:700}
+ol.routine{margin:0;padding:0;list-style:none;counter-reset:r;display:flex;flex-direction:column;gap:10px}
+ol.routine li{counter-increment:r;display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;align-items:start}
+ol.routine li::before{content:counter(r);width:34px;height:34px;border-radius:50%;background:var(--marker);color:var(--marker-ink);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.2rem}
+ol.routine b{font-family:var(--display);font-size:1.2rem;letter-spacing:.01em}
+ol.routine p{margin:1px 0 0;color:var(--ink2);font-size:.95rem}
+.foot{margin-top:28px;font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <a class="back" href="/">← golfbits</a>
+    <p class="eyebrow">Amit · Clover Greens range</p>
+    <h1>Range Book</h1>
+    <p class="stand">Eight levels, one fix at a time, built from your saved golf reels and your coach's current focus. Open <b>Today</b> at the range, run the 40-ball plan, and tap each test ball. Pass the test twice and move up.</p>
+    <div class="bag" aria-label="Your bag">
+      <span>Driver 14°</span><span>4H 22°</span><span>7i 30°</span><span>9i 40°</span><span class="soon">PW 45° soon</span><span>SW 56°</span><span>Putter</span>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" id="tab-today" aria-controls="today" aria-selected="true">Today</button>
+    <button class="tab" role="tab" id="tab-path" aria-controls="path" aria-selected="false">Path</button>
+    <button class="tab" role="tab" id="tab-warm" aria-controls="warm" aria-selected="false">Warm-up</button>
+    <button class="tab" role="tab" id="tab-routine" aria-controls="routine" aria-selected="false">Pre-shot</button>
+    <button class="tab" role="tab" id="tab-clubs" aria-controls="clubs" aria-selected="false">Clubs</button>
+  </nav>
+
+  <section id="today" role="tabpanel" aria-labelledby="tab-today">
+    <p class="lead">Pick your level. The plan fits your 45-minute Tuesday bucket of 40 balls. On a short Friday, do the first drill and the 10-ball test (20 to 30 balls).</p>
+    <div class="picker" id="picker" aria-label="Your level"></div>
+    <div id="todayBody"></div>
+  </section>
+
+  <section id="path" role="tabpanel" aria-labelledby="tab-path" hidden>
+    <p class="lead">Each level has one cue, two or three drills and a pass test. Stay on a level until you pass its test in two separate sessions. Skipped a week? Repeat your last passed level's test first.</p>
+    <div id="pathBody"></div>
+  </section>
+
+  <section id="warm" role="tabpanel" aria-labelledby="tab-warm" hidden>
+    <p class="lead">Six minutes with one club, before the first ball. It loosens the hips, back and wrists the swing loads, so you can swing faster later without tweaking anything.</p>
+    <div class="card">
+      <ol class="routine">
+        <li><div><b>Arm circles</b><p>10 forward, 10 back. Small to big.</p></div></li>
+        <li><div><b>Hip hinge with the club on your spine</b><p>Club touching head, upper back and tailbone. Push hips back, knees soft, keep all 3 contacts. 10 reps.</p></div></li>
+        <li><div><b>Posture turns</b><p>Club across your shoulders, in golf posture. Turn back until the club points at the ball, then through. 10 each way, slow.</p></div></li>
+        <li><div><b>Lunge and rotate</b><p>Step forward into a lunge, turn your chest over the front knee. 5 per side.</p></div></li>
+        <li><div><b>Leg swings</b><p>Hold the club as a stick. 10 front-to-back swings per leg.</p></div></li>
+        <li><div><b>Wrist hinges</b><p>Hold the club out in front, hinge it up and down. 10 reps.</p></div></li>
+        <li><div><b>First 10 balls: SW half swings at 50%</b><p>These are warm-up balls, not test balls. Brush the mat, find the rhythm.</p></div></li>
+      </ol>
+    </div>
+    <div class="card">
+      <p class="label">At home, on non-range days</p>
+      <ul class="checks">
+        <li><b>Wall posture turns, 15 a day.</b> Backside touching a wall in golf posture. Turn back and through without your backside leaving the wall. This is the same feel as your coach's bag drill.</li>
+        <li><b>Gym ball against a wall</b>, if you have one: pin it with your hip and turn without letting it drop. Teaches turn, not slide.</li>
+      </ul>
+      <figure class="half"><img src="__IMG_wallball__" alt="Golfer pinning a gym ball against a wall with his hip while turning" loading="lazy"><figcaption>From @grantleegolf. The ball stays pinned: hips turn, they don't slide.</figcaption></figure>
+      <div class="reels" data-reels="DJmRoV5R1Ox"></div>
+    </div>
+  </section>
+
+  <section id="routine" role="tabpanel" aria-labelledby="tab-routine" hidden>
+    <p class="lead">This is what makes you look like you belong. Same steps, every shot, under 20 seconds from the practice swing. Use it for all 10 test balls at the range.</p>
+    <div class="card">
+      <ol class="routine">
+        <li><div><b>Stand behind the ball</b><p>Pick a small target: a flag, a tree trunk, a yardage board. Not "the fairway".</p></div></li>
+        <li><div><b>Pick a spot 1 metre ahead</b><p>A leaf or a dark patch on the line to your target. You aim at this, it's easier than the flag.</p></div></li>
+        <li><div><b>One practice swing</b><p>Beside the ball, thinking only your level's cue.</p></div></li>
+        <li><div><b>Clubface first, then feet</b><p>Set the face square to your spot. Then feet, knees and shoulders parallel to that line.</p></div></li>
+        <li><div><b>One look, then go</b><p>Look at the target once, back to the ball, swing. No second waggle session.</p></div></li>
+      </ol>
+    </div>
+    <div class="card">
+      <p class="label">On the course</p>
+      <ul class="checks">
+        <li>Be ready when it's your turn: glove on, club chosen, yardage from your caddie.</li>
+        <li>Stand still and out of the player's eye line. Stay quiet from their practice swing to impact.</li>
+        <li>One practice swing only. Lost ball search is 3 minutes, then drop and move on.</li>
+        <li>Replace divots and rake bunkers, or let your caddie know you want them done.</li>
+        <li>On the range: stay in your bay and never walk forward onto the hitting area.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="clubs" role="tabpanel" aria-labelledby="tab-clubs" hidden>
+    <p class="lead">Your gapping chart. The carry column starts with a typical range for a beginner. After three sessions, use the range's yardage flags and write your own average in. It saves on this phone.</p>
+    <div class="card">
+      <div class="clubhead"><span>Club</span><span>Start guess (yds)</span><span>Your carry</span></div>
+      <ul class="clublist" id="clubRows"></ul>
+      <p class="note">Yards, carry only. Guesses are a beginner's typical range, not your numbers.</p>
+    </div>
+    <div class="card">
+      <p class="label">Ball position, top view</p>
+      <div class="diagram"><svg viewBox="0 0 360 214" role="img" aria-label="Ball position between the feet for each club, top view"><text x="16" y="14" font-family="Atkinson Hyperlegible,system-ui,sans-serif" font-size="11" font-weight="700" style="fill:var(--muted)">← Target</text><line x1="30" y1="96" x2="330" y2="96" style="stroke:var(--line2);stroke-width:1.5" stroke-dasharray="4 4"/><line x1="180" y1="106" x2="180" y2="200" style="stroke:var(--line2);stroke-width:1" stroke-dasharray="2 4"/><text x="186" y="196" font-family="Atkinson Hyperlegible,system-ui,sans-serif" font-size="10" style="fill:var(--muted)">centre</text><g transform="rotate(-12 84 158)"><rect x="71" y="128" width="26" height="60" rx="13" style="fill:var(--sunk);stroke:var(--ink2);stroke-width:1.5"/></g><g transform="rotate(0 276 158)"><rect x="263" y="128" width="26" height="60" rx="13" style="fill:var(--sunk);stroke:var(--ink2);stroke-width:1.5"/></g><text x="84" y="208" text-anchor="middle" font-family="Atkinson Hyperlegible,system-ui,sans-serif" font-size="11" style="fill:var(--muted)">lead foot</text><text x="276" y="208" text-anchor="middle" font-family="Atkinson Hyperlegible,system-ui,sans-serif" font-size="11" style="fill:var(--muted)">trail foot</text><line x1="84" y1="35" x2="84" y2="89" style="stroke:var(--line2);stroke-width:1"/><circle cx="84" cy="96" r="6.5" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.5"/><text x="84" y="30" text-anchor="middle" font-family="Atkinson Hyperlegible,system-ui,sans-serif" font-size="12" font-weight="700" style="fill:var(--ink)">Driver</text><line x1="112" y1="57" x2="112" y2="89" style="stroke:var(--line2);stroke-width:1"/><circle cx="112" cy="96" r="6.5" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.5"/><text x="112" y="52" text-anchor="middle" font-family="Atkinson Hyperlegible,system-ui,sans-serif" font-size="12" font-weight="700" style="fill:var(--ink)">4H</text><line x1="160" y1="35" x2="160" y2="89" style="stroke:var(--line2);stroke-width:1"/><circle cx="160" cy="96" r="6.5" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.5"/><text x="160" y="30" text-anchor="middle" font-family="Atkinson Hyperlegible,system-ui,sans-serif" font-size="12" font-weight="700" style="fill:var(--ink)">7-iron</text><line x1="180" y1="57" x2="180" y2="89" style="stroke:var(--line2);stroke-width:1"/><circle cx="180" cy="96" r="6.5" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.5"/><text x="176" y="52" text-anchor="start" font-family="Atkinson Hyperlegible,system-ui,sans-serif" font-size="12" font-weight="700" style="fill:var(--ink)">9i · PW · SW</text><line x1="206" y1="35" x2="206" y2="89" style="stroke:var(--line2);stroke-width:1"/><circle cx="206" cy="96" r="6.5" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.5"/><text x="202" y="30" text-anchor="start" font-family="Atkinson Hyperlegible,system-ui,sans-serif" font-size="12" font-weight="700" style="fill:var(--ink)">Chip (back)</text><text x="330" y="118" text-anchor="end" font-family="Atkinson Hyperlegible,system-ui,sans-serif" font-size="10" style="fill:var(--muted)">stance narrows as clubs get shorter</text></svg></div>
+    </div>
+  </section>
+
+  <p class="foot">Built 26 Sep 2026 from your Golf saves (26 reels) and your current coaching plan. Video links open the reel in Instagram. The full catalog of saves is in <a id="catLink" href="https://claude.ai/artifact/Kwzg8aZTKQmLMRsbtR5xEN" target="_blank" rel="noopener">Saved Fairways ↗</a>.</p>
+</div>
+
+<script>
+const IMG = __IMG_JSON__;
+const SVG = {"ballpos": "<svg viewBox=\"0 0 360 214\" role=\"img\" aria-label=\"Ball position between the feet for each club, top view\"><text x=\"16\" y=\"14\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"11\" font-weight=\"700\" style=\"fill:var(--muted)\">\u2190 Target</text><line x1=\"30\" y1=\"96\" x2=\"330\" y2=\"96\" style=\"stroke:var(--line2);stroke-width:1.5\" stroke-dasharray=\"4 4\"/><line x1=\"180\" y1=\"106\" x2=\"180\" y2=\"200\" style=\"stroke:var(--line2);stroke-width:1\" stroke-dasharray=\"2 4\"/><text x=\"186\" y=\"196\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"10\" style=\"fill:var(--muted)\">centre</text><g transform=\"rotate(-12 84 158)\"><rect x=\"71\" y=\"128\" width=\"26\" height=\"60\" rx=\"13\" style=\"fill:var(--sunk);stroke:var(--ink2);stroke-width:1.5\"/></g><g transform=\"rotate(0 276 158)\"><rect x=\"263\" y=\"128\" width=\"26\" height=\"60\" rx=\"13\" style=\"fill:var(--sunk);stroke:var(--ink2);stroke-width:1.5\"/></g><text x=\"84\" y=\"208\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"11\" style=\"fill:var(--muted)\">lead foot</text><text x=\"276\" y=\"208\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"11\" style=\"fill:var(--muted)\">trail foot</text><line x1=\"84\" y1=\"35\" x2=\"84\" y2=\"89\" style=\"stroke:var(--line2);stroke-width:1\"/><circle cx=\"84\" cy=\"96\" r=\"6.5\" style=\"fill:var(--paper);stroke:var(--ink);stroke-width:1.5\"/><text x=\"84\" y=\"30\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"12\" font-weight=\"700\" style=\"fill:var(--ink)\">Driver</text><line x1=\"112\" y1=\"57\" x2=\"112\" y2=\"89\" style=\"stroke:var(--line2);stroke-width:1\"/><circle cx=\"112\" cy=\"96\" r=\"6.5\" style=\"fill:var(--paper);stroke:var(--ink);stroke-width:1.5\"/><text x=\"112\" y=\"52\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"12\" font-weight=\"700\" style=\"fill:var(--ink)\">4H</text><line x1=\"160\" y1=\"35\" x2=\"160\" y2=\"89\" style=\"stroke:var(--line2);stroke-width:1\"/><circle cx=\"160\" cy=\"96\" r=\"6.5\" style=\"fill:var(--paper);stroke:var(--ink);stroke-width:1.5\"/><text x=\"160\" y=\"30\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"12\" font-weight=\"700\" style=\"fill:var(--ink)\">7-iron</text><line x1=\"180\" y1=\"57\" x2=\"180\" y2=\"89\" style=\"stroke:var(--line2);stroke-width:1\"/><circle cx=\"180\" cy=\"96\" r=\"6.5\" style=\"fill:var(--paper);stroke:var(--ink);stroke-width:1.5\"/><text x=\"176\" y=\"52\" text-anchor=\"start\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"12\" font-weight=\"700\" style=\"fill:var(--ink)\">9i \u00b7 PW \u00b7 SW</text><line x1=\"206\" y1=\"35\" x2=\"206\" y2=\"89\" style=\"stroke:var(--line2);stroke-width:1\"/><circle cx=\"206\" cy=\"96\" r=\"6.5\" style=\"fill:var(--paper);stroke:var(--ink);stroke-width:1.5\"/><text x=\"202\" y=\"30\" text-anchor=\"start\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"12\" font-weight=\"700\" style=\"fill:var(--ink)\">Chip (back)</text><text x=\"330\" y=\"118\" text-anchor=\"end\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"10\" style=\"fill:var(--muted)\">stance narrows as clubs get shorter</text></svg>", "railway": "<svg viewBox=\"0 0 360 200\" role=\"img\" aria-label=\"Railway tracks alignment: target line and body line parallel\"><text x=\"16\" y=\"22\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"12\" font-weight=\"700\" style=\"fill:var(--ink)\">\u2190 Target flag</text><line x1=\"36\" y1=\"34\" x2=\"36\" y2=\"62\" style=\"stroke:var(--ink);stroke-width:2\"/><path d=\"M36 34 L56 40 L36 46 Z\" style=\"fill:var(--flag)\"/><rect x=\"70\" y=\"62\" width=\"250\" height=\"6\" rx=\"3\" style=\"fill:var(--ink2)\"/><text x=\"326\" y=\"58\" text-anchor=\"end\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"11\" style=\"fill:var(--muted)\">club 1: target line</text><circle cx=\"200\" cy=\"82\" r=\"6.5\" style=\"fill:var(--paper);stroke:var(--ink);stroke-width:1.5\"/><rect x=\"70\" y=\"150\" width=\"250\" height=\"6\" rx=\"3\" style=\"fill:var(--ink2)\"/><text x=\"326\" y=\"174\" text-anchor=\"end\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"11\" style=\"fill:var(--muted)\">club 2: toe line</text><line x1=\"120\" y1=\"120\" x2=\"290\" y2=\"120\" style=\"stroke:var(--good);stroke-width:3\"/><text x=\"116\" y=\"124\" text-anchor=\"end\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"11\" font-weight=\"700\" style=\"fill:var(--good)\">shoulders \u2713</text><line x1=\"290\" y1=\"120\" x2=\"140\" y2=\"96\" style=\"stroke:var(--flag);stroke-width:2\" stroke-dasharray=\"5 4\"/><text x=\"236\" y=\"100\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"11\" font-weight=\"700\" style=\"fill:var(--flag)\">open = slice</text><text x=\"16\" y=\"194\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"10\" style=\"fill:var(--muted)\">Body lines run parallel left of the target, like the two rails of a track.</text></svg>", "gate": "<svg viewBox=\"0 0 360 210\" role=\"img\" aria-label=\"Headcover gate drill, top view\"><text x=\"16\" y=\"22\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"12\" font-weight=\"700\" style=\"fill:var(--ink)\">\u2190 Target</text><text x=\"344\" y=\"22\" text-anchor=\"end\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"10\" style=\"fill:var(--muted)\">far side (outside)</text><text x=\"344\" y=\"202\" text-anchor=\"end\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"10\" style=\"fill:var(--muted)\">your side (inside)</text><rect x=\"212\" y=\"66\" width=\"40\" height=\"26\" rx=\"10\" style=\"fill:var(--marker);stroke:var(--ink);stroke-width:1.2\"/><text x=\"232\" y=\"60\" text-anchor=\"middle\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"11\" font-weight=\"700\" style=\"fill:var(--ink)\">headcover</text><path d=\"M292 48 L112 170\" style=\"stroke:var(--flag);stroke-width:2.5;fill:none\" stroke-dasharray=\"6 4\"/><path d=\"M112 170 l12 -2 l-5 -10 Z\" style=\"fill:var(--flag)\"/><text x=\"344\" y=\"40\" text-anchor=\"end\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"11\" font-weight=\"700\" style=\"fill:var(--flag)\">over the top: hits it</text><path d=\"M318 160 Q 190 88 60 160\" style=\"stroke:var(--good);stroke-width:3;fill:none\"/><path d=\"M60 160 l13 1 l-6 -11 Z\" style=\"fill:var(--good)\"/><text x=\"318\" y=\"176\" text-anchor=\"end\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"11\" font-weight=\"700\" style=\"fill:var(--good)\">from the inside: misses it</text><circle cx=\"190\" cy=\"124\" r=\"7\" style=\"fill:var(--paper);stroke:var(--ink);stroke-width:1.5\"/><text x=\"204\" y=\"112\" font-family=\"Atkinson Hyperlegible,system-ui,sans-serif\" font-size=\"10\" style=\"fill:var(--muted)\">ball</text></svg>"};
+const REELS = {
+  "Db6mdT8g1WJ": ["@marcustran_", "6-drill range session"],
+  "DJmRoV5R1Ox": ["@grantleegolf", "Stop the sway"],
+  "DGmJvMCAPve": ["@aidandhalla", "Ball position per club"],
+  "Db5hn5kznjC": ["@kimminjunpro", "Hand position"],
+  "DdrRAtZkSBj": ["@ethanjonesgolf", "Grip, shoulders, forearms"],
+  "Ddrx1xZE3-F": ["@ethanjonesgolf", "Myths vs truths"],
+  "DH_6ylByiUa": ["@mikeyteetimes", "4 backswing checkpoints"],
+  "DJRTfVDtvpI": ["@nattiegolf", "Wrist hinge drills"],
+  "DcKRvv6yrBO": ["@jinhyeok_golf", "Hinge: iron vs driver"],
+  "Ddq8oAktcA1": ["@mistertropicana", "Knuckles down"],
+  "DbX_ZhgTD1o": ["@kimminjunpro", "Release, don't drag"],
+  "DdchAXASTUn": ["@mcgolf_hongheetaek", "Trail elbow close"],
+  "DdrUV-9JSO9": ["@ck__golf", "22 to scratch: 7 cues"],
+  "Dc4MS8AvwEw": ["@entertaimentmedia", "Body behind the ball"],
+  "Dc_hWIltNgC": ["@mistertropicana", "Don't rotate early"],
+  "DXozb-fCSd7": ["@rubystar330", "Don't charge in"],
+  "DHZbPd2zZBJ": ["@kimhyunwoopro", "Iron vs driver impact"],
+  "DafcgL3xmkz": ["@betsykellygolf", "Driver setup"],
+  "DdmCT7vI7Yr": ["@mcemileegolf", "Chip vs pitch setup"],
+  "Dc5gPLUP8v_": ["@golfslump", "Break 90: 7 rules"],
+  "Ddq8lXLITGf": ["@mcemileegolf", "Ball above your feet"]
+};
+
+const LEVELS = [
+{
+  n:1, name:"Solid contact", sub:"Stay in your posture", club:"7i + 9i",
+  goal:"Hit the ball first, then the mat. No more topped 7- and 9-irons.",
+  why:"Your topped shots come from standing up during the swing. Your chest rises, the club rises with it, and the bottom of the swing catches the top of the ball. Your coach parked slice work until this is fixed. That's the right order.",
+  cue:["Backside stays on the bag","Keep the gap between your chest and the ball until the ball is gone."],
+  drills:[
+    {b:20, club:"7i", name:"Bag-behind half swings", how:"Stand your bag just behind your backside at address. Waist-high back, waist-high through, 50% speed. Your backside stays touching the bag through impact. Your coach's drill."},
+    {b:10, club:"9i", name:"Towel drill", how:"Lay a towel flat about 10 cm (4 in) behind the ball. Hit the ball without touching the towel. Towel moved = low point too early."}
+  ],
+  test:{club:"7i", what:"half swings, ball first", pass:7},
+  misses:["Topped or thin: you stood up. Feel your backside stay on the bag.","Fat: weight stuck on your trail foot. Finish with your belt buckle facing the target, weight on the lead foot."],
+  imgs:[["towel","Towel drill ×15, from @marcustran_'s range session."]],
+  reels:["Db6mdT8g1WJ","DJmRoV5R1Ox"]
+},
+{
+  n:2, name:"Setup that repeats", sub:"Grip, aim, ball position", club:"all clubs",
+  goal:"The same setup on every ball, so a miss has one cause.",
+  why:"Fix setup first and impact improves as a byproduct (Ethan Jones' myth slides). Most beginner slices start at address: a weak lead-hand grip and shoulders aimed left.",
+  cue:["Clubface first, then feet","Aim the face at your spot, then build your stance square to it."],
+  drills:[
+    {b:10, club:"7i", name:"Railway tracks", how:"One club on the ground just outside the ball, pointing at the target. A second club along your toes, parallel. Hit 10 with your feet on the inner track."},
+    {b:10, club:"4H/9i", name:"Setup check every ball", how:"Before each ball, lay a club across your chest. It should point parallel left of the target, not at it. Most slicers find it aims left."},
+    {b:10, club:"mix", name:"Ball position ladder", how:"Hit 2 balls each with SW, 9i, 7i, 4H, then 2 more with 7i. Move the ball for each club (see diagram)."}
+  ],
+  checks:["Lead hand: you see 2 to 3 knuckles. The V of thumb and finger points at your trail shoulder.","Lead-hand pressure: 'squashing a can', firm in the last 3 fingers, not in the thumb.","Trail hand: palm faces the target, its V also points at your trail shoulder.","Irons: hands level with or just ahead of the ball, over your lead thigh. Never behind the ball."],
+  test:{club:"7i", what:"solid strike with the chest-club check done first", pass:7},
+  imgs:[["grip","Lead hand like squashing a can, then set on the grip. @ethanjonesgolf."],["shoulders","Club across the chest. If it points left of target, your shoulders are open. @ethanjonesgolf."],["ballpos","A stick marks the ball for driver, 5-iron, 7-iron and PW. @aidandhalla."],["hands","The right (O) iron setup: hands a touch ahead of the ball. @kimminjunpro."]],
+  svg:["ballpos","railway"],
+  reels:["DdrRAtZkSBj","DGmJvMCAPve","Db5hn5kznjC","Ddrx1xZE3-F"]
+},
+{
+  n:3, name:"Backswing and tempo", sub:"Same top, same rhythm", club:"9i + 7i",
+  goal:"A three-quarter backswing that arrives in the same place every time, at a slow rhythm.",
+  why:"Most mishits at your stage come from swinging too hard and a backswing that changes every ball. Four checkpoints and a count fix both.",
+  cue:["One-and-two","Back on 'one-and', hit on 'two'. Say it out loud if nobody's near."],
+  drills:[
+    {b:0, reps:5, club:"no ball", name:"Checkpoint rehearsal", how:"5 slow swings, pausing at each checkpoint: 1 shaft parallel to the ground, 2 shaft parallel to the target line, 3 wrists hinged so the club points up, 4 turn your shoulders."},
+    {b:10, club:"9i", name:"Hinge to parallel", how:"At address, hinge the club up until it's parallel to your toe line. Then turn back and hit from there. Teaches early wrist set with irons."},
+    {b:20, club:"7i", name:"Three-quarter swings on the count", how:"Hands to shoulder height, not higher. One-and-two on every ball."}
+  ],
+  test:{club:"7i", what:"three-quarter swings on one-and-two", pass:7},
+  misses:["Ball flies right and low: you rushed from the top. Slow the 'and'.","Arms lift without turning: finish checkpoint 4, turn your back to the target."],
+  imgs:[["backswing","The 4 checkpoints, in order. @mikeyteetimes."],["hinge","Hinge to parallel, then swing. @nattiegolf."],["cock","Irons hinge early (top), driver hinges later (bottom). @jinhyeok_golf."]],
+  reels:["DH_6ylByiUa","DJRTfVDtvpI","DcKRvv6yrBO"]
+},
+{
+  n:4, name:"Slice fix 1: the face", sub:"Knuckles down", club:"9i + 7i",
+  goal:"Straighter shots by closing the clubface on time. Start here only after Level 1 is passed.",
+  why:"A slice is a face that's open to your swing path. Closing the face is the quickest part to fix, so it comes first. Path comes next level. A ball that starts right and curves further right is an open face.",
+  cue:["Knuckles down","Through impact, turn your lead-hand knuckles toward the ground."],
+  drills:[
+    {b:10, club:"9i", name:"Toe-up half swings", how:"Swing to waist height after impact and stop. Check: toe of the club points at the sky, lead-hand knuckles face the ground."},
+    {b:10, club:"7i", name:"Elbow in, release out", how:"Feel your trail elbow come down close to your trail hip, then let the forearms roll over. Don't drag the handle toward the target."},
+    {b:10, club:"7i", name:"Knuckles-down three-quarter swings", how:"Normal swing with one thought only: knuckles down."}
+  ],
+  test:{club:"7i", what:"inside a 30-yard lane between two flags", pass:7},
+  misses:["Still curving right: check Level 2 grip first. A weak lead hand makes this nearly impossible.","Hooking left now: good sign, the face closes. Ease off the rotation a little."],
+  imgs:[["knuckles","Jimmy Tropicana's knuckles-down feel with a paddle aid."],["release","Slice (left) drags the hands; straight (right) releases. @kimminjunpro."],["elbow","Trail elbow flying out (red) vs close to the body (green). @mcgolf_hongheetaek."]],
+  reels:["Ddq8oAktcA1","DbX_ZhgTD1o","DdchAXASTUn","DdrUV-9JSO9"]
+},
+{
+  n:5, name:"Slice fix 2: the path", sub:"Stay behind the ball", club:"7i + 4H",
+  goal:"Swing from the inside instead of cutting across the ball.",
+  why:"Once the face is squarer, the last piece of the slice is an out-to-in path. It comes from your chest lunging at the ball, or shoulders spinning open from the top.",
+  cue:["Chest stays behind the ball","Get to the top, keep your back to the target a beat longer, then swing."],
+  drills:[
+    {b:10, club:"7i", name:"Pause at the top", how:"Swing to the top, hold for one second, then swing through. The pause kills the lunge. From Jimmy Tropicana's 'don't rotate' reel."},
+    {b:10, club:"7i", name:"Headcover gate", how:"Put your driver headcover on the mat just outside the ball (the far side) and a hand-width behind it, toward your trail foot. An over-the-top swing hits it on the way down. Swing without touching it."},
+    {b:10, club:"4H", name:"Step drill", how:"Feet together at address. As the club reaches the top, step your lead foot toward the target and swing. Builds the lower body leading."}
+  ],
+  test:{club:"4H", what:"miss the headcover and start at or right of target", pass:7},
+  misses:["Hitting the headcover: your chest moved first. Pause longer at the top.","Pushing straight right: path fixed, face lagging. Go back to knuckles down."],
+  imgs:[["behind","Don't lunge (left); leave your body behind the ball (right). via @entertaimentmedia."],["hold","'Get to the top and hold it.' @mistertropicana."],["chipsstep","Lead arm chips and the step drill. @marcustran_."]],
+  svg:["gate"],
+  reels:["Dc4MS8AvwEw","Dc_hWIltNgC","DXozb-fCSd7","Db6mdT8g1WJ"]
+},
+{
+  n:6, name:"Driver and speed", sub:"Sweep it, then add speed", club:"Driver + 4H",
+  goal:"A driver you trust, then more distance. Only start once Levels 4 and 5 are passed with the 7-iron.",
+  why:"The driver magnifies every flaw, so it waits until your iron strike settles. Its setup is different: the ball is teed up and forward, so you hit level to slightly up instead of down.",
+  cue:["Sweep it off the tee","Lead arm and shaft in one straight line at impact. No forward lean like an iron."],
+  drills:[
+    {b:15, club:"Driver", name:"Slow driver swings", how:"60% speed. Wide stance, ball off your lead heel, tee high: half the ball above the top of the driver. Takeaway wide and long, the wrists set later than with irons."},
+    {b:15, club:"Driver", name:"Speed ladder", how:"5 balls at 60%, 5 at 75%, 5 at 90%. Only move up a step when the lower speed keeps the ball in play. Build speed through the ball, not from the top."}
+  ],
+  test:{club:"Driver", what:"land inside a 40-yard lane", pass:6},
+  misses:["Skying it: tee too high or you chopped down. Tilt your spine away from the target a little at address.","Big slice returns: drop back to 60% and knuckles down."],
+  checks:["Stop at 30 driver balls in a session. Warm up first, every time."],
+  imgs:[["impact","Iron (left) leans forward; driver (right) is one straight line. @kimhyunwoopro."],["driversetup","Face-on driver setup. @betsykellygolf."],["slowdriver","Slow driver swings ×15 before full ones. @marcustran_."]],
+  reels:["DHZbPd2zZBJ","DafcgL3xmkz","DcKRvv6yrBO","Db6mdT8g1WJ"]
+},
+{
+  n:7, name:"Short game", sub:"One chip, one pitch, 3-footers", club:"7i/9i + SW + putter",
+  goal:"One reliable chip, one pitch, and short putts you expect to hole. This is where bogeys are saved.",
+  why:"You don't need five chip shots. A single bump-and-run you trust saves more strokes than any swing change (@golfslump's rule 6).",
+  cue:["Set it and keep it","Chip: weight left and shaft forward at address, and they stay there the whole swing."],
+  drills:[
+    {b:10, club:"9i", name:"Bump-and-run to a towel", how:"Chip setup: feet narrow, ball back, weight on lead side, shaft leaning to target. Drop your back foot slightly away. Land the ball on a towel 2 to 3 metres ahead and let it roll."},
+    {b:10, club:"SW", name:"Pitch to 3 targets", how:"Pitch setup: feet just inside shoulder width, ball middle, weight and shaft neutral. Hit to 10, 20 and 30 metres."},
+    {b:10, club:"Putter", name:"3-foot circle", how:"5 balls in a circle 1 metre from the hole. Hole all 5, then go again. 20 putts total if the green is open."}
+  ],
+  test:{club:"9i", what:"chips finishing within 2 club lengths of the hole", pass:7},
+  imgs:[["chippitch","Chip (left): ball back, narrow. Pitch (right): just inside shoulder width. @mcemileegolf."]],
+  reels:["DdmCT7vI7Yr","DdrUV-9JSO9","Dc5gPLUP8v_"]
+},
+{
+  n:8, name:"Course play", sub:"Bogey golf", club:"your whole bag",
+  goal:"Play a round the way a 90-shooter does: no hero shots, no big numbers.",
+  why:"Bogey on every hole of a par 72 is 89. You break 90 by removing doubles and triples, not by making birdies (@golfslump, @ck__golf).",
+  cue:["Middle of the green","Aim at the centre every time. Take the safe miss."],
+  checks:["Your par is bogey: 5 on a par 4, 4 on a par 3, 6 on a par 5.","Tight tee shot? Hit the 4-hybrid. Driver only on wide holes.","In the trees: punch out sideways with the 7-iron. Never the gap.","Ball above your feet: one club less, choke down, ball middle, aim right, swing easy.","Max 3 thoughts all day: 2 setup, 1 swing. Today's swing thought is your current level's cue.","Pre-shot routine on every shot, under 20 seconds. See the Pre-shot tab."],
+  drills:[
+    {b:20, club:"7i + 4H", name:"Stock shots to targets", how:"Change target and club every ball, like the course. Never two balls in a row at the same flag."},
+    {b:10, club:"mix", name:"Play the course on the range", how:"Pick a hole you know. Driver or 4H at a target lane, then the club your caddie would hand you, then a chip. Full routine every ball. Repeat for 3 holes."}
+  ],
+  test:{club:"mix", what:"course-sim shots that finish where you aimed them (lane or green)", pass:6},
+  reels:["Dc5gPLUP8v_","Ddq8lXLITGf","DdrUV-9JSO9","Ddrx1xZE3-F"]
+}
+];
+
+const CLUBS = [
+  ["Driver","14°","170–200","Lead heel","Wide tee shots, from Level 6"],
+  ["4-hybrid","22°","140–160","2 balls inside lead heel","Tight tee shots, long second shots"],
+  ["7-iron","30°","110–130","1 ball forward of centre","Your main practice club; punch-outs; long chips"],
+  ["9-iron","40°","90–105","Centre","Approaches; bump-and-run chips"],
+  ["PW (coming)","45°","80–95","Centre","Full wedge shots once it arrives"],
+  ["Sand wedge","56°","50–70","Centre","Pitches, bunkers, short full shots"],
+  ["Putter","","","Just forward of centre","Everything on the green"]
+];
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const store = {
+  get(k, d){ try { const v = localStorage.getItem("rb:"+k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } },
+  set(k, v){ try { localStorage.setItem("rb:"+k, JSON.stringify(v)); } catch(e){} }
+};
+
+function reelLinks(codes){
+  return codes.filter(c => REELS[c]).map(c => `<a class="reel" href="https://www.instagram.com/reel/${c}/" target="_blank" rel="noopener"><span class="play" aria-hidden="true"></span><span><b>${esc(REELS[c][1])}</b> <i>${esc(REELS[c][0])}</i></span></a>`).join("");
+}
+function drillList(L){
+  return `<ul class="drills">${L.drills.map(d => `<li class="drill"><div class="balls">${d.b || d.reps || 5}<small>${d.b ? "balls" : "reps"}</small></div><div><h4>${esc(d.name)}<em>${esc(d.club)}</em></h4><p>${esc(d.how)}</p></div></li>`).join("")}</ul>`;
+}
+function figures(L){
+  const f = (L.imgs || []).map(([k, cap]) => `<figure><img src="${IMG[k]}" alt="${esc(cap)}" loading="lazy"><figcaption>${esc(cap)}</figcaption></figure>`).join("");
+  const s = (L.svg || []).map(k => `<div class="diagram">${SVG[k]}</div>`).join("");
+  return s + f;
+}
+function passesAt(n){
+  return store.get("log", []).filter(e => e.level === n && e.clean >= LEVELS[n-1].test.pass).length;
+}
+function checklist(L){
+  return L.checks ? `<div><p class="label">Checklist</p><ul class="checks">${L.checks.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div>` : "";
+}
+function more(L, open){
+  return `<details class="more"${open ? " open" : ""}><summary>Why, pictures and videos</summary><div>
+      <p class="why">${esc(L.why)}</p>
+      ${L.misses ? `<div><p class="label">If it goes wrong</p><ul class="checks miss">${L.misses.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div>` : ""}
+      <div class="shots">${figures(L)}</div>
+      <div><p class="label">Watch the reels</p><div class="reels">${reelLinks(L.reels)}</div></div>
+    </div></details>`;
+}
+function levelCard(L){
+  const passed = passesAt(L.n);
+  return `<article class="card" id="level-${L.n}">
+    <div class="lvhead"><div class="num">${L.n}</div><div><h2>${esc(L.name)}</h2><p>${esc(L.sub)} · ${esc(L.club)}${passed ? ` · <span class="pass">passed ${passed}×</span>` : ""}</p></div></div>
+    <p class="goal">${esc(L.goal)}</p>
+    <div class="cue"><small>The one cue</small><b>${esc(L.cue[0])}</b><span>${esc(L.cue[1])}</span></div>
+    <div><p class="label">Drills</p>${drillList(L)}</div>
+    ${checklist(L)}
+    <div class="grad"><b>Pass test</b><p>${L.test.pass} of 10 with the ${esc(L.test.club)}: ${esc(L.test.what)}. Do it in two separate sessions.</p></div>
+    ${more(L, false)}
+  </article>`;
+}
+
+/* Today */
+let level = store.get("level", 1);
+let tally = store.get("tally", { level, shots: [] });
+function renderPicker(){
+  $("#picker").innerHTML = LEVELS.map(L => `<button class="pk${passesAt(L.n) >= 2 ? " done" : ""}" aria-pressed="${L.n === level}" data-lv="${L.n}" aria-label="Level ${L.n}: ${esc(L.name)}">${L.n}</button>`).join("");
+}
+function renderToday(){
+  const L = LEVELS[level-1];
+  if (tally.level !== level) tally = { level, shots: [] };
+  const clean = tally.shots.filter(x => x).length;
+  let t = 8;
+  const mm = m => `0:${String(m).padStart(2, "0")}`;
+  const steps = [`<li class="step"><div class="t">0:00<small>8 min</small></div><div><h4>Warm-up + 10 SW half swings</h4><p>See the Warm-up tab. Not counted.</p></div></li>`];
+  L.drills.forEach((d, i) => {
+    steps.push(`<li class="step"><div class="t">${mm(t)}<small>${d.b ? d.b + " balls" : (d.reps || 5) + " reps"}</small></div><div><h4>${i+1}. ${esc(d.name)} · ${esc(d.club)}</h4><p>${esc(d.how)}</p></div></li>`);
+    t += d.b ? Math.round(d.b * 0.8) : 3;
+  });
+  steps.push(`<li class="step"><div class="t">${mm(Math.min(t, 36))}<small>10 balls</small></div><div><h4>Test · ${esc(L.test.club)}</h4><p>Full pre-shot routine on each ball, ${esc(L.test.what)}. Tap Clean or Miss below.</p></div></li>`);
+  const passedTimes = passesAt(level);
+  const hist = store.get("log", []).slice(-6).reverse();
+  $("#todayBody").innerHTML = `
+    <article class="card">
+      <div class="lvhead"><div class="num">${L.n}</div><div><h2>${esc(L.name)}</h2><p>${esc(L.sub)}</p></div></div>
+      <div class="cue"><small>Today's one cue</small><b>${esc(L.cue[0])}</b><span>${esc(L.cue[1])}</span></div>
+      <ol class="plan">${steps.join("")}</ol>
+    </article>
+    <article class="card" aria-live="polite">
+      <p class="label">Test · clean strikes out of 10</p>
+      <div class="score"><b>${clean}/${tally.shots.length}</b><span>pass mark ${L.test.pass} of 10 · passed ${passedTimes} of 2 sessions</span></div>
+      <div class="dots">${Array.from({length:10}, (_, i) => i < tally.shots.length ? `<i class="${tally.shots[i] ? "c" : "m"}"></i>` : `<i class="e"></i>`).join("")}</div>
+      <div class="counter">
+        <button class="cbtn clean" id="bClean" ${tally.shots.length >= 10 ? "disabled" : ""}>Clean</button>
+        <button class="cbtn miss" id="bMiss" ${tally.shots.length >= 10 ? "disabled" : ""}>Miss</button>
+      </div>
+      <div class="row">
+        <button class="btn" id="bUndo" ${tally.shots.length ? "" : "disabled"}>Undo</button>
+        <button class="btn primary" id="bSave" ${tally.shots.length === 10 ? "" : "disabled"}>Save session</button>
+      </div>
+      <p class="note">Clean means ball first, solid feel, and it did what the test asks. Saved on this phone only.</p>
+      ${hist.length ? `<div><p class="label">Recent sessions</p><ul class="hist">${hist.map(e => `<li><span>${esc(e.date)} · L${e.level}</span><span class="${e.clean >= LEVELS[e.level-1].test.pass ? "pass" : ""}">${e.clean}/10</span></li>`).join("")}</ul></div>` : ""}
+    </article>
+    <article class="card">
+      ${checklist(L)}
+      ${L.misses ? `<div><p class="label">If it goes wrong</p><ul class="checks miss">${L.misses.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div>` : ""}
+      <div class="shots">${figures(L)}</div>
+      <div><p class="label">Watch the reels</p><div class="reels">${reelLinks(L.reels)}</div></div>
+    </article>`;
+  renderPicker();
+}
+document.addEventListener("click", e => {
+  const pk = e.target.closest(".pk");
+  if (pk) { level = +pk.dataset.lv; store.set("level", level); renderToday(); return; }
+  if (e.target.id === "bClean" || e.target.id === "bMiss") {
+    if (tally.shots.length < 10) tally.shots.push(e.target.id === "bClean");
+    store.set("tally", tally); renderToday(); return;
+  }
+  if (e.target.id === "bUndo") { tally.shots.pop(); store.set("tally", tally); renderToday(); return; }
+  if (e.target.id === "bSave") {
+    const log = store.get("log", []);
+    const d = new Date();
+    log.push({ date: d.toLocaleDateString("en-IN", { day: "numeric", month: "short" }), level, clean: tally.shots.filter(x => x).length });
+    store.set("log", log); tally = { level, shots: [] }; store.set("tally", tally);
+    renderToday(); renderPath(); return;
+  }
+  const tab = e.target.closest(".tab");
+  if (tab) {
+    document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", String(t === tab)));
+    document.querySelectorAll('section[role="tabpanel"]').forEach(s => s.hidden = s.id !== tab.getAttribute("aria-controls"));
+    store.set("tab", tab.id);
+  }
+});
+
+function renderPath(){ $("#pathBody").innerHTML = LEVELS.map(L => levelCard(L)).join(""); }
+
+function renderClubs(){
+  const mine = store.get("carry", {});
+  $("#clubRows").innerHTML = CLUBS.map(([c, loft, g, pos, use], i) => `<li><div class="crow"><span class="cname">${esc(c)} <small>${loft}</small></span><span class="num2">${g || "·"}</span><span>${g ? `<input id="carry-${i}" inputmode="numeric" aria-label="Your ${esc(c)} carry" value="${esc(mine[i] || "")}" placeholder="yds">` : ""}</span></div><p><b>Ball:</b> ${esc(pos)}. ${esc(use)}.</p></li>`).join("");
+  $("#clubRows").addEventListener("input", e => {
+    const m = e.target.id.match(/^carry-(\d+)$/); if (!m) return;
+    const cur = store.get("carry", {}); cur[m[1]] = e.target.value.replace(/[^0-9]/g, "").slice(0, 3); store.set("carry", cur);
+  });
+}
+
+document.querySelectorAll("[data-reels]").forEach(el => el.innerHTML = reelLinks(el.dataset.reels.split(",")));
+renderToday(); renderPath(); renderClubs();
+const startTab = location.hash ? document.getElementById("tab-" + location.hash.slice(1)) : document.getElementById(store.get("tab", "tab-today"));
+if (startTab) startTab.click();
+</script>

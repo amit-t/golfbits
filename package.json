@@ -6,13 +6,16 @@
     "golfbits": "bin/golfbits.js",
     "golf.learn": "bin/golf-learn.js",
     "golf.learn.rebuild": "bin/golf-learn-rebuild.js",
-    "golf.ask": "bin/golf-ask.js"
+    "golf.ask": "bin/golf-ask.js",
+    "golf.publish": "bin/golf-publish.js"
   },
   "scripts": {
     "start": "node bin/golfbits.js open",
     "serve": "node bin/golfbits.js serve",
     "test": "node test/run-tests.js",
-    "validate": "node bin/golfbits.js validate"
+    "validate": "node bin/golfbits.js validate",
+    "range": "node scripts/build-range.js",
+    "pwa": "node bin/golfbits.js pwa"
   },
   "engines": { "node": ">=18" },
   "license": "MIT",

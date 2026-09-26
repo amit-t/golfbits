@@ -459,7 +459,8 @@ const get = (port, path, opts = {}) => new Promise((resolve, reject) => {
       golfbits: "bin/golfbits.js",
       "golf.learn": "bin/golf-learn.js",
       "golf.learn.rebuild": "bin/golf-learn-rebuild.js",
-      "golf.ask": "bin/golf-ask.js"
+      "golf.ask": "bin/golf-ask.js",
+      "golf.publish": "bin/golf-publish.js"
     });
     for (const rel of Object.values(pkg.bin)) {
       assert.ok(fs.existsSync(path.join(ROOT, rel)), `${rel} missing`);
@@ -469,6 +470,34 @@ const get = (port, path, opts = {}) => new Promise((resolve, reject) => {
     const res = spawnSync(process.execPath, ["bin/golf-learn-rebuild.js", "--agent=bogus"], { cwd: ROOT, encoding: "utf8" });
     assert.notStrictEqual(res.status, 0);
     assert.match(res.stderr + res.stdout, /Unknown agent provider 'bogus'.*claude.*codex.*gemini.*antigravity/);
+  });
+
+  await test("pwa: static build has frozen API, Range Book, manifest and a service worker", () => {
+    const { buildPwa } = require("../lib/pwa");
+    const out = fs.mkdtempSync(path.join(os.tmpdir(), "golfbits-pwa-"));
+    const { files, version } = buildPwa({ outDir: out, quiet: true });
+    for (const f of ["index.html", "range.html", "sw.js", "manifest.webmanifest", "icons/icon-180.png",
+                     "api/bits.json", "api/progress.json", "api/config.json", "api/playbook.json"]) {
+      assert.ok(files.includes(f), `${f} missing from build`);
+    }
+    const index = fs.readFileSync(path.join(out, "index.html"), "utf8");
+    assert.match(index, /window\.GOLFBITS_STATIC = true/);
+    assert.match(index, /serviceWorker\.register\("\/sw\.js"\)/);
+    const range = fs.readFileSync(path.join(out, "range.html"), "utf8");
+    assert.ok(!/__IMG_/.test(range), "range.html has unreplaced image placeholders");
+    assert.match(range, /data:image\/jpeg;base64,/);
+    const bits = JSON.parse(fs.readFileSync(path.join(out, "api", "bits.json"), "utf8"));
+    assert.strictEqual(bits.length, loadBits().length);
+    assert.ok(bits.every(b => !("__file" in b)), "bits.json leaks __file");
+    assert.match(fs.readFileSync(path.join(out, "sw.js"), "utf8"), new RegExp("golfbits-" + version));
+    fs.rmSync(out, { recursive: true, force: true });
+  });
+  await test("publish: refuses without an API key unless --anonymous", async () => {
+    const res = spawnSync(process.execPath, ["bin/golfbits.js", "publish"], {
+      cwd: ROOT, encoding: "utf8", env: { ...process.env, HERENOW_API_KEY: "", HOME: os.tmpdir() }
+    });
+    assert.notStrictEqual(res.status, 0);
+    assert.match(res.stderr + res.stdout, /No here\.now API key/);
   });
 
   // restore repo state (reset to fresh rather than delete — works on restricted filesystems too)

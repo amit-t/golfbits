@@ -5,6 +5,36 @@
 let bits = [], progress = null, config = { agent: "claude" };
 let view = "today", quizAnswered = null, readingId = null, libFilter = "All", continuing = false, justCompleted = false;
 
+// ---------- data layer: local daemon, or static PWA build (window.GOLFBITS_STATIC) ----------
+// The static build (golfbits pwa / golf.publish) freezes the API into api/*.json and keeps
+// progress in this device's localStorage. The repo snapshot wins only if it's further along.
+const STATIC = !!window.GOLFBITS_STATIC;
+const LS_PROGRESS = "gb-progress";
+function pickProgress(local, snap) {
+  if (!local) return snap;
+  if (!snap) return local;
+  const best = (snap.entries || []).length > (local.entries || []).length ? snap : local;
+  return { ...best, plan: { ...(snap.plan || {}), ...(local.plan || {}) } };
+}
+async function apiGet(name) {
+  if (!STATIC) return fetch("/api/" + name).then(r => r.json());
+  if (name === "progress") {
+    const snap = await fetch("/api/progress.json").then(r => r.json()).catch(() => null);
+    let local = null;
+    try { local = JSON.parse(localStorage.getItem(LS_PROGRESS)); } catch (e) { /* none yet */ }
+    return pickProgress(local, snap);
+  }
+  return fetch("/api/" + name + ".json").then(r => { if (!r.ok) throw new Error(name + " missing"); return r.json(); });
+}
+async function saveProgress(p) {
+  if (STATIC) {
+    try { localStorage.setItem(LS_PROGRESS, JSON.stringify(p)); return null; }
+    catch (e) { return "this phone blocked local storage"; }
+  }
+  const res = await fetch("/api/progress", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(p) });
+  return res.ok ? null : (await res.json()).error;
+}
+
 const $ = sel => document.querySelector(sel);
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -39,12 +69,17 @@ async function boot() {
   $("#themeToggle").addEventListener("click", toggleTheme);
   try {
     const [b, p, c] = await Promise.all([
-      fetch("/api/bits").then(r => r.json()),
-      fetch("/api/progress").then(r => r.json()),
-      fetch("/api/config").then(r => r.json())
+      apiGet("bits"),
+      apiGet("progress"),
+      apiGet("config")
     ]);
     bits = b; progress = p; config = c;
     $("#agentChip").textContent = "agent: " + config.agent;
+    if (STATIC) {
+      $("#agentChip").hidden = true;
+      const foot = document.querySelector(".foot");
+      if (foot) foot.textContent = "progress saved on this device · content from the golfbits repo";
+    }
     document.querySelectorAll(".tabs button").forEach(btn =>
       btn.addEventListener("click", () => { view = btn.dataset.view; readingId = null; quizAnswered = null; continuing = false; justCompleted = false; render(); }));
     document.addEventListener("keydown", quizAccelerator);
@@ -94,8 +129,8 @@ async function completeBit(knownBefore) {
   quizAnswered = null;
   continuing = false;   // land back on the done banner, which re-offers "keep going"
   justCompleted = true; // drives the one-shot completion micro-moment
-  const res = await fetch("/api/progress", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(progress) });
-  if (!res.ok) { alert("Failed to save progress: " + (await res.json()).error); }
+  const err = await saveProgress(progress);
+  if (err) { alert("Failed to save progress: " + err); }
   render();
 }
 
@@ -122,6 +157,10 @@ const cmd = c => `<div class="cmd"><span>${esc(c)}</span><button data-copy="${es
 const cmdList = arr => `<div class="cmd-list">${arr.map(cmd).join("")}</div>`;
 
 function clubhouseClosed() {
+  if (STATIC) return `<div class="card clubhouse" data-screen="offline">
+    <h2>Couldn't load your bits</h2>
+    <p>Open golfbits once with a connection so it can save everything for offline use at the range.</p>
+  </div>`;
   return `<div class="card clubhouse" data-screen="daemon-off">
     <svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true">
       <circle cx="28" cy="28" r="26" fill="var(--track)"/>
@@ -140,7 +179,7 @@ function renderPlaybook() {
   if (playbookMd === null) {
     if (!playbookLoading) {
       playbookLoading = true;
-      fetch("/api/playbook").then(r => r.json()).then(d => {
+      apiGet("playbook").then(d => {
         playbookMd = d.markdown || "";
         playbookLoading = false;
         if (view === "playbook") render();
@@ -166,8 +205,8 @@ async function togglePlanTask(taskId, on) {
   if (!progress.plan) progress.plan = {};
   if (on) progress.plan[taskId] = true; else delete progress.plan[taskId];
   render(); // optimistic
-  const res = await fetch("/api/progress", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(progress) });
-  if (!res.ok) { alert("Failed to save plan: " + (await res.json()).error); }
+  const err = await saveProgress(progress);
+  if (err) { alert("Failed to save plan: " + err); }
 }
 
 function planChecked(id) { return !!(progress.plan && progress.plan[id]); }
@@ -176,7 +215,7 @@ function renderPlan() {
   if (planData === null) {
     if (!planLoading) {
       planLoading = true;
-      fetch("/api/plan").then(r => r.json()).then(d => {
+      apiGet("plan").then(d => {
         planData = d; planLoading = false;
         if (view === "plan") render();
       }).catch(() => { planData = false; planLoading = false; if (view === "plan") render(); });

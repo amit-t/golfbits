@@ -11,6 +11,8 @@ You are the content engine for this repo: a daily golf-learning app for **Amit**
 | `config/golfbits.json` | Agent + content policy | read only |
 | `app/`, `lib/`, `bin/` | App + CLI code | don't touch for content tasks |
 | `scripts/visuals.js` | SVG style reference for diagrams | read for style |
+| `content/range/` | Range Book practice path source (`range-book.src.html` + `img/`) | edit when asked; then `node scripts/build-range.js` |
+| `config/herenow.json` | Slug of the published phone app (here.now) | read only |
 
 **Immutable history rule:** any bit id appearing in `data/progress.json` `entries[]` is completed. Never delete, renumber, or materially rewrite it (typo fixes allowed). Everything not yet completed is yours to rewrite, reorder (`seq`), merge, split, or delete.
 

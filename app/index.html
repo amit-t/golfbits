@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>golfbits</title>
 <link rel="stylesheet" href="/styles.css">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+<meta name="theme-color" content="#166B47">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="golfbits">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>⛳</text></svg>">
 <script>
   // Resolve theme before first paint: stored choice wins, else prefers-color-scheme.
@@ -49,6 +55,7 @@
 
   <nav class="tabs" role="tablist">
     <button data-view="today" role="tab" class="active">Today</button>
+    <a class="tab-link" href="/range.html">Range ↗</a>
     <button data-view="journey" role="tab">Journey</button>
     <button data-view="plan" role="tab">Plan</button>
     <button data-view="library" role="tab">Library</button>

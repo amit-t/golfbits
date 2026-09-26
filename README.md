@@ -30,6 +30,9 @@ Or without linking: `npm start`.
 | `golf.learn` | Global shortcut for `golfbits open` |
 | `golf.learn.rebuild ["note"] [--agent-flag]` | Global shortcut for `golfbits restructure` |
 | `golf.ask "question" [--agent-flag]` | Global shortcut for `golfbits ask` |
+| `golfbits pwa` | Build the phone app (static PWA + Range Book) into `dist/pwa/` |
+| `golfbits publish [--overwrite]` | Build the PWA and publish it to [here.now](https://here.now); same URL every time |
+| `golf.publish` | Global shortcut for `golfbits publish` |
 
 Agent flags are valid on `golf.ask`, `golf.learn.rebuild`, and `golfbits extend|restructure|ask`: `--claude`, `--codex`, `--gemini`, `--antigravity`, or `--agent=<name>`. Last one wins. `golf.learn` accepts these flags but ignores them with a note because opening the app does not use an agent.
 
@@ -68,6 +71,24 @@ Precedence is: CLI agent flag > `project.conf` > `config/golfbits.json` defaults
 }
 ```
 
+## On your iPhone (PWA via here.now)
+
+`golf.publish` builds a static copy of the app and puts it on a free [here.now](https://here.now) site:
+
+1. Once: get a here.now API key and save it to `~/.herenow/credentials` (the here.now CLI/skill does this, or `export HERENOW_API_KEY=...`). Without a key here.now only makes 24-hour sites, so the command refuses unless you pass `--anonymous`.
+2. Run `golf.publish` (or `npm run pwa` to build without publishing). The first run creates the site and saves its slug to `config/herenow.json`; commit that file so every later publish updates the same URL.
+3. On the iPhone, open the URL in Safari → Share → **Add to Home Screen**. It opens full-screen as "golfbits" and works offline at the range (service worker caches everything).
+
+How the phone copy differs from the laptop daemon:
+
+- Content (bits, plan, playbook, Range Book) is frozen at publish time. Run `golf.publish` again after `golfbits extend` or a Range Book edit.
+- Progress you make on the phone is stored on the phone (localStorage). It starts from the repo's `data/progress.json` snapshot and keeps whichever copy is further along. It does not write back to the repo.
+- The agent commands (`extend`, `ask`, …) stay laptop-only.
+
+## Range Book
+
+The **Range ↗** tab opens `app/range.html`: an 8-level practice path (one cue per level, 40-ball session plans, a Clean/Miss test counter, frames from saved Instagram golf reels). Edit `content/range/range-book.src.html` (images in `content/range/img/`), then run `npm run range` to regenerate `app/range.html`. `golfbits pwa` and `golf.publish` rebuild it automatically.
+
 ## How the learning loop works
 
 1. **You learn** — one bit unlocks per day. After each quiz you choose **"Learned something new"** or **"I already knew this."**
@@ -80,6 +101,7 @@ Precedence is: CLI agent flag > `project.conf` > `config/golfbits.json` defaults
 bin/golfbits.js      CLI entry; global wrappers live beside it
 lib/                 server, content loader, progress store, agent invoker, validator
 app/                 the web app (served by the daemon)
+content/range/       Range Book source (practice path) → app/range.html
 docs/PLAYBOOK.md     your golf playbook — readable in-app (Playbook tab) and used by golf.ask
 content/bits/        one JSON file per learning bit ← the content
 data/progress.json   your learning history ← the personalization signal

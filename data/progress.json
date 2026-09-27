@@ -2,12 +2,24 @@
   "schema": "golfbits-progress/2",
   "streak": 1,
   "longestStreak": 1,
-  "lastCompletedDate": "2026-07-08",
+  "lastCompletedDate": "2026-09-26",
   "entries": [
     {
       "id": "b001",
       "date": "2026-07-08",
       "quizCorrect": false,
+      "knownBefore": false
+    },
+    {
+      "id": "b002",
+      "date": "2026-09-26",
+      "quizCorrect": true,
+      "knownBefore": false
+    },
+    {
+      "id": "b003",
+      "date": "2026-09-26",
+      "quizCorrect": true,
       "knownBefore": false
     }
   ],
